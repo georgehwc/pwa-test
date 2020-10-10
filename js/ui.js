@@ -16,7 +16,7 @@ const renderRecipe = (data, id) => {
     <div class="card-panel recipe white row" data-id="${id}">
       <img src="/img/dish.png" alt="recipe thumb">
       <div class="recipe-details">
-        <div class="recipe-title">${data.name}</div>
+        <div class="recipe-title" data-id="${id}">${data.name}</div>
         <div class="recipe-ingredients">${data.ingredients}</div>
       </div>
       <div class="recipe-delete">
@@ -33,3 +33,4 @@ const removeRecipe = (id) => {
   const recipe = document.querySelector(`.recipe[data-id=${id}]`);
   recipe.remove();
 };
+

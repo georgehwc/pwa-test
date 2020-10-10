@@ -1,75 +1,321 @@
 /* colours */
-:root{
+:root {
   --primary: #ffd2a3;
   --secondary: #ffc58e;
-  --title: #FF7202;
+  --title: #ff7202;
+  --btnSelected: #ff9d2e;
 }
 
 /* layout styles */
-nav{
+nav {
   background: var(--primary);
   border-bottom: 10px solid var(--secondary);
 }
-nav a{
+nav a {
   text-transform: uppercase;
   color: var(--title);
 }
-nav a span{
+nav a span {
   font-weight: bold;
 }
-nav .sidenav-trigger{
+nav .sidenav-trigger {
   margin: 0;
 }
 
 /* recipe styles */
-.recipes{
+.recipes {
   margin-top: 20px;
 }
-.card-panel.recipe{
+.card-panel.recipe {
   border-radius: 8px;
   padding: 10px;
-  box-shadow: 0px 1px 3px rgba(90,90,90,0.1);
+  box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1);
   display: grid;
   grid-template-columns: 2fr 6fr 1fr;
   grid-template-areas: "image details delete";
   position: relative;
 }
-.recipe img{
+.recipe img {
   grid-area: image;
   max-width: 60px;
 }
-.recipe-details{
+.recipe-details {
   grid-area: details;
   margin-top: 6px;
 }
-.recipe-delete{
+.recipe-delete {
   grid-area: delete;
   position: absolute;
   bottom: 0px;
   right: 0px;
 }
-.recipe-delete i{
+.recipe-delete i {
   font-size: 18px;
 }
-.recipe-title{
+.recipe-title {
   font-weight: bold;
 }
-.recipe-ingredients{
+.recipe-ingredients {
   font-size: 0.8em;
 }
 
 /* form-styles */
-.add-btn{
+.add-btn {
   background: var(--title) !important;
 }
-input{
+input {
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
 }
-.side-form button{
+.side-form button {
   background: var(--title);
-  box-shadow: 1px 1px 3px rgba(90,90,90,0.2);
+  box-shadow: 1px 1px 3px rgba(90, 90, 90, 0.2);
 }
-form .input-field{
+form .input-field {
   margin-top: 30px;
+}
+
+.mjmain {
+  /* display: flex; */
+  flex-wrap: wrap;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20%;
+}
+
+.playerbox {
+  /* flex: 0 1 300px; */
+  /* flex: 0 1 48%;
+  border: 1px solid red;
+  background: lightpink;
+  font-size: 2rem;
+  text-align: center;
+  height: 150px;
+  width: 50%; */
+  /* background-color:#333; */
+  border: 1px solid black;
+
+  /* padding: 20px; */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-family: sans-serif;
+  flex-direction: column;
+  user-select: none;
+}
+
+.playerbox.selected {
+  background-color: var(--btnSelected);
+  user-select: none;
+}
+
+.player-row {
+  /* border: 1px solid black;
+  background: lightpink;
+  width: 100%;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
+  margin: 20px auto;
+  width: 100%;
+  height: 100vw;
+  /* background-color: #fff; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row: auto auto;
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
+}
+
+.mjmain .playername {
+  /* width: 100%; */
+  text-align: center;
+}
+
+.mjmain .playerscore {
+  width: 100%;
+  text-align: center;
+}
+
+.mjmain .eat-button {
+  padding: 8px 12px;
+  background: #ffe100;
+  border: 0;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.mjmain .record-box {
+  background: url(/img/bg.jpeg);
+  /* background-attachment: fixed; */
+  /* padding-right: 5px; */
+  /* overflow-y: scroll; */
+  flex: 1;
+  width: 100%;
+}
+
+.mjmain .record {
+  display: flex;
+  margin: 6px 0 0 0;
+}
+
+.tg {
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+.tg td {
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+  padding: 10px 5px;
+  word-break: normal;
+}
+.tg th {
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  overflow: hidden;
+  padding: 10px 5px;
+  word-break: normal;
+}
+.tg .tg-baqh {
+  text-align: center;
+  vertical-align: top;
+}
+.tg .tg-c3ow {
+  border-color: inherit;
+  text-align: center;
+  vertical-align: top;
+}
+
+/*user profile*/
+.Profile-page {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  display: none;
+}
+.Profile-page.open {
+  display: block;
+}
+
+/*confirm*/
+.confirm-page {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 5;
+  display: none;
+}
+.confirm-page.open {
+  display: block;
+}
+
+/*setting profile*/
+.setting-page {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  display: none;
+}
+.setting-page.open {
+  display: block;
+}
+
+/* modal styles */
+.modal {
+  /* width: 300px; */
+  padding: 30px;
+  margin: 100px auto;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: block;
+}
+
+.eat-select {
+  display: block;
+  margin: 8px 0;
+  padding: 8px 2px;
+  border-width: 0 0 2px 0;
+  width: 100%;
+}
+
+.mj-head {
+  color: #fff;
+  background-color: #ee6e73;
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  display: flex;
+}
+
+.head-div {
+  width: 33%;
+  text-align: center;
+}
+
+.setting {
+  cursor: pointer;
+}
+
+.range-value {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.range-value input {
+  text-align: center;
+}
+
+.range-value div {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 16px;
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+th {
+  text-align: center;
+}
+
+#eat-confirm {
+  cursor: pointer;
+}
+
+#setting-page-cover.yes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background-color: rgb(95 80 80 / 30%);
+  z-index: 10;
+}
+
+.title {
 }
