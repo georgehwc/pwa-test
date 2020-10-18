@@ -22,6 +22,8 @@
 
 <body class="grey lighten-4">
 
+  <div class="notification"></div>
+
   <!-- top nav -->
   <nav class="z-depth-0">
     <div class="nav-wrapper container">
@@ -48,18 +50,22 @@
   <!-- setting  -->
   <div class="setting-page">
     <div class="modal">
+      <div class="setting-invite">
+        <input type="button" value="">
+      </div>
+
       <div id="setting-page-cover"></div>
       <h2>設定</h2>
       <form>
 
-        <input type="text" class="playername player1" id="player1" placeholder="player name..." value="Player1"
-          maxlength="10" onchange="nameChange(this.id,this.value)">
-        <input type="text" class="playername player2" id="player2" placeholder="player name..." value="Player2"
-          maxlength="10" onchange="nameChange(this.id,this.value)">
-        <input type="text" class="playername player3" id="player3" placeholder="player name..." value="Player3"
-          maxlength="10" onchange="nameChange(this.id,this.value)">
-        <input type="text" class="playername player4" id="player4" placeholder="player name..." value="Player4"
-          maxlength="10" onchange="nameChange(this.id,this.value)">
+        <input type="text" class="playername player1" id="player1" placeholder="player name..." value="~" maxlength="10"
+          onchange="nameChange(this.id,this.value)">
+        <input type="text" class="playername player2" id="player2" placeholder="player name..." value="~" maxlength="10"
+          onchange="nameChange(this.id,this.value)">
+        <input type="text" class="playername player3" id="player3" placeholder="player name..." value="~" maxlength="10"
+          onchange="nameChange(this.id,this.value)">
+        <input type="text" class="playername player4" id="player4" placeholder="player name..." value="~" maxlength="10"
+          onchange="nameChange(this.id,this.value)">
 
         <br>
         <div id="farn-slider"></div>
@@ -86,39 +92,40 @@
           <label class="switch">
             <input type="checkbox" id="price-lart">
             <span class="price-lart">辣辣上</span>
+            <br>
             <!-- <span class="slider"></span> -->
           </label>
 
         </div>
 
 
-        <form action="">
-          <div class="range-value">
-            <div class="range-value-div">
-              <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
-              <button type="button" class="price-change" id="price-d10">細十倍</button>
-            </div>
-            <div class="range-value-div">
-              <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
-              <button type="button" class="price-change" id="price-d2">細一倍</button>
-            </div>
-            <div class="range-value-div">
-              <button type="button" class="price-change" id="price-reset">重置</button>
-            </div>
-            <div class="range-value-div">
-              <!-- <input type="text" placeholder="最大幾錢" value="64" id="max-price"> -->
-              <button type="button" class="price-change" id="price-x2">大一倍</button>
 
-            </div>
-            <div class="range-value-div">
-              <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
-              <button type="button" class="price-change" id="price-x10">大十倍</button>
-            </div>
-
-            <!-- <div class="setting-button">確定</div> -->
+        <div class="range-value">
+          <div class="range-value-div">
+            <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
+            <button type="button" class="price-change" id="price-d10">細十倍</button>
+          </div>
+          <div class="range-value-div">
+            <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
+            <button type="button" class="price-change" id="price-d2">細一倍</button>
+          </div>
+          <div class="range-value-div">
+            <button type="button" class="price-change" id="price-reset">重置</button>
+          </div>
+          <div class="range-value-div">
+            <!-- <input type="text" placeholder="最大幾錢" value="64" id="max-price"> -->
+            <button type="button" class="price-change" id="price-x2">大一倍</button>
 
           </div>
-        </form>
+          <div class="range-value-div">
+            <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
+            <button type="button" class="price-change" id="price-x10">大十倍</button>
+          </div>
+
+          <!-- <div class="setting-button">確定</div> -->
+
+        </div>
+
 
 
         <!-- <input type="text" value="" placeholder="最大幾錢?" id="max-price" style="text-align: center;"> -->
@@ -128,16 +135,24 @@
 
         </div>
 
-        <p class="error"></p>
+        <div class="range-value">
+          <label class="switch">
+            <input type="checkbox" id="setting-jackpot">
+            <span>Jackpot</span>
+            <br>
+            <!-- <span class="slider"></span> -->
+          </label>
 
-        <div class="image-upload">
-          <!-- <label for="iconBtn">
-              <img src="" alt="user-icon" id="userIcon">
-            </label> -->
+          <input type="number" id="setting-jackpot-input" disabled>
 
-          <input type="file" name="userIcon" id="iconBtn" accept="image/*">
         </div>
 
+
+        <!-- <div class="image-upload">
+          <input type="file" name="userIcon" id="iconBtn" accept="image/*">
+        </div> -->
+
+        <br>
         <input type="submit" value="確定" id="setting-submit">
 
 
@@ -153,20 +168,20 @@
 
     <div class="modal">
 
-      <div id="modal-confirm-table"> 
+      <div id="modal-confirm-table">
         <h2> 邊個出衝?</h2>
         <div class="player-row confirm-eat">
-  
+
           <!-- <div class="playerbox" value="1">
             <div class="playername player1">Player1</div>
   
           </div> -->
-  
+
           <input class="playerbox playername player1" type="button" value=""></input>
           <input class="playerbox playername player2" type="button" value=""></input>
           <input class="playerbox playername player3" type="button" value=""></input>
           <input class="playerbox playername player4" type="button" value=""></input>
-  
+
         </div>
       </div>
 
@@ -196,7 +211,8 @@
         </div>
 
         <div>
-          流局
+
+          <button type="button" class="" id="eat-lauGuk"> 流局</button>
         </div>
 
 
@@ -206,7 +222,7 @@
             <img src="" alt="user-icon" id="userIcon">
           </label> -->
 
-          <input type="file" name="userIcon" id="iconBtn" accept="image/*">
+          <input type="file" name="userIcon" id="iconBtn" accept="image/*" disabled>
         </div>
 
       </form>
@@ -224,10 +240,12 @@
   <div class="mj-head">
 
     <div class="head-div">
-      Jackpot
+      <span id="head-jackpot"></span>
+      <span id="head-jackpot-value"></span>
     </div>
     <div class="head-div" id="max-farn">
       打幾大?
+
     </div>
     <div class="head-div setting" id="setting-div">
       設定

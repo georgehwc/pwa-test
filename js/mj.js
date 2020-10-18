@@ -1,13 +1,27 @@
 // open profile modal
-const eatButton = document.querySelector(".eat-button");
 const profileModal = document.querySelector(".Profile-page");
+
+//notification
+const notification = document.querySelector(".notification");
+
+const showNotification = (message) => {
+  notification.textContent = message;
+  notification.classList.add("active");
+  setTimeout(() => {
+    notification.classList.remove("active");
+    notification.textContent = "";
+  }, 5000);
+};
 
 let defValue = Math.floor(1);
 let arrayRecordData = [];
-let arrayPrice = [];
+let arrayPrice = [0];
 let intMinValue = 1;
 let intMaxValue = 1;
 let tvid = "";
+let setting = false;
+let jackpot = "";
+var jackpotTotal = 0;
 
 //check tvid
 const checkTvid = async () => {
@@ -106,6 +120,7 @@ function printPriceTable(arrayPrice, min, max) {
   for (let index = 0; index < btnEatPrice.length; index++) {
     var test = index % 2;
     btnEatPrice[index].addEventListener("click", () => {
+      //reset
       MapEatDetail.set("type", "0");
 
       confirmModal.classList.add("open");
@@ -128,11 +143,15 @@ function printPriceTable(arrayPrice, min, max) {
   }
 }
 
-function calPrice(arrayPrice, defValue) {
+function calPrice(defValue, intMaxValue) {
+  console.log("start cal price");
   var newvalue = defValue;
   var lart = document.getElementById("price-lart");
+  console.log(defValue, intMaxValue);
+  console.log(arrayPrice);
+
   if (lart.checked == false) {
-    for (var i = 0; i < arrayPrice.length; i++) {
+    for (var i = 0; i < intMaxValue + 1; i++) {
       // 半辣上
 
       if (i == 0) {
@@ -177,6 +196,8 @@ function calPrice(arrayPrice, defValue) {
     }
   }
 
+  console.log(arrayPrice + "in cal price");
+
   console.log(tvid + " in calPrice");
   if (tvid != "") {
     firebase
@@ -196,51 +217,6 @@ function calPrice(arrayPrice, defValue) {
   return arrayPrice;
 }
 
-function showRecord() {
-  console.log("show record function");
-  console.log(arrayRecordData);
-  var recordTableBody = document.getElementById("record-table-body");
-
-  var player1Total = 0;
-  var player2Total = 0;
-  var player3Total = 0;
-  var player4Total = 0;
-
-  for (let index = 1; index < arrayRecordData.length + 1; index++) {
-    player1Total = arrayRecordData[index - 1][1] + player1Total;
-    player2Total = arrayRecordData[index - 1][2] + player2Total;
-    player3Total = arrayRecordData[index - 1][3] + player3Total;
-    player4Total = arrayRecordData[index - 1][4] + player4Total;
-  }
-
-  recordTableBody.innerHTML = `<tr>
-  <td class="tg-baqh">Total</td>
-  <td class="tg-baqh">${player1Total}</td>
-  <td class="tg-baqh">${player2Total}</td>
-  <td class="tg-baqh">${player3Total}</td>
-  <td class="tg-baqh">${player4Total}</td>
-  </tr>`;
-
-  document.getElementById("playerscore1").innerHTML = player1Total;
-  document.getElementById("playerscore2").innerHTML = player2Total;
-  document.getElementById("playerscore3").innerHTML = player3Total;
-  document.getElementById("playerscore4").innerHTML = player4Total;
-
-  var html = "";
-
-  for (let index = 0; index < arrayRecordData.length; index++) {
-    html += `<tr>
-    <td class="tg-baqh">       ${index} </td>
-    <td class="tg-baqh">${arrayRecordData[index][1]}</td>
-    <td class="tg-baqh">${arrayRecordData[index][2]}</td>
-    <td class="tg-baqh">${arrayRecordData[index][3]}</td>
-    <td class="tg-baqh">${arrayRecordData[index][4]}</td>
-    </tr>`;
-  }
-
-  recordTableBody.innerHTML += html;
-}
-
 function getData() {
   // ----------- use data from firebase
   firebase
@@ -255,8 +231,15 @@ function getData() {
         arrayPrice = doc.data().Price;
         intMinValue = doc.data().MinFarn;
         intMaxValue = doc.data().MaxFarn;
+        setting = doc.data().setting;
+        jackpot = doc.data().Jackpot;
 
-        // console.log([intMinValue, intMaxValue]);
+        console.log(jackpot);
+
+        if (setting) {
+          settingCover();
+        }
+        console.log(arrayPrice);
 
         slider.noUiSlider.set([intMinValue, intMaxValue]);
         console.log(slider.noUiSlider.get());
@@ -266,8 +249,20 @@ function getData() {
       }
     })
     .then(() => {
-      // try get round data
+      document.getElementById("range-value-1").innerHTML = intMinValue;
+      document.getElementById("range-value-2").innerHTML = intMaxValue;
+      if (jackpot == "") {
+        document.getElementById("head-jackpot").innerHTML =
+          "<del>jackpot</del>";
+      } else {
+        document.getElementById("head-jackpot").innerHTML =
+          "jackpot =";
+      }
 
+      document.getElementById("max-farn").innerHTML =
+        "最大" + intMaxValue + "番" + arrayPrice[intMaxValue] + "蚊";
+
+      // try get round data
       firebase
         .firestore()
         .collection("recipes")
@@ -285,7 +280,8 @@ function getData() {
         })
         .then(() => {
           showRecord();
-          calPrice();
+          // calPrice();
+          calPrice(defValue, intMaxValue);
           printPriceTable(arrayPrice, intMinValue, intMaxValue);
         });
 
@@ -299,13 +295,98 @@ function getData() {
   // -----------------------}
 }
 
+function showRecord() {
+  console.log("show record function");
+  console.log(arrayRecordData);
+  var recordTableBody = document.getElementById("record-table-body");
+
+  var player1Total = 0;
+  var player2Total = 0;
+  var player3Total = 0;
+  var player4Total = 0;
+  jackpotTotal = 0;
+
+
+  for (let index = 1; index < arrayRecordData.length + 1; index++) {
+    if (arrayRecordData[index - 1][1] == "") {
+      player1Total = 0 + player1Total;
+    } else {
+      player1Total = arrayRecordData[index - 1][1] + player1Total;
+    }
+
+    if (arrayRecordData[index - 1][2] == "") {
+      player2Total = 0 + player2Total;
+    } else {
+      player2Total = arrayRecordData[index - 1][2] + player2Total;
+    }
+
+    if (arrayRecordData[index - 1][3] == "") {
+      player3Total = 0 + player3Total;
+    } else {
+      player3Total = arrayRecordData[index - 1][3] + player3Total;
+    }
+    if (arrayRecordData[index - 1][4] == "") {
+      player4Total = 0 + player4Total;
+    } else {
+      player4Total = arrayRecordData[index - 1][4] + player4Total;
+    }
+
+    if (arrayRecordData[index - 1][5] == 2) {
+      // console.log(jackpotTotal);
+      jackpotTotal = (jackpot * 4) + jackpotTotal;
+      // console.log(jackpotTotal);
+
+    }
+
+    if(arrayRecordData[index - 1][0] == intMaxValue){
+
+      jackpotTotal = 0;
+
+    }
+  }
+
+  // if (MapEatDetail.get("type") == 2) {
+  //   document.getElementById("head-jackpot-value").value =
+  //     document.getElementById("head-jackpot-value").value + jackpot * 4;
+  // }
+
+  document.getElementById("head-jackpot-value").innerHTML = jackpotTotal;
+
+  recordTableBody.innerHTML = `<tr>
+  <td class="tg-baqh">Total</td>
+  <td class="tg-baqh">${player1Total}</td>
+  <td class="tg-baqh">${player2Total}</td>
+  <td class="tg-baqh">${player3Total}</td>
+  <td class="tg-baqh">${player4Total}</td>
+  </tr>`;
+
+  document.getElementById("playerscore1").innerHTML = player1Total;
+  document.getElementById("playerscore2").innerHTML = player2Total;
+  document.getElementById("playerscore3").innerHTML = player3Total;
+  document.getElementById("playerscore4").innerHTML = player4Total;
+
+  var html = "";
+
+  for (let index = 0; index < arrayRecordData.length; index++) {
+    html += `<tr id="recordRound${index}">
+    <td class="tg-baqh">       ${index} </td>
+    <td class="tg-baqh">${arrayRecordData[index][1]}</td>
+    <td class="tg-baqh">${arrayRecordData[index][2]}</td>
+    <td class="tg-baqh">${arrayRecordData[index][3]}</td>
+    <td class="tg-baqh">${arrayRecordData[index][4]}</td>
+    </tr>`;
+  }
+
+  recordTableBody.innerHTML += html;
+}
+
 checkTvid() // ------------------------------------- start here -------------------
   .then((data) => {
     console.log(data);
     tvid = data;
   })
   .then(() => {
-    nameChange(1, 1); // default
+    // nameChange(1, 1); // default
   })
   .then(() => {
     getData(); // and also show record() is here
@@ -324,7 +405,6 @@ checkTvid() // ------------------------------------- start here ----------------
       .onSnapshot((doc) => {
         console.log("Current data: ", doc.data());
         // getData();
-        console.log(doc.data());
         let roundLength = doc.data().round.length;
         console.log(roundLength);
 
@@ -333,7 +413,33 @@ checkTvid() // ------------------------------------- start here ----------------
           console.log(arrayRecordData[index]);
         }
 
-        // showRecord();
+        showRecord();
+
+        console.log(doc.data().PlayerName.player1);
+        console.log(doc.data().PlayerName);
+
+        var playerName = document.querySelectorAll(".playername");
+
+        playerName.forEach((element) => {
+          // console.log(element);
+
+          if (element.classList.contains("player1")) {
+            element.innerHTML = doc.data().PlayerName.player1;
+            element.value = doc.data().PlayerName.player1;
+          }
+          if (element.classList.contains("player2")) {
+            element.innerHTML = doc.data().PlayerName.player2;
+            element.value = doc.data().PlayerName.player2;
+          }
+          if (element.classList.contains("player3")) {
+            element.innerHTML = doc.data().PlayerName.player3;
+            element.value = doc.data().PlayerName.player3;
+          }
+          if (element.classList.contains("player4")) {
+            element.innerHTML = doc.data().PlayerName.player4;
+            element.value = doc.data().PlayerName.player4;
+          }
+        });
       });
   })
   .then(() => {
@@ -345,13 +451,22 @@ checkTvid() // ------------------------------------- start here ----------------
   });
 
 // return console.log("get data from server");
+const eatButton = document.querySelector(".eat-button");
 
 document.getElementById("recipes").style.display = "none";
 
 eatButton.addEventListener("click", () => {
-  profileModal.classList.add("open");
-  console.log("open");
+  if (setting == false) {
+    showNotification("Please go to setting page first");
+    const settingModal = document.querySelector(".setting-page");
+    settingModal.classList.add("open");
+  } else {
+    profileModal.classList.add("open");
+    console.log("open");
+  }
 });
+
+function checkSetting() {}
 
 // close profile modal
 profileModal.addEventListener("click", (e) => {
@@ -389,6 +504,8 @@ var MapEatDetail = new Map([
 ]);
 
 function MakeNewRecord() {
+  //番 player1 player2 player3 player4 0(出)/1(自)/2(流)
+
   arrayRecordData.push(new Array(6));
 
   console.log(arrayRecordData.length);
@@ -411,16 +528,32 @@ function MakeNewRecord() {
 
     arrayRecordData[arrayRecordData.length - 1][MapEatDetail.get("eat")] = // win
       (arrayPrice[MapEatDetail.get("farn")] / 2) * 3;
-  } else {
+  } else if (MapEatDetail.get("type") == 0) {
+    //出
     arrayRecordData[arrayRecordData.length - 1][MapEatDetail.get("eat")] = // win
       arrayPrice[MapEatDetail.get("farn")];
 
     arrayRecordData[arrayRecordData.length - 1][MapEatDetail.get("gotEat")] = // lost
       arrayPrice[MapEatDetail.get("farn")] -
       arrayPrice[MapEatDetail.get("farn")] * 2;
+  } else if (MapEatDetail.get("type") == 2) {
+
+    for (let index = 1; index < 5; index++) {
+      // everyone lose
+      arrayRecordData[arrayRecordData.length - 1][index] =
+        jackpot - jackpot * 2;
+    }
+
+  }
+
+  if(MapEatDetail.get("farn") == intMaxValue){
+    arrayRecordData[arrayRecordData.length - 1][MapEatDetail.get("eat")] += jackpotTotal; 
+    jackpotTotal = 0;
   }
 
   arrayRecordData[arrayRecordData.length - 1][5] = MapEatDetail.get("type");
+
+ 
 
   return console.table(arrayRecordData);
 }
@@ -511,8 +644,10 @@ playerName.forEach((element) => {
   }
 });
 
-function nameChange(id, value) {
+function nameChange(playerNum, value) {
   // var y = document.getElementById(x).value;
+
+  console.log(playerNum, value);
 
   var playerName = document.querySelectorAll(".playername");
   // console.log(id + value);
@@ -520,7 +655,7 @@ function nameChange(id, value) {
   playerName.forEach((element) => {
     // console.log(element);
 
-    if (element.classList.contains(id)) {
+    if (element.classList.contains(playerNum)) {
       element.innerHTML = value;
       element.value = value;
     }
@@ -550,7 +685,7 @@ var player3 = document.getElementById("player3").value;
 var player4 = document.getElementById("player4").value;
 
 // open profile modal
-const setting = document.getElementById("setting-div");
+const settingDiv = document.getElementById("setting-div");
 const settingModal = document.querySelector(".setting-page");
 
 // close profile modal
@@ -560,15 +695,86 @@ profileModal.addEventListener("click", (e) => {
   }
 });
 
-setting.addEventListener("click", () => {
+settingDiv.addEventListener("click", () => {
   settingModal.classList.add("open");
   // console.log("open");
 });
 
 document.getElementById("setting-submit").addEventListener("click", (e) => {
-  document.getElementById("setting-page-cover").classList.add("yes");
-  settingModal.classList.remove("open");
+  e.preventDefault();
+  setting = true;
+
+  firebase
+    .firestore()
+    .collection("recipes")
+    .doc(tvid)
+    .update({
+      setting: true,
+    })
+    .then(() => {
+      console.log("setting true");
+      settingCover();
+      getData();
+    })
+    .catch((err) => console.log(err));
 });
+
+function settingCover() {
+  // document.getElementById("setting-page-cover").classList.add("yes");
+  // settingModal.classList.remove("open");
+
+
+  // document.getElementById("setting-page-cover").title = "Copy to clipboard";
+
+  // document
+  //   .getElementById("setting-page-cover")
+  //   .addEventListener("click", () => {
+  //     showNotification("Copy success, use the link to invite");
+  //     copyToClipboard(console.log(window.location.href));
+  //   });
+
+  document.getElementById("player1").disabled = true;
+  document.getElementById("player2").disabled = true;
+  document.getElementById("player3").disabled = true;
+  document.getElementById("player4").disabled = true;
+
+  slider.setAttribute('disabled', true);
+
+  document.getElementById("price-lart").disabled = true;
+  document.getElementById("price-d10").disabled = true;
+  document.getElementById("price-d2").disabled = true;
+  document.getElementById("price-reset").disabled = true;
+  document.getElementById("price-x2").disabled = true;
+  document.getElementById("price-x10").disabled = true;
+  document.getElementById("setting-jackpot").disabled = true;
+
+
+
+}
+
+function copyToClipboard(text) {
+  if (window.clipboardData && window.clipboardData.setData) {
+    // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
+    return clipboardData.setData("Text", text);
+  } else if (
+    document.queryCommandSupported &&
+    document.queryCommandSupported("copy")
+  ) {
+    var textarea = document.createElement("textarea");
+    textarea.textContent = text;
+    textarea.style.position = "fixed"; // Prevent scrolling to bottom of page in Microsoft Edge.
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      return document.execCommand("copy"); // Security exception may be thrown by some browsers.
+    } catch (ex) {
+      console.warn("Copy to clipboard failed.", ex);
+      return false;
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  }
+}
 
 // close profile modal
 settingModal.addEventListener("click", (e) => {
@@ -598,6 +804,12 @@ noUiSlider.create(slider, {
 });
 
 console.log(intMinValue, intMaxValue);
+var lart = document.getElementById("price-lart");
+lart.addEventListener("change", (event) => {
+  calPrice(defValue, intMaxValue);
+
+  printPriceTable(arrayPrice, intMinValue, intMaxValue);
+});
 
 // / When the slider value changes, update the input and span
 slider.noUiSlider.on("change", function (values, handle) {
@@ -614,14 +826,10 @@ slider.noUiSlider.on("change", function (values, handle) {
 
   arrayPrice = new Array(intMaxValue + 1);
 
-  calPrice(arrayPrice, defValue);
-  printPriceTable(arrayPrice, intMinValue, intMaxValue);
+  // calPrice(arrayPrice, defValue);
+  calPrice(defValue, intMaxValue);
 
-  var lart = document.getElementById("price-lart");
-  lart.addEventListener("change", (event) => {
-    calPrice(arrayPrice, defValue);
-    printPriceTable(arrayPrice, intMinValue, intMaxValue);
-  });
+  printPriceTable(arrayPrice, intMinValue, intMaxValue);
 
   document.getElementById("max-farn").innerHTML =
     "最大" + intMaxValue + "番" + arrayPrice[intMaxValue] + "蚊";
@@ -650,7 +858,7 @@ document.getElementById("price-d10").addEventListener("click", function () {
     alert("打咁細點比錢呀? 比bitcoin都比唔到啦");
     defValue = mul(defValue, 10);
   } else {
-    calPrice(arrayPrice, defValue);
+    calPrice(defValue, intMaxValue);
     printPriceTable(arrayPrice, intMinValue, intMaxValue);
   }
 });
@@ -661,26 +869,26 @@ document.getElementById("price-d2").addEventListener("click", function () {
     alert("打咁細點比錢呀? 比bitcoin都比唔到啦");
     defValue = mul(defValue, 2);
   } else {
-    calPrice(arrayPrice, defValue);
+    calPrice(defValue, intMaxValue);
     printPriceTable(arrayPrice, intMinValue, intMaxValue);
   }
 });
 
 document.getElementById("price-x2").addEventListener("click", function () {
   defValue = mul(defValue, 2);
-  calPrice(arrayPrice, defValue);
+  calPrice(defValue, intMaxValue);
   printPriceTable(arrayPrice, intMinValue, intMaxValue);
 });
 
 document.getElementById("price-x10").addEventListener("click", function () {
   defValue = mul(defValue, 10);
-  calPrice(arrayPrice, defValue);
+  calPrice(defValue, intMaxValue);
   printPriceTable(arrayPrice, intMinValue, intMaxValue);
 });
 
 document.getElementById("price-reset").addEventListener("click", function () {
   defValue = 1;
-  calPrice(arrayPrice, defValue);
+  calPrice(defValue, intMaxValue);
   printPriceTable(arrayPrice, intMinValue, intMaxValue);
 });
 
@@ -707,26 +915,16 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
   //   console.log(key + " = " + value);
   // }
 
-  if (MapEatDetail.get("eat") == MapEatDetail.get("gotEat")) {
+  if (
+    MapEatDetail.get("eat") == MapEatDetail.get("gotEat") &&
+    MapEatDetail.get("type") == 0
+  ) {
     alert("出衝點會同食糊係同一個人呀");
   } else {
     MakeNewRecord();
     showRecord();
-    document.getElementById("modal-confirm-table").style.display = "block";
 
-    MapEatDetail.get("gotEat");
-
-    // const record = {
-    //   farn: arrayRecordData[arrayRecordData.length - 1][0],
-    //   player1: arrayRecordData[arrayRecordData.length - 1][1],
-    //   player2: arrayRecordData[arrayRecordData.length - 1][2],
-    //   player3: arrayRecordData[arrayRecordData.length - 1][3],
-    //   player4: arrayRecordData[arrayRecordData.length - 1][4],
-    //   type: MapEatDetail.get("type"),
-    //   time: timeConverter(Date.now()),
-    // };
-
-    let roundNum = arrayRecordData.length.toString();
+    // MapEatDetail.get("gotEat");
 
     const record = {
       0: arrayRecordData[arrayRecordData.length - 1][0],
@@ -770,6 +968,10 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
     //reset map
     MapEatDetail.set("eat", "default");
     MapEatDetail.set("gotEat", "default");
+
+    document.getElementById("modal-confirm-table").style.display = "block"; //reset
+
+
   }
 });
 
@@ -801,6 +1003,52 @@ confirmModal.addEventListener("click", (e) => {
   }
 });
 
+const lauGuk = document.getElementById("eat-lauGuk");
+
+lauGuk.addEventListener("click", (e) => {
+  MapEatDetail.set("eat", 0);
+  MapEatDetail.set("farn", 0);
+  MapEatDetail.set("gotEat", 0);
+  MapEatDetail.set("type", 2);
+
+  confirmModal.classList.add("open");
+  document.getElementById("modal-confirm-table").style.display = "none";
+
+});
+
+document
+  .getElementById("setting-jackpot-input")
+  .addEventListener("change", (event) => {
+    firebase
+      .firestore()
+      .collection("recipes")
+      .doc(tvid)
+      .update({
+        Jackpot: document.getElementById("setting-jackpot-input").value,
+      })
+      .then(() => {
+        console.log("Jackpot");
+        jackpot = document.getElementById("setting-jackpot-input").value;
+      })
+      .catch((err) => console.log(err));
+  });
+
+document
+  .getElementById("setting-jackpot")
+  .addEventListener("change", (event) => {
+    // document.getElementById("setting-jackpot").disabled = false;
+
+    if (document.getElementById("setting-jackpot-input").disabled == false) {
+      document.getElementById("setting-jackpot-input").disabled = true;
+    } else {
+      if (document.getElementById("setting-jackpot-input").disabled == true) {
+        document.getElementById("setting-jackpot-input").disabled = false;
+      }
+    }
+
+    // console.log(document.getElementById("setting-jackpot-input").checked);
+  });
+
 //-------------------------------------------------------- for testing
 
 // console.log(MapEatDetail.get("eat")); // 食
@@ -810,8 +1058,7 @@ confirmModal.addEventListener("click", (e) => {
 for (let [key, value] of MapEatDetail) {
   console.log(key + " = " + value);
 }
-// MakeNewRecord();
-// MakeNewRecord();
+
 // arrayRecordData[0][1] = 16;
 // arrayRecordData[0][2] = 0;
 // arrayRecordData[0][3] = -16;

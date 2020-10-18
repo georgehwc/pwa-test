@@ -29,30 +29,41 @@ firebase
   });
 
 // add new recipe
-const form = document.querySelector("form");
-form.addEventListener("submit", (evt) => {
-  evt.preventDefault();
+const addForm = document.getElementById("add-recipe-form");
 
-  const recipe = {
-    name: form.title.value,
-    ingredients: form.ingredients.value,
-    CreateTime: timeConverter(Date.now()),
-    round: 0,
-    defValue: 1,
-    arrayPrice: 1,
-    MinFarn: 3,
-    MaxFarn: 8,
-  };
+if (addForm != null) {
+  addForm.addEventListener("submit", (evt) => {
+    evt.preventDefault();
 
-  firebase
-    .firestore()
-    .collection("recipes")
-    .add(recipe)
-    .catch((err) => console.log(err));
+    const recipe = {
+      name: addForm.title.value,
+      ingredients: addForm.ingredients.value,
+      CreateTime: timeConverter(Date.now()),
+      round: 0,
+      defValue: 1,
+      Price: [0],
+      MinFarn: 3,
+      MaxFarn: 8,
+      setting: false,
+      Jackpot: "",
+      PlayerName: {
+        player1: "Player1",
+        player2: "Player2",
+        player3: "Player3",
+        player4: "Player4",
+      },
+    };
 
-  form.title.value = "";
-  form.ingredients.value = "";
-});
+    firebase
+      .firestore()
+      .collection("recipes")
+      .add(recipe)
+      .catch((err) => console.log(err));
+
+    addForm.title.value = "";
+    addForm.ingredients.value = "";
+  });
+}
 
 // remove a recipe
 const recipeContainer = document.querySelector(".recipes");
@@ -74,7 +85,7 @@ recipeContainer.addEventListener("click", (evt) => {
     const id = evt.target.getAttribute("data-id");
     console.log(id);
 
-    url = window.location.href + "/pages/mj.html?id=" + id;
+    url = window.location.href + "pages/mj.html?id=" + id;
 
     // url = "http://127.0.0.1:5500/pages/mj.html?" + "id="+id;
     console.log(url);
