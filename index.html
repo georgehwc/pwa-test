@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,6 +20,8 @@
 </head>
 
 <body class="grey lighten-4">
+  <div class="notification"></div>
+
 
   <!-- top nav -->
   <nav class="z-depth-0">
@@ -53,7 +56,21 @@
     <a class="btn-floating btn-small btn-large add-btn sidenav-trigger" data-target="side-form">
       <i class="material-icons">add</i>
     </a>
+    
   </div>
+
+  <fieldset>
+    <label>
+      <span>Server URL for connectivity test:</span>
+      <input id="serverUrl" style="width: 100%">
+    </label>
+  </fieldset>
+  <script>document.getElementById('serverUrl').value = window.location.origin;</script>
+  
+  <p>
+    <i>Use Network Panel in DevTools to toggle Offline status</i>
+  </p>
+
 
   <!-- add recipe side nav -->
   <div id="side-form" class="sidenav side-form">

@@ -16,8 +16,8 @@ const renderRecipe = (data, id) => {
     <div class="card-panel recipe white row" data-id="${id}">
       <img src="/img/dish.png" alt="recipe thumb">
       <div class="recipe-details">
-        <div class="recipe-title" data-id="${id}">${data.name}</div>
-        <div class="recipe-ingredients">${data.ingredients}</div>
+        <div class="recipe-title" data-id="${id}">${data.CreateTime}</div>
+        <!--  <div class="recipe-ingredients">${data.name}</div> -->
       </div>
       <div class="recipe-delete">
         <i class="material-icons" data-id="${id}">delete_outline</i>

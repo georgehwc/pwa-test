@@ -1,17 +1,6 @@
 // open profile modal
 const profileModal = document.querySelector(".Profile-page");
 
-//notification
-const notification = document.querySelector(".notification");
-
-const showNotification = (message) => {
-  notification.textContent = message;
-  notification.classList.add("active");
-  setTimeout(() => {
-    notification.classList.remove("active");
-    notification.textContent = "";
-  }, 5000);
-};
 
 let defValue = Math.floor(1);
 let arrayRecordData = [];
@@ -237,7 +226,7 @@ function getData() {
         console.log(jackpot);
 
         if (setting) {
-          settingCover();
+          settingCover(jackpot);
         }
         console.log(arrayPrice);
 
@@ -719,7 +708,7 @@ document.getElementById("setting-submit").addEventListener("click", (e) => {
     .catch((err) => console.log(err));
 });
 
-function settingCover() {
+function settingCover(x) {
   // document.getElementById("setting-page-cover").classList.add("yes");
   // settingModal.classList.remove("open");
 
@@ -747,12 +736,18 @@ function settingCover() {
   document.getElementById("price-x2").disabled = true;
   document.getElementById("price-x10").disabled = true;
   document.getElementById("setting-jackpot").disabled = true;
+  document.getElementById("setting-jackpot-input").disabled = true;
+  document.getElementById("setting-jackpot-input").value = x;
+
+  
+
 
 
 
 }
 
 function copyToClipboard(text) {
+  console.log("copy");
   if (window.clipboardData && window.clipboardData.setData) {
     // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
     return clipboardData.setData("Text", text);
@@ -1048,6 +1043,17 @@ document
 
     // console.log(document.getElementById("setting-jackpot-input").checked);
   });
+
+document.getElementById("btn-invite").addEventListener("click",(e)=>{
+  copyToClipboard(window.location.href);
+  document.getElementById("myTooltip").innerHTML = "Copied ";
+})
+ 
+function outFunc() {
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copy to clipboard";
+}
+
 
 //-------------------------------------------------------- for testing
 
