@@ -1,17 +1,25 @@
-// real-time listener
-firebase
-  .firestore()
-  .collection("recipes")
-  .onSnapshot((snapshot) => {
-    snapshot.docChanges().forEach((change) => {
-      if (change.type === "added") {
-        renderRecipe(change.doc.data(), change.doc.id);
-      }
-      if (change.type === "removed") {
-        removeRecipe(change.doc.id);
-      }
-    });
-  });
+// // real-time listener
+// firebase
+//   .firestore()
+//   .collection("recipes")
+//   .onSnapshot((snapshot) => {
+//     snapshot.docChanges().forEach((change) => {
+//       if (change.type === "added") {
+//         renderRecipe(change.doc.data(), change.doc.id);
+//       }
+//       if (change.type === "removed") {
+//         removeRecipe(change.doc.id);
+//       }
+//     });
+//   });
+
+// remove recipe
+const removeRecipe = (id) => {
+  const recipe = document.querySelector(`.recipe[data-id=${id}]`);
+  recipe.remove();
+};
+
+
 
 // add new recipe
 const addForm = document.getElementById("add-recipe-form");
@@ -48,19 +56,50 @@ if (addForm != null) {
         addForm.title.value = "";
         addForm.ingredients.value = "";
         SaveDataToLocalStorage(data.id);
+        return data.id;
+      })
+      .then((id) => {
+        console.log(id);
+        url = window.location.href + "pages/mj.html?id=" + id;
+        window.location.href = url;
+        // window.location.replace(url);
       })
       .catch((err) => console.log(err));
   });
 }
 
-// remove a recipe
+
 const recipeContainer = document.querySelector(".recipes");
 recipeContainer.addEventListener("click", (evt) => {
   console.log(evt);
+  // remove a recipe
   if (evt.target.tagName === "I") {
     const id = evt.target.getAttribute("data-id");
     console.log(id);
     firebase.firestore().collection("recipes").doc(id).delete();
+
+    var retrievedData = localStorage.getItem("mjsession");
+
+    var retrievedDataArray = JSON.parse(retrievedData);
+    console.log(retrievedDataArray);
+
+    // retrievedDataArray.forEach((element) => {
+    //   if (element == id) {
+    //     arr.splice(i, 1);
+    //     i--;
+    //   }
+    // });
+
+    for (var i = 0; i < retrievedDataArray.length; i++) {
+      if (retrievedDataArray[i] === id) {
+        retrievedDataArray.splice(i, 1);
+        i--;
+      }
+    }
+    console.log(retrievedDataArray);
+    localStorage.setItem("mjsession", JSON.stringify(retrievedDataArray));
+
+    removeRecipe(id);
   }
 
   if (evt.toElement.offsetParent === "div.card-panel.recipe.white.row") {
@@ -78,6 +117,7 @@ recipeContainer.addEventListener("click", (evt) => {
     // url = "http://127.0.0.1:5500/pages/mj.html?" + "id="+id;
     console.log(url);
 
-    window.location.replace(url);
+    // window.location.replace(url);
+    window.location.href = url;
   }
 });

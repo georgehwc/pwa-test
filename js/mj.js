@@ -739,6 +739,10 @@ function settingCover(x) {
   document.getElementById("setting-jackpot-input").disabled = true;
   document.getElementById("setting-jackpot-input").value = x;
 
+  document.getElementById("setting-invite").style.display = "block";
+
+
+  
   
 
 
@@ -914,7 +918,7 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
     MapEatDetail.get("eat") == MapEatDetail.get("gotEat") &&
     MapEatDetail.get("type") == 0
   ) {
-    alert("出衝點會同食糊係同一個人呀");
+    showNotification("出衝點會同食糊係同一個人呀");
   } else {
     MakeNewRecord();
     showRecord();

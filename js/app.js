@@ -54,7 +54,6 @@ if ("serviceWorker" in navigator) {
 
   window.addEventListener("online", handleConnection);
   window.addEventListener("offline", handleConnection);
-
 }
 
 // notification
@@ -68,7 +67,6 @@ const showNotification = (message) => {
     notification.textContent = "";
   }, 5000);
 };
-
 
 function handleConnection() {
   console.log("handleConnection");
@@ -111,6 +109,13 @@ function getServerUrl() {
 
 // document.getElementById("serverUrl").value ||
 
+function addZero(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
+
 function timeConverter(UNIX_timestamp) {
   var a = new Date(UNIX_timestamp * 1000);
   var b = new Date(UNIX_timestamp);
@@ -132,11 +137,13 @@ function timeConverter(UNIX_timestamp) {
   var year = b.getFullYear();
   var month = months[b.getMonth()];
   var date = b.getDate();
-  var hour = b.getHours();
-  var min = b.getMinutes();
-  var sec = b.getSeconds();
+  var hour = addZero(b.getHours());
+  var min =addZero(b.getMinutes());
+  var sec = addZero(b.getSeconds());
   var time =
-    date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+    date + " " + month + " " + year + " " + hour + ":" + min ;
+    // var time =
+    // date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
   return time;
 }
 
@@ -173,6 +180,25 @@ function storageAvailable(type) {
   }
 }
 
+// render recipe data
+const renderRecipe = (data, id) => {
+
+  const html = `
+    <div class="card-panel recipe white row" data-id="${id}">
+      <img src="/img/dish.png" alt="recipe thumb">
+      <div class="recipe-details">
+        <div class="recipe-title" data-id="${id}">${data.CreateTime}</div>
+        <div class="recipe-ingredients">最大${data.MaxFarn}番</div> 
+      </div>
+      <div class="recipe-delete">
+        <i class="material-icons" data-id="${id}">delete_outline</i>
+      </div>
+    </div>
+  `;
+  recipes.innerHTML += html;
+
+};
+
 if (storageAvailable("localStorage")) {
   // Yippee! We can use localStorage awesomeness
   console.log("We can use localStorage");
@@ -181,9 +207,9 @@ if (storageAvailable("localStorage")) {
     console.log(localStorage.getItem("mjdata"));
     console.log(!localStorage.getItem("mjdata"));
 
-    localStorage.setItem("bgcolor", 1);
-    localStorage.setItem("font", 2);
-    localStorage.setItem("image", 3);
+    // localStorage.setItem("bgcolor", 1);
+    // localStorage.setItem("font", 2);
+    // localStorage.setItem("image", 3);
 
     showNotification("welcome");
     var a = [];
@@ -204,13 +230,18 @@ if (storageAvailable("localStorage")) {
     retrievedDataArray.forEach((element) => {
       console.log(element);
       firebase
-      .firestore()
-      .collection("recipes")
-      .doc(element)
-      .get()
-      .then(function (doc) {
+        .firestore()
+        .collection("recipes")
+        .doc(element)
+        .get()
+        .then(function (doc) {
           if (doc.exists) {
             console.log(doc.data());
+
+            renderRecipe(doc.data(), doc.id);
+
+
+
           } else {
             console.log("no such data");
           }
