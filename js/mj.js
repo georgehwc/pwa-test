@@ -446,7 +446,7 @@ document.getElementById("recipes").style.display = "none";
 
 eatButton.addEventListener("click", () => {
   if (setting == false) {
-    showNotification("Please go to setting page first");
+    showNotification("請先完成設定");
     const settingModal = document.querySelector(".setting-page");
     settingModal.classList.add("open");
   } else {

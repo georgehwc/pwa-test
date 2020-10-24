@@ -227,12 +227,13 @@ if (storageAvailable("localStorage")) {
     var retrievedDataArray = JSON.parse(retrievedData);
     console.log(retrievedDataArray);
 
-    retrievedDataArray.forEach((element) => {
-      console.log(element);
+    for (let index = retrievedDataArray.length-1; index >= 0 ; index--) {
+      console.log(index);
+      console.log(retrievedDataArray[index]);
       firebase
         .firestore()
         .collection("recipes")
-        .doc(element)
+        .doc(retrievedDataArray[index])
         .get()
         .then(function (doc) {
           if (doc.exists) {
@@ -246,7 +247,28 @@ if (storageAvailable("localStorage")) {
             console.log("no such data");
           }
         });
-    });
+    }
+
+    // retrievedDataArray.forEach((element) => {
+    //   console.log(element);
+    //   firebase
+    //     .firestore()
+    //     .collection("recipes")
+    //     .doc(element)
+    //     .get()
+    //     .then(function (doc) {
+    //       if (doc.exists) {
+    //         console.log(doc.data());
+
+    //         renderRecipe(doc.data(), doc.id);
+
+
+
+    //       } else {
+    //         console.log("no such data");
+    //       }
+    //     });
+    // });
 
     // while (i--) {
     //   archive[keys[i]] = localStorage.getItem(keys[i]);
