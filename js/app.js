@@ -244,7 +244,7 @@ if (storageAvailable("localStorage")) {
 
 
           } else {
-            console.log("no such data");
+            showNotification("no such data");
           }
         });
     }

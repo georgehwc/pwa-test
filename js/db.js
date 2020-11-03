@@ -39,6 +39,7 @@ if (addForm != null) {
       MaxFarn: 8,
       setting: false,
       Jackpot: "",
+      chip:0,
       PlayerName: {
         player1: "Player1",
         player2: "Player2",

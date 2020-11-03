@@ -1,7 +1,6 @@
 // open profile modal
 const profileModal = document.querySelector(".Profile-page");
 
-
 let defValue = Math.floor(1);
 let arrayRecordData = [];
 let arrayPrice = [0];
@@ -10,7 +9,8 @@ let intMaxValue = 1;
 let tvid = "";
 let setting = false;
 let jackpot = "";
-var jackpotTotal = 0;
+let jackpotTotal = 0;
+let chipTotal = 0;
 
 //check tvid
 const checkTvid = async () => {
@@ -244,8 +244,7 @@ function getData() {
         document.getElementById("head-jackpot").innerHTML =
           "<del>jackpot</del>";
       } else {
-        document.getElementById("head-jackpot").innerHTML =
-          "jackpot =";
+        document.getElementById("head-jackpot").innerHTML = "jackpot =";
       }
 
       document.getElementById("max-farn").innerHTML =
@@ -285,8 +284,8 @@ function getData() {
 }
 
 function showRecord() {
-  console.log("show record function");
-  console.log(arrayRecordData);
+
+  console.log("show record function: arrayRecordData = " + arrayRecordData);
   var recordTableBody = document.getElementById("record-table-body");
 
   var player1Total = 0;
@@ -294,7 +293,6 @@ function showRecord() {
   var player3Total = 0;
   var player4Total = 0;
   jackpotTotal = 0;
-
 
   for (let index = 1; index < arrayRecordData.length + 1; index++) {
     if (arrayRecordData[index - 1][1] == "") {
@@ -322,15 +320,12 @@ function showRecord() {
 
     if (arrayRecordData[index - 1][5] == 2) {
       // console.log(jackpotTotal);
-      jackpotTotal = (jackpot * 4) + jackpotTotal;
+      jackpotTotal = jackpot * 4 + jackpotTotal;
       // console.log(jackpotTotal);
-
     }
 
-    if(arrayRecordData[index - 1][0] == intMaxValue){
-
+    if (arrayRecordData[index - 1][0] == intMaxValue) {
       jackpotTotal = 0;
-
     }
   }
 
@@ -395,7 +390,7 @@ checkTvid() // ------------------------------------- start here ----------------
         console.log("Current data: ", doc.data());
         // getData();
         let roundLength = doc.data().round.length;
-        console.log(roundLength);
+        console.log("roundLength" + roundLength);
 
         for (let index = 0; index < roundLength; index++) {
           arrayRecordData[index] = doc.data().round[index];
@@ -404,7 +399,6 @@ checkTvid() // ------------------------------------- start here ----------------
 
         showRecord();
 
-        console.log(doc.data().PlayerName.player1);
         console.log(doc.data().PlayerName);
 
         var playerName = document.querySelectorAll(".playername");
@@ -437,6 +431,12 @@ checkTvid() // ------------------------------------- start here ----------------
   })
   .catch((err) => {
     console.log(err);
+    showNotification("Error");
+
+    var intervalID = setInterval(function () {
+      url = window.location.origin + "/pages/fallback.html";
+      window.location.href = url;
+    }, 5000);
   });
 
 // return console.log("get data from server");
@@ -526,23 +526,21 @@ function MakeNewRecord() {
       arrayPrice[MapEatDetail.get("farn")] -
       arrayPrice[MapEatDetail.get("farn")] * 2;
   } else if (MapEatDetail.get("type") == 2) {
-
     for (let index = 1; index < 5; index++) {
       // everyone lose
       arrayRecordData[arrayRecordData.length - 1][index] =
         jackpot - jackpot * 2;
     }
-
   }
 
-  if(MapEatDetail.get("farn") == intMaxValue){
-    arrayRecordData[arrayRecordData.length - 1][MapEatDetail.get("eat")] += jackpotTotal; 
+  if (MapEatDetail.get("farn") == intMaxValue) {
+    arrayRecordData[arrayRecordData.length - 1][
+      MapEatDetail.get("eat")
+    ] += jackpotTotal;
     jackpotTotal = 0;
   }
 
   arrayRecordData[arrayRecordData.length - 1][5] = MapEatDetail.get("type");
-
- 
 
   return console.table(arrayRecordData);
 }
@@ -700,7 +698,8 @@ document.getElementById("setting-submit").addEventListener("click", (e) => {
     .update({
       setting: true,
     })
-    .then(() => {
+    .then((doc) => {
+      console.log(doc.data());
       console.log("setting true");
       settingCover();
       getData();
@@ -708,10 +707,9 @@ document.getElementById("setting-submit").addEventListener("click", (e) => {
     .catch((err) => console.log(err));
 });
 
-function settingCover(x) {
+function settingCover(jackpot) {
   // document.getElementById("setting-page-cover").classList.add("yes");
   // settingModal.classList.remove("open");
-
 
   // document.getElementById("setting-page-cover").title = "Copy to clipboard";
 
@@ -727,7 +725,7 @@ function settingCover(x) {
   document.getElementById("player3").disabled = true;
   document.getElementById("player4").disabled = true;
 
-  slider.setAttribute('disabled', true);
+  slider.setAttribute("disabled", true);
 
   document.getElementById("price-lart").disabled = true;
   document.getElementById("price-d10").disabled = true;
@@ -737,17 +735,13 @@ function settingCover(x) {
   document.getElementById("price-x10").disabled = true;
   document.getElementById("setting-jackpot").disabled = true;
   document.getElementById("setting-jackpot-input").disabled = true;
-  document.getElementById("setting-jackpot-input").value = x;
+  document.getElementById("setting-jackpot-input").value = jackpot;
+
+  document.getElementById("setting-chip").disabled = true;
+  document.getElementById("setting-chip-input").disabled = true;
+  // document.getElementById("setting-chip-input").value = x;
 
   document.getElementById("setting-invite").style.display = "block";
-
-
-  
-  
-
-
-
-
 }
 
 function copyToClipboard(text) {
@@ -969,8 +963,6 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
     MapEatDetail.set("gotEat", "default");
 
     document.getElementById("modal-confirm-table").style.display = "block"; //reset
-
-
   }
 });
 
@@ -1012,7 +1004,6 @@ lauGuk.addEventListener("click", (e) => {
 
   confirmModal.classList.add("open");
   document.getElementById("modal-confirm-table").style.display = "none";
-
 });
 
 document
@@ -1048,16 +1039,44 @@ document
     // console.log(document.getElementById("setting-jackpot-input").checked);
   });
 
-document.getElementById("btn-invite").addEventListener("click",(e)=>{
+document
+  .getElementById("setting-chip-input")
+  .addEventListener("change", (event) => {
+    firebase
+      .firestore()
+      .collection("recipes")
+      .doc(tvid)
+      .update({
+        chip: document.getElementById("setting-chip-input").value,
+      })
+      .then(() => {
+        console.log("chip");
+        jackpot = document.getElementById("setting-chip-input").value;
+      })
+      .catch((err) => console.log(err));
+  });
+
+document.getElementById("setting-chip").addEventListener("change", (event) => {
+  if (document.getElementById("setting-chip-input").disabled == false) {
+    document.getElementById("setting-chip-input").disabled = true;
+  } else {
+    if (document.getElementById("setting-chip-input").disabled == true) {
+      document.getElementById("setting-chip-input").disabled = false;
+    }
+  }
+
+  // console.log(document.getElementById("setting-jackpot-input").checked);
+});
+
+document.getElementById("btn-invite").addEventListener("click", (e) => {
   copyToClipboard(window.location.href);
   document.getElementById("myTooltip").innerHTML = "Copied ";
-})
- 
+});
+
 function outFunc() {
   var tooltip = document.getElementById("myTooltip");
   tooltip.innerHTML = "Copy to clipboard";
 }
-
 
 //-------------------------------------------------------- for testing
 
