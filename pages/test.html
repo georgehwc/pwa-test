@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="notranslate" translate="no">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MJ</title>
+  <!-- materialize icons, css & js -->
+  <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" href="/css/styles.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/materialize.min.js"></script>
+  <link rel="manifest" href="/manifest.json">
+  <!-- ios support -->
+  <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+  <link rel="icon" href="/img/mahjong-icon.png">
+  <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+  <meta name="theme-color" content="#FFE1C4">
+  <meta name="google" content="notranslate" />
+</head>
+
+<body class="grey lighten-4">
+  <div class="notification"></div>
+
+
+  <!-- top nav -->
+  <nav class="z-depth-0">
+    <div class="nav-wrapper container">
+      <a href="/">M<span>J</span></a>
+      <span class="right grey-text text-darken-1">
+        <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
+      </span>
+    </div>
+  </nav>
+
+  <!-- side nav -->
+  <ul id="side-menu" class="sidenav side-menu">
+    <li><a class="subheader">MJ</a></li>
+    <li><a href="/" class="waves-effect">主頁</a></li>
+    <li><a href="/pages/comingsoon.html" class="waves-effect">教學</a></li>
+
+    <li><a href="/pages/about.html" class="waves-effect">關於</a></li>
+    <!-- <li><a href="/" class="waves-effect">About</a></li>
+    <li><a href="/" class="waves-effect">About</a></li> -->
+
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a href="/pages/contact.html" class="waves-effect">
+        <i class="material-icons">mail_outline</i>Contact</a>
+    </li>
+
+
+  </ul>
+
+  <iframe src="https://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF%E9%BA%BB%E9%9B%80%E8%83%A1%E7%89%8C%E5%88%97%E8%A1%A8" width="100%" height="1000" frameborder="0" scrolling="yes"></iframe>
+
+
+
+  <!-- <fieldset>
+    <label>
+      <span>Server URL for connectivity test:</span>
+      <input id="serverUrl" style="width: 100%">
+    </label>
+  </fieldset>
+    <p>
+    <i>Use Network Panel in DevTools to toggle Offline status</i>
+  </p>
+
+
+  <script>document.getElementById('serverUrl').value = window.location.origin;</script> -->
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyD3dde0DNVn0l5p5HNOvQHSD82LRdG4TaA",
+      authDomain: "pwa-mj.firebaseapp.com",
+      databaseURL: "https://pwa-mj.firebaseio.com",
+      projectId: "pwa-mj",
+      storageBucket: "pwa-mj.appspot.com",
+      messagingSenderId: "78621739323",
+      appId: "1:78621739323:web:8a725c342efb20f1534f1e",
+      measurementId: "G-GCQGCHLXQL"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+
+  </script>
+
+</body>
+
+</html>

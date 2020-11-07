@@ -222,8 +222,7 @@ function getData() {
         intMaxValue = doc.data().MaxFarn;
         setting = doc.data().setting;
         jackpot = doc.data().Jackpot;
-
-        console.log(jackpot);
+        chipTotal = Number(doc.data().chip);
 
         if (setting) {
           settingCover(jackpot);
@@ -284,14 +283,20 @@ function getData() {
 }
 
 function showRecord() {
-
   console.log("show record function: arrayRecordData = " + arrayRecordData);
   var recordTableBody = document.getElementById("record-table-body");
+  // console.log(typeof player1Total);
+  // console.log(chipTotal);
 
   var player1Total = 0;
   var player2Total = 0;
   var player3Total = 0;
   var player4Total = 0;
+  // var player1Total = chipTotal;
+  // var player2Total = chipTotal;
+  // var player3Total = chipTotal;
+  // var player4Total = chipTotal;
+
   jackpotTotal = 0;
 
   for (let index = 1; index < arrayRecordData.length + 1; index++) {
@@ -329,19 +334,14 @@ function showRecord() {
     }
   }
 
-  // if (MapEatDetail.get("type") == 2) {
-  //   document.getElementById("head-jackpot-value").value =
-  //     document.getElementById("head-jackpot-value").value + jackpot * 4;
-  // }
-
   document.getElementById("head-jackpot-value").innerHTML = jackpotTotal;
 
   recordTableBody.innerHTML = `<tr>
-  <td class="tg-baqh">Total</td>
-  <td class="tg-baqh">${player1Total}</td>
-  <td class="tg-baqh">${player2Total}</td>
-  <td class="tg-baqh">${player3Total}</td>
-  <td class="tg-baqh">${player4Total}</td>
+  <td class="tg-baqh">總共 (${chipTotal})</td>
+  <td class="tg-baqh">${player1Total + chipTotal}</td>
+  <td class="tg-baqh">${player2Total + chipTotal}</td>
+  <td class="tg-baqh">${player3Total + chipTotal}</td>
+  <td class="tg-baqh">${player4Total + chipTotal}</td>
   </tr>`;
 
   document.getElementById("playerscore1").innerHTML = player1Total;
@@ -349,10 +349,31 @@ function showRecord() {
   document.getElementById("playerscore3").innerHTML = player3Total;
   document.getElementById("playerscore4").innerHTML = player4Total;
 
+  showRecordBody().then(() => {
+    let round = "recordRound" + (arrayRecordData.length - 1);
+
+    console.log(round);
+    if (arrayRecordData.length != 0) {
+      document.getElementById(round).addEventListener("click", function () {
+        console.log("click");
+        delNewRecord();
+        showRecord();
+      });
+    }
+  });
+}
+
+async function showRecordBody() {
   var html = "";
 
   for (let index = 0; index < arrayRecordData.length; index++) {
-    html += `<tr id="recordRound${index}">
+    html += `<tr id="recordRound${index}" class="`;
+
+    if (index == arrayRecordData.length - 1) {
+      html += `hrDelable`;
+    }
+
+    html += `" >
     <td class="tg-baqh">       ${index} </td>
     <td class="tg-baqh">${arrayRecordData[index][1]}</td>
     <td class="tg-baqh">${arrayRecordData[index][2]}</td>
@@ -361,7 +382,7 @@ function showRecord() {
     </tr>`;
   }
 
-  recordTableBody.innerHTML += html;
+  document.getElementById("record-table-body").innerHTML += html;
 }
 
 checkTvid() // ------------------------------------- start here -------------------
@@ -433,10 +454,10 @@ checkTvid() // ------------------------------------- start here ----------------
     console.log(err);
     showNotification("Error");
 
-    var intervalID = setInterval(function () {
-      url = window.location.origin + "/pages/fallback.html";
-      window.location.href = url;
-    }, 5000);
+    // var intervalID = setInterval(function () {
+    //   url = window.location.origin + "/pages/fallback.html";
+    //   window.location.href = url;
+    // }, 5000);
   });
 
 // return console.log("get data from server");
@@ -492,8 +513,45 @@ var MapEatDetail = new Map([
   ["type", 0],
 ]);
 
+function delNewRecord() {
+  // console.log(arrayRecordData);
+  arrayRecordData.pop();
+  console.log(arrayRecordData);
+
+    //
+    const record = {
+      0: arrayRecordData[arrayRecordData.length - 1][0],
+      1: arrayRecordData[arrayRecordData.length - 1][1],
+      2: arrayRecordData[arrayRecordData.length - 1][2],
+      3: arrayRecordData[arrayRecordData.length - 1][3],
+      4: arrayRecordData[arrayRecordData.length - 1][4],
+      5: arrayRecordData[arrayRecordData.length - 1][5],
+      time: arrayRecordData[arrayRecordData.length - 1]["time"],
+    };
+  
+    console.log(record);
+  
+    firebase
+      .firestore()
+      .collection("recipes")
+      .doc(tvid)
+      // .doc(arrayRecordData.length.toString())
+      .update({
+  
+        round: firebase.firestore.FieldValue.arrayRemove(record),
+      })
+      .then(function (docRef) {
+        console.log("Success update del delNewRecord");
+      })
+      .catch((err) => console.log(err));
+}
+
 function MakeNewRecord() {
   //番 player1 player2 player3 player4 0(出)/1(自)/2(流)
+
+  console.log(MapEatDetail.get("eat"));
+  console.log(MapEatDetail.get("gotEat"));
+  console.log(MapEatDetail.get("type"));
 
   arrayRecordData.push(new Array(6));
 
@@ -541,6 +599,10 @@ function MakeNewRecord() {
   }
 
   arrayRecordData[arrayRecordData.length - 1][5] = MapEatDetail.get("type");
+
+  arrayRecordData[arrayRecordData.length - 1]["time"] = timeConverter(
+    Date.now()
+  );
 
   return console.table(arrayRecordData);
 }
@@ -698,8 +760,7 @@ document.getElementById("setting-submit").addEventListener("click", (e) => {
     .update({
       setting: true,
     })
-    .then((doc) => {
-      console.log(doc.data());
+    .then(() => {
       console.log("setting true");
       settingCover();
       getData();
@@ -743,6 +804,7 @@ function settingCover(jackpot) {
 
   document.getElementById("setting-invite").style.display = "block";
 }
+0;
 
 function copyToClipboard(text) {
   console.log("copy");
@@ -902,11 +964,13 @@ eatSelect.addEventListener("change", (event) => {
 var confirmEat = document.querySelectorAll(".confirm-eat .playerbox");
 
 document.getElementById("eat-confirm").addEventListener("click", (e) => {
-  console.log("confrim eat");
-
   // for (let [key, value] of MapEatDetail) {
   //   console.log(key + " = " + value);
   // }
+
+  // console.log(MapEatDetail.get("eat"));
+  // console.log(MapEatDetail.get("gotEat"));
+  // console.log(MapEatDetail.get("type"));
 
   if (
     MapEatDetail.get("eat") == MapEatDetail.get("gotEat") &&
@@ -914,6 +978,7 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
   ) {
     showNotification("出衝點會同食糊係同一個人呀");
   } else {
+    console.log("confrim eat");
     MakeNewRecord();
     showRecord();
 
@@ -925,8 +990,8 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
       2: arrayRecordData[arrayRecordData.length - 1][2],
       3: arrayRecordData[arrayRecordData.length - 1][3],
       4: arrayRecordData[arrayRecordData.length - 1][4],
-      5: MapEatDetail.get("type"),
-      time: timeConverter(Date.now()),
+      5: arrayRecordData[arrayRecordData.length - 1][5],
+      time: arrayRecordData[arrayRecordData.length - 1]["time"],
     };
 
     firebase
@@ -1112,3 +1177,38 @@ console.log("12312312");
 // .onSnapshot(()=>{
 //   console.log("Current data: ", doc.data());
 // })
+
+const testButton = document.querySelector(".test-button");
+
+document.getElementById("recipes").style.display = "none";
+
+testButton.addEventListener("click", () => {
+  console.log("test");
+
+  //  delNewRecord();
+  const record = {
+    0: arrayRecordData[arrayRecordData.length - 1][0],
+    1: arrayRecordData[arrayRecordData.length - 1][1],
+    2: arrayRecordData[arrayRecordData.length - 1][2],
+    3: arrayRecordData[arrayRecordData.length - 1][3],
+    4: arrayRecordData[arrayRecordData.length - 1][4],
+    5: arrayRecordData[arrayRecordData.length - 1][5],
+    time: arrayRecordData[arrayRecordData.length - 1]["time"],
+  };
+
+  console.log(record);
+
+  firebase
+    .firestore()
+    .collection("recipes")
+    .doc(tvid)
+    // .doc(arrayRecordData.length.toString())
+    .update({
+
+      round: firebase.firestore.FieldValue.arrayRemove(record),
+    })
+    .then(function (docRef) {
+      console.log("Success update del delNewRecord");
+    })
+    .catch((err) => console.log(err));
+});

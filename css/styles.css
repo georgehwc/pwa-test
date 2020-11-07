@@ -389,3 +389,8 @@ th {
 .htitle{
   margin-left: 50px;
 }
+
+.hrDelable{
+  background-color: RGBA(1,1,1,0.5);
+  cursor: pointer;
+}

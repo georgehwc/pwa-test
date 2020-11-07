@@ -141,7 +141,7 @@ function timeConverter(UNIX_timestamp) {
   var min =addZero(b.getMinutes());
   var sec = addZero(b.getSeconds());
   var time =
-    date + " " + month + " " + year + " " + hour + ":" + min ;
+    date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec ;
     // var time =
     // date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
   return time;
