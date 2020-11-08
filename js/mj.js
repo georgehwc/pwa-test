@@ -229,6 +229,8 @@ function getData() {
         }
         console.log(arrayPrice);
 
+        calPrice(defValue, intMaxValue);
+
         slider.noUiSlider.set([intMinValue, intMaxValue]);
         console.log(slider.noUiSlider.get());
       } else {
@@ -518,32 +520,31 @@ function delNewRecord() {
   arrayRecordData.pop();
   console.log(arrayRecordData);
 
-    //
-    const record = {
-      0: arrayRecordData[arrayRecordData.length - 1][0],
-      1: arrayRecordData[arrayRecordData.length - 1][1],
-      2: arrayRecordData[arrayRecordData.length - 1][2],
-      3: arrayRecordData[arrayRecordData.length - 1][3],
-      4: arrayRecordData[arrayRecordData.length - 1][4],
-      5: arrayRecordData[arrayRecordData.length - 1][5],
-      time: arrayRecordData[arrayRecordData.length - 1]["time"],
-    };
-  
-    console.log(record);
-  
-    firebase
-      .firestore()
-      .collection("recipes")
-      .doc(tvid)
-      // .doc(arrayRecordData.length.toString())
-      .update({
-  
-        round: firebase.firestore.FieldValue.arrayRemove(record),
-      })
-      .then(function (docRef) {
-        console.log("Success update del delNewRecord");
-      })
-      .catch((err) => console.log(err));
+  //
+  const record = {
+    0: arrayRecordData[arrayRecordData.length - 1][0],
+    1: arrayRecordData[arrayRecordData.length - 1][1],
+    2: arrayRecordData[arrayRecordData.length - 1][2],
+    3: arrayRecordData[arrayRecordData.length - 1][3],
+    4: arrayRecordData[arrayRecordData.length - 1][4],
+    5: arrayRecordData[arrayRecordData.length - 1][5],
+    time: arrayRecordData[arrayRecordData.length - 1]["time"],
+  };
+
+  console.log(record);
+
+  firebase
+    .firestore()
+    .collection("recipes")
+    .doc(tvid)
+    // .doc(arrayRecordData.length.toString())
+    .update({
+      round: firebase.firestore.FieldValue.arrayRemove(record),
+    })
+    .then(function (docRef) {
+      console.log("Success update del delNewRecord");
+    })
+    .catch((err) => console.log(err));
 }
 
 function MakeNewRecord() {
@@ -1136,12 +1137,16 @@ document.getElementById("setting-chip").addEventListener("change", (event) => {
 document.getElementById("btn-invite").addEventListener("click", (e) => {
   copyToClipboard(window.location.href);
   document.getElementById("myTooltip").innerHTML = "Copied ";
+  setTimeout(() => {
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy to clipboard";
+  }, 1500);
 });
 
-function outFunc() {
-  var tooltip = document.getElementById("myTooltip");
-  tooltip.innerHTML = "Copy to clipboard";
-}
+// function outFunc() {
+
+//   console.log("1");
+// }
 
 //-------------------------------------------------------- for testing
 
@@ -1178,37 +1183,33 @@ console.log("12312312");
 //   console.log("Current data: ", doc.data());
 // })
 
-const testButton = document.querySelector(".test-button");
+// const testButton = document.querySelector(".test-button");
+// testButton.addEventListener("click", () => {
+//   console.log("test");
 
-document.getElementById("recipes").style.display = "none";
+//   //  delNewRecord();
+//   const record = {
+//     0: arrayRecordData[arrayRecordData.length - 1][0],
+//     1: arrayRecordData[arrayRecordData.length - 1][1],
+//     2: arrayRecordData[arrayRecordData.length - 1][2],
+//     3: arrayRecordData[arrayRecordData.length - 1][3],
+//     4: arrayRecordData[arrayRecordData.length - 1][4],
+//     5: arrayRecordData[arrayRecordData.length - 1][5],
+//     time: arrayRecordData[arrayRecordData.length - 1]["time"],
+//   };
 
-testButton.addEventListener("click", () => {
-  console.log("test");
+//   console.log(record);
 
-  //  delNewRecord();
-  const record = {
-    0: arrayRecordData[arrayRecordData.length - 1][0],
-    1: arrayRecordData[arrayRecordData.length - 1][1],
-    2: arrayRecordData[arrayRecordData.length - 1][2],
-    3: arrayRecordData[arrayRecordData.length - 1][3],
-    4: arrayRecordData[arrayRecordData.length - 1][4],
-    5: arrayRecordData[arrayRecordData.length - 1][5],
-    time: arrayRecordData[arrayRecordData.length - 1]["time"],
-  };
-
-  console.log(record);
-
-  firebase
-    .firestore()
-    .collection("recipes")
-    .doc(tvid)
-    // .doc(arrayRecordData.length.toString())
-    .update({
-
-      round: firebase.firestore.FieldValue.arrayRemove(record),
-    })
-    .then(function (docRef) {
-      console.log("Success update del delNewRecord");
-    })
-    .catch((err) => console.log(err));
-});
+//   firebase
+//     .firestore()
+//     .collection("recipes")
+//     .doc(tvid)
+//     // .doc(arrayRecordData.length.toString())
+//     .update({
+//       round: firebase.firestore.FieldValue.arrayRemove(record),
+//     })
+//     .then(function (docRef) {
+//       console.log("Success update del delNewRecord");
+//     })
+//     .catch((err) => console.log(err));
+// });

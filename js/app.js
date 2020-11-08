@@ -138,12 +138,12 @@ function timeConverter(UNIX_timestamp) {
   var month = months[b.getMonth()];
   var date = b.getDate();
   var hour = addZero(b.getHours());
-  var min =addZero(b.getMinutes());
+  var min = addZero(b.getMinutes());
   var sec = addZero(b.getSeconds());
   var time =
-    date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec ;
-    // var time =
-    // date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+    date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+  // var time =
+  // date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
   return time;
 }
 
@@ -182,7 +182,6 @@ function storageAvailable(type) {
 
 // render recipe data
 const renderRecipe = (data, id) => {
-
   const html = `
     <div class="card-panel recipe white row" data-id="${id}">
       <img src="/img/dish.png" alt="recipe thumb">
@@ -196,7 +195,6 @@ const renderRecipe = (data, id) => {
     </div>
   `;
   recipes.innerHTML += html;
-
 };
 
 if (storageAvailable("localStorage")) {
@@ -204,12 +202,6 @@ if (storageAvailable("localStorage")) {
   console.log("We can use localStorage");
   if (!localStorage.getItem("mjsession")) {
     //dont have
-    console.log(localStorage.getItem("mjdata"));
-    console.log(!localStorage.getItem("mjdata"));
-
-    // localStorage.setItem("bgcolor", 1);
-    // localStorage.setItem("font", 2);
-    // localStorage.setItem("image", 3);
 
     showNotification("welcome");
     var a = [];
@@ -227,7 +219,7 @@ if (storageAvailable("localStorage")) {
     var retrievedDataArray = JSON.parse(retrievedData);
     console.log(retrievedDataArray);
 
-    for (let index = retrievedDataArray.length-1; index >= 0 ; index--) {
+    for (let index = retrievedDataArray.length - 1; index >= 0; index--) {
       console.log(index);
       console.log(retrievedDataArray[index]);
       firebase
@@ -240,9 +232,6 @@ if (storageAvailable("localStorage")) {
             console.log(doc.data());
 
             renderRecipe(doc.data(), doc.id);
-
-
-
           } else {
             showNotification("no such data");
           }
@@ -261,8 +250,6 @@ if (storageAvailable("localStorage")) {
     //         console.log(doc.data());
 
     //         renderRecipe(doc.data(), doc.id);
-
-
 
     //       } else {
     //         console.log("no such data");
@@ -304,3 +291,29 @@ function SaveDataToLocalStorage(data) {
 //   }
 //   console.log(archive);
 // }
+
+const shareButton = document.querySelector(".share-button");
+const shareDialog = document.querySelector(".share-dialog");
+const closeButton = document.querySelector(".close-button");
+
+shareButton.addEventListener("click", (event) => {
+  if (navigator.share) {
+    navigator
+      .share({
+        title: "WebShare API Demo",
+        url: "https://codepen.io/ayoisaiah/pen/YbNazJ",
+      })
+      .then(() => {
+        console.log("Thanks for sharing!");
+      })
+      .catch(console.error);
+  } else {
+    shareDialog.classList.add("is-open");
+  }
+});
+
+closeButton.addEventListener("click", (event) => {
+  shareDialog.classList.remove("is-open");
+});
+
+document.querySelector(".pen-url").innerHTML = window.location;
