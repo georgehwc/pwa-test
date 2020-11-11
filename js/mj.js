@@ -357,7 +357,6 @@ function showRecord() {
     console.log(round);
     if (arrayRecordData.length != 0) {
       document.getElementById(round).addEventListener("click", function () {
-        console.log("click");
         delNewRecord();
         showRecord();
       });
@@ -516,8 +515,8 @@ var MapEatDetail = new Map([
 ]);
 
 function delNewRecord() {
-  // console.log(arrayRecordData);
-  arrayRecordData.pop();
+
+
   console.log(arrayRecordData);
 
   //
@@ -532,6 +531,7 @@ function delNewRecord() {
   };
 
   console.log(record);
+  arrayRecordData.pop();
 
   firebase
     .firestore()
@@ -544,7 +544,7 @@ function delNewRecord() {
     .then(function (docRef) {
       console.log("Success update del delNewRecord");
     })
-    .catch((err) => console.log(err));
+  //   .catch((err) => console.log(err));
 }
 
 function MakeNewRecord() {

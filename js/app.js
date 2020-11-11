@@ -197,75 +197,49 @@ const renderRecipe = (data, id) => {
   recipes.innerHTML += html;
 };
 
-if (storageAvailable("localStorage")) {
-  // Yippee! We can use localStorage awesomeness
-  console.log("We can use localStorage");
-  if (!localStorage.getItem("mjsession")) {
-    //dont have
+function getAll() {
+  if (storageAvailable("localStorage")) {
+    // Yippee! We can use localStorage awesomeness
+    console.log("We can use localStorage");
+    if (!localStorage.getItem("mjsession")) {
+      //dont have
 
-    showNotification("welcome");
-    var a = [];
-    a = JSON.parse(localStorage.getItem("mjsession")) || [];
-    localStorage.setItem("mjsession", JSON.stringify(a));
-  } else {
-    //have
-    // SaveDataToLocalStorage(["name", "key"]);
-    // SaveDataToLocalStorage("111");
-    // SaveDataToLocalStorage("222");
-    // SaveDataToLocalStorage("333");
+      showNotification("welcome");
+      var a = [];
+      a = JSON.parse(localStorage.getItem("mjsession")) || [];
+      localStorage.setItem("mjsession", JSON.stringify(a));
+    } else {
+      //have
 
-    var retrievedData = localStorage.getItem("mjsession");
-    console.log(retrievedData);
-    var retrievedDataArray = JSON.parse(retrievedData);
-    console.log(retrievedDataArray);
+      var retrievedData = localStorage.getItem("mjsession");
+      console.log(retrievedData);
+      var retrievedDataArray = JSON.parse(retrievedData);
+      console.log(retrievedDataArray);
 
-    for (let index = retrievedDataArray.length - 1; index >= 0; index--) {
-      console.log(index);
-      console.log(retrievedDataArray[index]);
-      firebase
-        .firestore()
-        .collection("recipes")
-        .doc(retrievedDataArray[index])
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            console.log(doc.data());
+      for (let index = retrievedDataArray.length - 1; index >= 0; index--) {
+        console.log(index);
+        console.log(retrievedDataArray[index]);
+        firebase
+          .firestore()
+          .collection("recipes")
+          .doc(retrievedDataArray[index])
+          .get()
+          .then(function (doc) {
+            if (doc.exists) {
+              console.log(doc.data());
 
-            renderRecipe(doc.data(), doc.id);
-          } else {
-            showNotification("no such data");
-          }
-        });
+              renderRecipe(doc.data(), doc.id);
+            } else {
+              showNotification("something wrong with your data");
+            }
+          });
+      }
     }
-
-    // retrievedDataArray.forEach((element) => {
-    //   console.log(element);
-    //   firebase
-    //     .firestore()
-    //     .collection("recipes")
-    //     .doc(element)
-    //     .get()
-    //     .then(function (doc) {
-    //       if (doc.exists) {
-    //         console.log(doc.data());
-
-    //         renderRecipe(doc.data(), doc.id);
-
-    //       } else {
-    //         console.log("no such data");
-    //       }
-    //     });
-    // });
-
-    // while (i--) {
-    //   archive[keys[i]] = localStorage.getItem(keys[i]);
-    // }
-    // console.log(archive);
+  } else {
+    // Too bad, no localStorage for us
+    showNotification("cant use local storage");
+    console.log("cant use local storage");
   }
-} else {
-  // Too bad, no localStorage for us
-  showNotification("cant use local storage");
-  console.log("cant use local storage");
 }
 
 function SaveDataToLocalStorage(data) {
@@ -317,3 +291,27 @@ closeButton.addEventListener("click", (event) => {
 });
 
 document.querySelector(".pen-url").innerHTML = window.location;
+
+document.getElementById("menu-join").addEventListener("click", () => {
+  document.querySelector(".modal-join").classList.add("open");
+});
+
+document.querySelector(".modal-join").addEventListener("click", (e) => {
+  // console.log(e);
+  if (e.target.classList.contains("modal-join")) {
+    // document.getElementById("modal-join").classList.remove("open");
+    document.querySelector(".modal-join").classList.remove("open");
+  }
+  if (e.target.id == "modal-join-submit" ) {
+    console.log("1");
+    let url = document.getElementById("modal-join-url").value;
+    console.log(url);
+    if(url.indexOf("/pages/mj.html?id=")  >-1){
+      console.log("2");
+      window.location.href = url;
+    }
+    
+  }
+});
+
+//evt.request.url.indexOf(".html"
