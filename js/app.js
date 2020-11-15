@@ -180,15 +180,74 @@ function storageAvailable(type) {
   }
 }
 
+function timeConverTochinese(params) {
+  var str = params;
+  var res = str.split(" ");
+  console.log(res);
+  let month = "";
+  switch (res[1]) {
+    case "Jan":
+      month = "一月";
+      break;
+    case "Jan":
+      month = "一月";
+      break;
+
+    case "Feb":
+      month = "二月";
+      break;
+
+    case "Mar":
+      month = "三月";
+      break;
+    case "Apr":
+      month = "四月";
+      break;
+    case "May":
+      month = "五月";
+      break;
+    case "Jun":
+      month = "六月";
+      break;
+    case "Jul":
+      month = "七月";
+      break;
+    case "Aug":
+      month = "八月";
+      break;
+    case "Sep":
+      month = "九月";
+      break;
+    case "Oct":
+      month = "十月";
+      break;
+    case "Nov":
+      month = "十一月";
+      break;
+    case "Dec":
+      month = "十二月";
+      break;
+
+    default:
+      break;
+  }
+  let time = month;
+  time += res[0] + " " + res[2] + " ";
+  time += res[3].slice(0,5);
+
+  return time;
+}
+
 // render recipe data
 const renderRecipe = (data, id) => {
   console.log(data);
+  let time = timeConverTochinese(data.CreateTime);
   const html = `
     <div class="card-panel recipe row" data-id="${id}">
       <img src="/img/common/${data.icon}.svg" alt="搵唔到">
       <div class="recipe-details" data-id="${id}">
-        <div class="recipe-title" data-id="${id}">${data.CreateTime}</div>
-        <div class="recipe-ingredients" data-id="${id}">最大${data.MaxFarn}番</div> 
+        <div class="recipe-title" data-id="${id}">${time}</div>
+        <div class="recipe-ingredients" data-id="${id}">標題: ${data.name} 備註:${data.ingredients} </br>最大${data.MaxFarn}番</div> 
       </div>
       <div class="recipe-delete" data-id="${id}">
         <i class="material-icons" data-id="${id}">delete_outline</i>
