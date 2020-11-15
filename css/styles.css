@@ -6,19 +6,23 @@
   --btnSelected: #ff9d2e;
   --bg :#f7f7d5;
   --green :#33683e;
+  --green2 :#5aab6b;
+
   --red :#c91925;
   --blue :#00004f;
+  --black: #000000;
 
 }
 
 /* layout styles */
 nav {
-  background: var(--bg);
-  border-bottom: 10px solid var(--bg);
+  background: var(--green);
+  border-bottom: 2px solid var(--black);
 }
 nav a {
   text-transform: uppercase;
   color: var(--red);
+  font-size: 1.5em;
 }
 nav a span {
   font-weight: bold;
@@ -34,11 +38,13 @@ nav .sidenav-trigger {
 .card-panel.recipe {
   border-radius: 8px;
   padding: 10px;
-  box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1);
+  /* box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1); */
   display: grid;
   grid-template-columns: 2fr 6fr 1fr;
   grid-template-areas: "image details delete";
   position: relative;
+  background-color:#f7f7f7;
+  z-index: 10;
 }
 .recipe img {
   grid-area: image;
@@ -53,6 +59,7 @@ nav .sidenav-trigger {
   position: absolute;
   bottom: 0px;
   right: 0px;
+  cursor: pointer;
 }
 .recipe-delete i {
   font-size: 18px;
@@ -264,7 +271,7 @@ form .input-field {
 .eat-select {
   display: block;
   margin: 8px 0;
-  padding: 8px 2px;
+  padding: 10px 8px;
   border-width: 0 0 2px 0;
   width: 100%;
 }
@@ -340,6 +347,8 @@ th {
   border-radius: 0 0 10px 10px;
   transition: 0.4s;
   margin-top: -100%;
+  font-size: 1.2rem;
+  z-index: 5000;
 }
 
 .notification.active {
@@ -406,9 +415,17 @@ th {
   cursor: pointer;
 }
 
+.bgcolor{
+  position: relative;
+  height: 100vh;
+  background: var(--bg) ;
+
+}
+
 .bgtext {
   position: relative;
   height: 100vh;
+  background: var(--bg) ;
 
 }
 .bgtext::before {
@@ -421,9 +438,7 @@ th {
   z-index: -1;
   top: 0;
   left: 0;
-  /* background: black; */
-  /* background-color: var(--bg) ; */
-  background: var(--bg) ;
+
 }
 .bgtext::after {
   content: "MJ";
@@ -577,9 +592,35 @@ header {
   background: rgba(0, 0, 0, 0.4);
   z-index: 1;
   display: none;
+  top: 0;
 }
 
 .modal-join.open{
   display: block;
-  z-index: 2;
+  z-index: 20;
 }
+
+#recipes-icon{
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 16px;
+  margin: 0 0 8px 0;
+  padding: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-transition: border .3s, -webkit-box-shadow .3s;
+  transition: border .3s, -webkit-box-shadow .3s;
+  transition: box-shadow .3s, border .3s;
+  transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+}
+
+/* .subheader{
+  color: var(--blue);
+} */

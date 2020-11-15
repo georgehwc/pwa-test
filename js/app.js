@@ -182,14 +182,15 @@ function storageAvailable(type) {
 
 // render recipe data
 const renderRecipe = (data, id) => {
+  console.log(data);
   const html = `
-    <div class="card-panel recipe white row" data-id="${id}">
-      <img src="/img/dish.png" alt="recipe thumb">
-      <div class="recipe-details">
+    <div class="card-panel recipe row" data-id="${id}">
+      <img src="/img/common/${data.icon}.svg" alt="搵唔到">
+      <div class="recipe-details" data-id="${id}">
         <div class="recipe-title" data-id="${id}">${data.CreateTime}</div>
-        <div class="recipe-ingredients">最大${data.MaxFarn}番</div> 
+        <div class="recipe-ingredients" data-id="${id}">最大${data.MaxFarn}番</div> 
       </div>
-      <div class="recipe-delete">
+      <div class="recipe-delete" data-id="${id}">
         <i class="material-icons" data-id="${id}">delete_outline</i>
       </div>
     </div>
@@ -226,8 +227,6 @@ function getAll() {
           .get()
           .then(function (doc) {
             if (doc.exists) {
-              console.log(doc.data());
-
               renderRecipe(doc.data(), doc.id);
             } else {
               showNotification("something wrong with your data");
@@ -302,15 +301,14 @@ document.querySelector(".modal-join").addEventListener("click", (e) => {
     // document.getElementById("modal-join").classList.remove("open");
     document.querySelector(".modal-join").classList.remove("open");
   }
-  if (e.target.id == "modal-join-submit" ) {
+  if (e.target.id == "modal-join-submit") {
     console.log("1");
     let url = document.getElementById("modal-join-url").value;
     console.log(url);
-    if(url.indexOf("/pages/mj.html?id=")  >-1){
+    if (url.indexOf("/pages/mj.html?id=") > -1) {
       console.log("2");
       window.location.href = url;
     }
-    
   }
 });
 

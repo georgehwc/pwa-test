@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="grey lighten-4">
+<body class="bgcolor">
 
   <div class="notification"></div>
 
@@ -31,26 +31,45 @@
   <nav class="z-depth-0">
     <div class="nav-wrapper container">
       <a href="/">M<span>J</span></a>
-      <span class="right grey-text text-darken-1">
+      <span class="right">
         <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
       </span>
     </div>
   </nav>
 
+    <!-- join -->
+    <div class="modal-join">
+      <div class="modal">
+        <h2>加入</h2>
+        <div class="link">
+          <input type="text" class="pen-url" id="modal-join-url">
+        </div>
+        <a class="button" id="modal-join-submit">加入</a>
+      </div>
+    </div>
+
   <!-- side nav -->
-  <ul id="side-menu" class="sidenav side-menu">
+  <ul id="side-menu" class="sidenav side-menu sidenav-close">
     <li><a class="subheader">MJ</a></li>
-    <li><a href="/" class="waves-effect">Home</a></li>
-    <li><a href="/pages/about.html" class="waves-effect">About</a></li>
+    <li><a href="/" class="waves-effect">主頁</a></li>
+    <li><a  class="waves-effect sidenav-trigger " data-target="side-form">新的賽局</a></li>
+
+    <li><a id="menu-join" class="waves-effect">加入</a></li>
+
+    <li><a href="/pages/test.html" class="waves-effect">教學</a></li>
+
+    <li><a href="/pages/about.html" class="waves-effect">關於</a></li>
+
     <li>
       <div class="divider"></div>
     </li>
     <li><a href="/pages/contact.html" class="waves-effect">
         <i class="material-icons">mail_outline</i>Contact</a>
     </li>
-  </ul>
 
-  <!-- setting  -->
+
+  </ul>
+  <!-- setting + share  -->
   <div class="setting-page">
     <div class="modal">
       <div id="setting-invite">
@@ -393,7 +412,7 @@
       </div>
     </div>
 
-    <div class="eat-button">EAT</div>
+    <div class="eat-button">食糊</div>
     <!-- <div class="test-button">Test</div> -->
 
 

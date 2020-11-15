@@ -21,7 +21,7 @@
   <meta name="google" content="notranslate" />
 </head>
 
-<body class="grey lighten-4 bgtext" onload="getAll()">
+<body class="bgtext" onload="getAll()">
   <div class="notification"></div>
 
 
@@ -29,7 +29,7 @@
   <nav class="z-depth-0">
     <div class="nav-wrapper container">
       <a href="/">M<span>J</span></a>
-      <span class="right grey-text text-darken-1">
+      <span class="right">
         <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
       </span>
     </div>
@@ -91,6 +91,7 @@
     </button>
   </div>
 
+  <!-- join -->
   <div class="modal-join">
     <div class="modal">
       <h2>加入</h2>
@@ -103,16 +104,16 @@
 
 
   <!-- side nav -->
-  <ul id="side-menu" class="sidenav side-menu">
+  <ul id="side-menu" class="sidenav side-menu sidenav-close">
     <li><a class="subheader">MJ</a></li>
     <li><a href="/" class="waves-effect">主頁</a></li>
+    <li><a  class="waves-effect sidenav-trigger " data-target="side-form">新的賽局</a></li>
+
     <li><a id="menu-join" class="waves-effect">加入</a></li>
 
-    <li><a href="/pages/comingsoon.html" class="waves-effect">教學</a></li>
+    <li><a href="/pages/test.html" class="waves-effect">教學</a></li>
 
     <li><a href="/pages/about.html" class="waves-effect">關於</a></li>
-    <!-- <li><a href="/" class="waves-effect">About</a></li>
-    <li><a href="/" class="waves-effect">About</a></li> -->
 
     <li>
       <div class="divider"></div>
@@ -124,7 +125,6 @@
 
   </ul>
 
-  <!-- <h1 class="htitle">目錄</h1> -->
   <!-- recipes -->
   <div class="recipes container grey-text text-darken-1">
 
@@ -158,13 +158,29 @@
       <h6>新賽局</h6>
       <div class="divider"></div>
       <div class="input-field">
-        <input placeholder="e.g. Ninja soup" id="title" type="text" class="validate">
-        <label for="title">名</label>
+        <input placeholder="我的賽局" id="title" type="text" class="validate">
+        <label for="title">標題</label>
       </div>
+      <div class="input-field">
+        <select id="recipesIcon" class="eat-select validate">
+          <option id="iconselectDefault" value="mjrandom" selected >隨機</option>
+          <option value="mjt">筒</option>
+          <option value="mjs">索</option>
+          <option value="mjw">萬</option>
+          <option value="mjother">其他</option>
+        </select>
+        <label for="recipesIcon" style="-webkit-transform: translateY(-14px) scale(0.8);
+        transform: translateY(-14px) scale(0.8);
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;">Icon</label>
+      </div>
+
       <div class="input-field">
         <input placeholder="" id="ingredients" type="text" class="validate">
         <label for="ingredients">備註</label>
       </div>
+
+
       <div class="input-field center">
         <button class="btn-small">Add</button>
       </div>

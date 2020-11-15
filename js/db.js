@@ -19,10 +19,80 @@ const removeRecipe = (id) => {
   recipe.remove();
 };
 
-
-
 // add new recipe
 const addForm = document.getElementById("add-recipe-form");
+
+function iconRandom(prefer) {
+  var icon = [
+    "MJat1",
+    "MJat2-",
+    "MJat3-",
+    "MJd1-",
+    "MJd2-",
+    "MJd3-",
+    "MJd3rv1-",
+    "MJf1-",
+    "MJf2-",
+    "MJf3-",
+    "MJf4-",
+    "MJh1-",
+    "MJh2-",
+    "MJh3-",
+    "MJh4-",
+    "MJh5-",
+    "MJh6-",
+    "MJh7-",
+    "MJh8-",
+    "MJs1-",
+    "MJs2-",
+    "MJs3-",
+    "MJs4-",
+    "MJs5-",
+    "MJs6-",
+    "MJs7-",
+    "MJs8-",
+    "MJs9-",
+    "MJt1-",
+    "MJt2-",
+    "MJt3-",
+    "MJt4-",
+    "MJt5-",
+    "MJt6-",
+    "MJt7-",
+    "MJt8-",
+    "MJt9-",
+    "MJw1-",
+    "MJw2-",
+    "MJw3-",
+    "MJw4-",
+    "MJw5-",
+    "MJw6-",
+    "MJw7-",
+    "MJw8-",
+    "MJw9-",
+  ];
+
+  if (prefer == "mjrandom") {
+    let random = Math.floor(Math.random() * 46);
+    return icon[random];
+  }
+  if (prefer == "mjother") {
+    let random = Math.floor(Math.random() * 19);
+    return icon[random];
+  }
+  if (prefer == "mjs") {
+    let random = Math.floor(Math.random() * 9) + 19;
+    return icon[random];
+  }
+  if (prefer == "mjt") {
+    let random = Math.floor(Math.random() * 9) + 28;
+    return icon[random];
+  }
+  if (prefer == "mjw") {
+    let random = Math.floor(Math.random() * 9) + 37;
+    return icon[random];
+  }
+}
 
 if (addForm != null) {
   addForm.addEventListener("submit", (evt) => {
@@ -32,6 +102,7 @@ if (addForm != null) {
       name: addForm.title.value,
       ingredients: addForm.ingredients.value,
       CreateTime: timeConverter(Date.now()),
+      icon: iconRandom(addForm.recipesIcon.value),
       round: 0,
       defValue: 1,
       Price: [0],
@@ -39,7 +110,7 @@ if (addForm != null) {
       MaxFarn: 8,
       setting: false,
       Jackpot: "",
-      chip:0,
+      chip: 0,
       PlayerName: {
         player1: "Player1",
         player2: "Player2",
@@ -69,7 +140,6 @@ if (addForm != null) {
   });
 }
 
-
 const recipeContainer = document.querySelector(".recipes");
 recipeContainer.addEventListener("click", (evt) => {
   console.log(evt);
@@ -83,13 +153,6 @@ recipeContainer.addEventListener("click", (evt) => {
 
     var retrievedDataArray = JSON.parse(retrievedData);
     console.log(retrievedDataArray);
-
-    // retrievedDataArray.forEach((element) => {
-    //   if (element == id) {
-    //     arr.splice(i, 1);
-    //     i--;
-    //   }
-    // });
 
     for (var i = 0; i < retrievedDataArray.length; i++) {
       if (retrievedDataArray[i] === id) {
@@ -107,18 +170,21 @@ recipeContainer.addEventListener("click", (evt) => {
     const id = evt.target.getAttribute("data-id");
     console.log("test");
   }
-  // console.log(evt.target);
-  if (evt.target.className === "recipe-title") {
-    console.log("hihi");
+
+  if (
+    evt.target.classList.contains("card-panel") ||
+    evt.target.classList.contains("recipe-title") ||
+    evt.target.classList.contains("recipe-details") ||
+    evt.target.classList.contains("recipe-ingredients")
+    // evt.target.classList.contains("123")
+  ) {
     const id = evt.target.getAttribute("data-id");
     console.log(id);
 
     url = window.location.href + "pages/mj.html?id=" + id;
 
-    // url = "http://127.0.0.1:5500/pages/mj.html?" + "id="+id;
     console.log(url);
 
-    // window.location.replace(url);
     window.location.href = url;
   }
 });
