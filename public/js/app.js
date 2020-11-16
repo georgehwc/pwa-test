@@ -1,17 +1,17 @@
-// // Your web app's Firebase configuration
-// var firebaseConfig = {
-//   apiKey: "AIzaSyD3dde0DNVn0l5p5HNOvQHSD82LRdG4TaA",
-//   authDomain: "pwa-mj.firebaseapp.com",
-//   databaseURL: "https://pwa-mj.firebaseio.com",
-//   projectId: "pwa-mj",
-//   storageBucket: "pwa-mj.appspot.com",
-//   messagingSenderId: "78621739323",
-//   appId: "1:78621739323:web:8a725c342efb20f1534f1e",
-//   measurementId: "G-GCQGCHLXQL"
-// };
-// // // Initialize Firebase
-// // firebase.initializeApp(firebaseConfig);
-// // firebase.analytics();
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyD3dde0DNVn0l5p5HNOvQHSD82LRdG4TaA",
+  authDomain: "pwa-mj.firebaseapp.com",
+  databaseURL: "https://pwa-mj.firebaseio.com",
+  projectId: "pwa-mj",
+  storageBucket: "pwa-mj.appspot.com",
+  messagingSenderId: "78621739323",
+  appId: "1:78621739323:web:8a725c342efb20f1534f1e",
+  measurementId: "G-GCQGCHLXQL",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 // if ("serviceWorker" in navigator) {
 //   navigator.serviceWorker
@@ -456,18 +456,6 @@ function SaveDataToLocalStorage(data) {
   localStorage.setItem("mjsession", JSON.stringify(a));
 }
 
-// function allStorage() {
-//   console.log("allStorage");
-//   var archive = {}, // Notice change here
-//     keys = Object.keys(localStorage),
-//     i = keys.length;
-
-//   while (i--) {
-//     archive[keys[i]] = localStorage.getItem(keys[i]);
-//   }
-//   console.log(archive);
-// }
-
 const shareButton = document.querySelector(".share-button");
 const shareDialog = document.querySelector(".share-dialog");
 const closeButton = document.querySelector(".close-button");
@@ -517,16 +505,13 @@ document.querySelector(".modal-join").addEventListener("click", (e) => {
 
 //evt.request.url.indexOf(".html"
 
-const recipes = document.querySelector('.recipes');
+const recipes = document.querySelector(".recipes");
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   // nav menu
-  const menus = document.querySelectorAll('.side-menu');
-  M.Sidenav.init(menus, {edge: 'right'});
+  const menus = document.querySelectorAll(".side-menu");
+  M.Sidenav.init(menus, { edge: "right" });
   // add recipe form
-  const forms = document.querySelectorAll('.side-form');
-  M.Sidenav.init(forms, {edge: 'left'});
+  const forms = document.querySelectorAll(".side-form");
+  M.Sidenav.init(forms, { edge: "left" });
 });
-
-
-

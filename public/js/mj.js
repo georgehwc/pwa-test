@@ -384,7 +384,7 @@ async function showRecordBody() {
     }
 
     html += `" >
-    <td class="tg-baqh">       ${index} </td>
+    <td class="tg-baqh">       ${index+1} </td>
     <td class="tg-baqh">${arrayRecordData[index][1]}</td>
     <td class="tg-baqh">${arrayRecordData[index][2]}</td>
     <td class="tg-baqh">${arrayRecordData[index][3]}</td>
