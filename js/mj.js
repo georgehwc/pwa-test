@@ -108,20 +108,29 @@ function printPriceTable(arrayPrice, min, max) {
 
   for (let index = 0; index < btnEatPrice.length; index++) {
     var test = index % 2;
-    btnEatPrice[index].addEventListener("click", () => {
-      //reset
-      MapEatDetail.set("type", "0");
 
-      confirmModal.classList.add("open");
-      MapEatDetail.set("farn", btnEatPrice[index].value);
-      MapEatDetail.set(
-        "eat",
-        document.getElementById("eatSelect").selectedIndex
-      );
-    });
+    if (test == 0) {
+      btnEatPrice[index].addEventListener("click", () => {
+        //reset
+        MapEatDetail.set("type", "0");
+
+        confirmModal.classList.add("open");
+        MapEatDetail.set("farn", btnEatPrice[index].value);
+        MapEatDetail.set(
+          "eat",
+          document.getElementById("eatSelect").selectedIndex
+        );
+      });
+    }
 
     if (test == 1) {
       btnEatPrice[index].addEventListener("click", () => {
+        confirmModal.classList.add("open");
+        MapEatDetail.set("farn", btnEatPrice[index].value);
+        MapEatDetail.set(
+          "eat",
+          document.getElementById("eatSelect").selectedIndex
+        );
         MapEatDetail.set("type", "1");
 
         document.getElementById("modal-confirm-table").style.display = "none";
@@ -339,7 +348,7 @@ function showRecord() {
   document.getElementById("head-jackpot-value").innerHTML = jackpotTotal;
 
   recordTableBody.innerHTML = `<tr>
-  <td class="tg-baqh">總共 (${chipTotal})</td>
+  <td class="tg-baqh">起始 ($${chipTotal})</td>
   <td class="tg-baqh">${player1Total + chipTotal}</td>
   <td class="tg-baqh">${player2Total + chipTotal}</td>
   <td class="tg-baqh">${player3Total + chipTotal}</td>
@@ -515,8 +524,6 @@ var MapEatDetail = new Map([
 ]);
 
 function delNewRecord() {
-
-
   console.log(arrayRecordData);
 
   //
@@ -543,7 +550,7 @@ function delNewRecord() {
     })
     .then(function (docRef) {
       console.log("Success update del delNewRecord");
-    })
+    });
   //   .catch((err) => console.log(err));
 }
 
@@ -804,8 +811,9 @@ function settingCover(jackpot) {
   // document.getElementById("setting-chip-input").value = x;
 
   document.getElementById("setting-invite").style.display = "block";
+
+  document.getElementById("setting-submit").disabled = true;
 }
-0;
 
 function copyToClipboard(text) {
   console.log("copy");

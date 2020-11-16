@@ -71,6 +71,7 @@ const showNotification = (message) => {
 function handleConnection() {
   console.log("handleConnection");
   if (navigator.onLine) {
+    document.body.classList.remove("offline");
     isReachable(getServerUrl()).then(function (online) {
       if (online) {
         // handle online status
@@ -81,6 +82,7 @@ function handleConnection() {
     });
   } else {
     // handle offline status
+    document.body.classList.add("offline");
     console.log("offline");
   }
 }
@@ -183,57 +185,197 @@ function storageAvailable(type) {
 function timeConverTochinese(params) {
   var str = params;
   var res = str.split(" ");
-  console.log(res);
   let month = "";
+  let time = "";
+  let day = "";
+  let year = "";
+  switch (res[2]) {
+    case "2020":
+      year = "二零二零";
+      break;
+    case "2021":
+      year = "二零二一";
+
+      break;
+    case "2022":
+      year = "二零二二";
+
+      break;
+    case "2023":
+      year = "二零二三";
+
+      break;
+    case "2024":
+      year = "二零二四";
+
+      break;
+    case "2025":
+      year = "二零二五";
+
+      break;
+
+    default:
+      year = res[2];
+      break;
+  }
+
+  time += year + "<span  style='color: var(--red);'>年</span>";
+
   switch (res[1]) {
     case "Jan":
-      month = "一月";
-      break;
-    case "Jan":
-      month = "一月";
+      month = "一";
       break;
 
     case "Feb":
-      month = "二月";
+      month = "二";
       break;
 
     case "Mar":
-      month = "三月";
+      month = "三";
       break;
     case "Apr":
-      month = "四月";
+      month = "四";
       break;
     case "May":
-      month = "五月";
+      month = "五";
       break;
     case "Jun":
-      month = "六月";
+      month = "六";
       break;
     case "Jul":
-      month = "七月";
+      month = "七";
       break;
     case "Aug":
-      month = "八月";
+      month = "八";
       break;
     case "Sep":
-      month = "九月";
+      month = "九";
       break;
     case "Oct":
-      month = "十月";
+      month = "十";
       break;
     case "Nov":
-      month = "十一月";
+      month = "十一";
       break;
     case "Dec":
-      month = "十二月";
+      month = "十二";
       break;
 
     default:
       break;
   }
-  let time = month;
-  time += res[0] + " " + res[2] + " ";
-  time += res[3].slice(0,5);
+  time += month + "<span  style='color: var(--red);'>月</span>";
+
+  switch (res[0]) {
+    case "1":
+      day = "一";
+      break;
+    case "2":
+      day = "二";
+      break;
+    case "3":
+      day = "三";
+
+      break;
+    case "4":
+      day = "四";
+
+      break;
+    case "5":
+      day = "五";
+
+      break;
+    case "6":
+      day = "六";
+      break;
+    case "7":
+      day = "七";
+      break;
+    case "8":
+      day = "八";
+      break;
+    case "9":
+      day = "九";
+      break;
+    case "10":
+      day = "十";
+      break;
+    case "11":
+      day = "十一";
+      break;
+    case "12":
+      day = "十二";
+      break;
+    case "13":
+      day = "十三";
+      break;
+    case "14":
+      day = "十四";
+      break;
+    case "15":
+      day = "十五";
+      break;
+    case "16":
+      day = "十六";
+      break;
+    case "17":
+      day = "十七";
+      break;
+    case "18":
+      day = "十八";
+      break;
+    case "19":
+      day = "十九";
+      break;
+    case "20":
+      day = "二十";
+
+      break;
+    case "21":
+      day = "二十一";
+      break;
+    case "22":
+      day = "二十二";
+      break;
+    case "23":
+      day = "二十三";
+      break;
+    case "24":
+      day = "二十四";
+      break;
+    case "25":
+      day = "二十五";
+      break;
+    case "26":
+      day = "二十六";
+
+      break;
+    case "27":
+      day = "二十七";
+
+      break;
+    case "28":
+      day = "二十八";
+
+      break;
+    case "29":
+      day = "二十九";
+
+      break;
+    case "30":
+      day = "三十";
+
+      break;
+    case "31":
+      day = "三十一";
+
+      break;
+
+    default:
+      break;
+  }
+  time += day + "<span  style='color: var(--red);'>日</span>" + " ";
+  time += res[3].slice(0, 5);
 
   return time;
 }
@@ -260,7 +402,9 @@ const renderRecipe = (data, id) => {
 function getAll() {
   if (storageAvailable("localStorage")) {
     // Yippee! We can use localStorage awesomeness
-    console.log("We can use localStorage");
+    // console.log("We can use localStorage");
+    showNotification("welcome");
+
     if (!localStorage.getItem("mjsession")) {
       //dont have
 
@@ -372,3 +516,17 @@ document.querySelector(".modal-join").addEventListener("click", (e) => {
 });
 
 //evt.request.url.indexOf(".html"
+
+const recipes = document.querySelector('.recipes');
+
+document.addEventListener('DOMContentLoaded', function() {
+  // nav menu
+  const menus = document.querySelectorAll('.side-menu');
+  M.Sidenav.init(menus, {edge: 'right'});
+  // add recipe form
+  const forms = document.querySelectorAll('.side-form');
+  M.Sidenav.init(forms, {edge: 'left'});
+});
+
+
+

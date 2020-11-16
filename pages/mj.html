@@ -27,6 +27,14 @@
 
   <div class="notification"></div>
 
+  <div class="offline-notification">
+    你好似斷左線 有D工能可能會唔work
+    <a >咩意思?</a>
+    <div class="offline-notification_explanation">
+      呢個程式會繼續run 但係你唔會收到其他人嘅 資料/數據 直至你上得返網.
+    </div>
+  </div>
+
   <!-- top nav -->
   <nav class="z-depth-0">
     <div class="nav-wrapper container">
@@ -228,23 +236,23 @@
         <div class="range-value">
           <div class="range-value-div">
             <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
-            <button type="button" class="price-change" id="price-d10">細十倍</button>
+            <button type="button" class="price-change button" id="price-d10">細十倍</button>
           </div>
           <div class="range-value-div">
             <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
-            <button type="button" class="price-change" id="price-d2">細一倍</button>
+            <button type="button" class="price-change button" id="price-d2">細一倍</button>
           </div>
           <div class="range-value-div">
-            <button type="button" class="price-change" id="price-reset">重置</button>
+            <button type="button" class="price-change button" id="price-reset">重置</button>
           </div>
           <div class="range-value-div">
             <!-- <input type="text" placeholder="最大幾錢" value="64" id="max-price"> -->
-            <button type="button" class="price-change" id="price-x2">大一倍</button>
+            <button type="button" class="price-change button" id="price-x2">大一倍</button>
 
           </div>
           <div class="range-value-div">
             <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
-            <button type="button" class="price-change" id="price-x10">大十倍</button>
+            <button type="button" class="price-change button" id="price-x10">大十倍</button>
           </div>
 
           <!-- <div class="setting-button">確定</div> -->
@@ -290,7 +298,7 @@
         </div> -->
 
         <br>
-        <input type="submit" value="確定" id="setting-submit">
+        <input type="submit" value="確定" class="button" id="setting-submit">
 
 
       </form>
@@ -307,12 +315,7 @@
 
       <div id="modal-confirm-table">
         <h2> 邊個出衝?</h2>
-        <div class="player-row confirm-eat">
-
-          <!-- <div class="playerbox" value="1">
-            <div class="playername player1">Player1</div>
-  
-          </div> -->
+        <div class="player-row-confirm confirm-eat">
 
           <input class="playerbox playername player1" type="button" value=""></input>
           <input class="playerbox playername player2" type="button" value=""></input>
@@ -349,7 +352,7 @@
 
         <div>
 
-          <button type="button" class="" id="eat-lauGuk"> 流局</button>
+          <button type="button" class="button" id="eat-lauGuk"> 流局</button>
         </div>
 
 
@@ -359,7 +362,7 @@
             <img src="" alt="user-icon" id="userIcon">
           </label> -->
 
-          <input type="file" name="userIcon" id="iconBtn" accept="image/*" disabled>
+          <!-- <input type="file" name="userIcon" id="iconBtn" accept="image/*" disabled> -->
         </div>
 
       </form>
@@ -412,20 +415,15 @@
       </div>
     </div>
 
-    <div class="eat-button">食糊</div>
+    <div class="eat-button waves-effect">
+      <img src="/img/common/160547136430151.png" class="" alt="">
+    </div>
     <!-- <div class="test-button">Test</div> -->
 
 
     <div class="record-box">
       <table class="tg">
         <thead id="record-table-head">
-          <!-- <tr>
-            <th class="tg-c3ow">round</th>
-            <th class="tg-c3ow playername player1">~</th>
-            <th class="tg-c3ow playername player2">~</th>
-            <th class="tg-c3ow playername player3">~</th>
-            <th class="tg-c3ow playername player4">~</th>
-          </tr> -->
         </thead>
         <tbody id="record-table-body">
 
@@ -481,8 +479,6 @@
     firebase.analytics();
 
   </script>
-  <script src="/js/ui.js"></script>
-
   <script src="/js/app.js"></script>
   <script src="/js/db.js"></script>
   <script src="/js/mj.js"></script>
