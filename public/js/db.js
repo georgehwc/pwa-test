@@ -3,14 +3,15 @@
 //   .firestore()
 //   .collection("recipes")
 //   .onSnapshot((snapshot) => {
-//     snapshot.docChanges().forEach((change) => {
-//       if (change.type === "added") {
-//         renderRecipe(change.doc.data(), change.doc.id);
-//       }
-//       if (change.type === "removed") {
-//         removeRecipe(change.doc.id);
-//       }
-//     });
+//     console.log(snapshot);
+//     // snapshot.docChanges().forEach((change) => {
+//     //   if (change.type === "added") {
+//     //     renderRecipe(change.doc.data(), change.doc.id);
+//     //   }
+//     //   if (change.type === "removed") {
+//     //     removeRecipe(change.doc.id);
+//     //   }
+//     // });
 //   });
 
 // remove recipe
@@ -132,59 +133,70 @@ if (addForm != null) {
       })
       .then((id) => {
         console.log(id);
-        url = window.location.href + "pages/mj.html?id=" + id;
-        window.location.href = url;
-        // window.location.replace(url);
+        gotopage(id);
       })
       .catch((err) => console.log(err));
   });
 }
 
 const recipeContainer = document.querySelector(".recipes");
-recipeContainer.addEventListener("click", (evt) => {
-  console.log(evt);
-  // remove a recipe
-  if (evt.target.tagName === "I") {
-    const id = evt.target.getAttribute("data-id");
-    console.log(id);
-    firebase.firestore().collection("recipes").doc(id).delete();
 
-    var retrievedData = localStorage.getItem("mjsession");
+if (recipeContainer != null) {
+  recipeContainer.addEventListener("click", (evt) => {
+    console.log(evt);
+    // remove a recipe
+    if (evt.target.tagName === "I") {
+      const id = evt.target.getAttribute("data-id");
+      console.log(id);
+      firebase.firestore().collection("recipes").doc(id).delete();
 
-    var retrievedDataArray = JSON.parse(retrievedData);
-    console.log(retrievedDataArray);
+      var retrievedData = localStorage.getItem("mjsession");
 
-    for (var i = 0; i < retrievedDataArray.length; i++) {
-      if (retrievedDataArray[i] === id) {
-        retrievedDataArray.splice(i, 1);
-        i--;
+      var retrievedDataArray = JSON.parse(retrievedData);
+      console.log(retrievedDataArray);
+
+      for (var i = 0; i < retrievedDataArray.length; i++) {
+        if (retrievedDataArray[i] === id) {
+          retrievedDataArray.splice(i, 1);
+          i--;
+        }
       }
+      console.log(retrievedDataArray);
+      localStorage.setItem("mjsession", JSON.stringify(retrievedDataArray));
+
+      removeRecipe(id);
     }
-    console.log(retrievedDataArray);
-    localStorage.setItem("mjsession", JSON.stringify(retrievedDataArray));
 
-    removeRecipe(id);
+    if (evt.toElement.offsetParent === "div.card-panel.recipe.white.row") {
+      const id = evt.target.getAttribute("data-id");
+      console.log("test");
+    }
+
+    if (
+      evt.target.classList.contains("card-panel") ||
+      evt.target.classList.contains("recipe-title") ||
+      evt.target.classList.contains("recipe-details") ||
+      evt.target.classList.contains("recipe-ingredients")
+      // evt.target.classList.contains("123")
+    ) {
+      const id = evt.target.getAttribute("data-id");
+      gotopage(id);
+    }
+  });
+}
+
+function gotopage(id) {
+  // const id = evt.target.getAttribute("data-id");
+  let href = window.location.href;
+
+  if (href.indexOf("/index.html?") > -1) {
+    href = href.replace("index.html?", "");
+  }
+  if (href.indexOf("/index.html") > -1) {
+    href = href.replace("index.html", "");
   }
 
-  if (evt.toElement.offsetParent === "div.card-panel.recipe.white.row") {
-    const id = evt.target.getAttribute("data-id");
-    console.log("test");
-  }
-
-  if (
-    evt.target.classList.contains("card-panel") ||
-    evt.target.classList.contains("recipe-title") ||
-    evt.target.classList.contains("recipe-details") ||
-    evt.target.classList.contains("recipe-ingredients")
-    // evt.target.classList.contains("123")
-  ) {
-    const id = evt.target.getAttribute("data-id");
-    console.log(id);
-
-    url = window.location.href + "pages/mj.html?id=" + id;
-
-    console.log(url);
-
-    window.location.href = url;
-  }
-});
+  url = href + "pages/mj.html?id=" + id;
+  console.log(url);
+  window.location.href = url;
+}

@@ -79,6 +79,7 @@ nav .sidenav-trigger {
   height: 28px;
   padding: 0;
   cursor: pointer;
+  margin: 2rem 0 0 0;
 }
 input {
   box-shadow: none !important;
@@ -207,7 +208,7 @@ form .input-field {
 }
 
 .mjmain .record-box {
-  background: url(/img/bg.jpeg);
+  background: url(../img/bg.jpeg);
   /* background-attachment: fixed; */
   /* padding-right: 5px; */
   /* overflow-y: scroll; */
@@ -499,7 +500,7 @@ th {
   /* text-shadow: 0px 0px 5px black; */
   /* background: #0a0a0a8c; */
   padding: 5px;
-  /* animation-name: blinking; */
+  animation-name: blinking;
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -508,10 +509,10 @@ th {
 }
 @keyframes blinking {
   0% {
-    opacity: 0;
+    opacity: 0.3;
   }
   100% {
-    opacity: 1;
+    opacity: 0.5;
   }
 }
 
@@ -695,7 +696,6 @@ tr {
 .offline-notification:hover .offline-notification_explanation {
   display: block;
   z-index: 9999;
-  
 }
 .offline-notification_explanation {
   display: none;
@@ -707,5 +707,13 @@ tr {
   /* transition: transform 0.3s; */
   /* transform: translateY(0) translateX(-50%); */
   margin-top: 0;
-  
+}
+
+.targets .button{
+  cursor: pointer;
+  user-select: none;
+}
+
+.targets .button:hover{
+  color: rgba(255, 0, 0, 0.5);
 }

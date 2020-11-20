@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" class="notranslate" translate="no">
 
 
@@ -7,20 +8,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>MJ</title>
   <!-- materialize icons, css & js -->
-  <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
+  <link type="text/css" href="../css/materialize.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" href="/css/styles.css" rel="stylesheet">
-  <script type="text/javascript" src="/js/materialize.min.js"></script>
-  <link rel="manifest" href="/manifest.json">
-  <link href="/css/nouislider.css" rel="stylesheet">
-  <script src="/js/nouislider.js"></script>
+  <link href="../css/styles.css" rel="stylesheet">
+  <script type="text/javascript" src="../js/materialize.min.js"></script>
+  <link rel="manifest" href="../manifest.json">
+  <link href="../css/nouislider.css" rel="stylesheet">
+  <script src="../js/nouislider.js"></script>
   <!-- ios support -->
-  <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
-  <link rel="icon" href="/img/mahjong-icon.png">
+  <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
+  <link rel="icon" href="../img/mahjong-icon.png">
   <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
   <meta name="theme-color" content="#FFE1C4">
   <meta name="google" content="notranslate" />
-
+  <base href="">
 </head>
 
 <body class="bgcolor">
@@ -29,7 +30,7 @@
 
   <div class="offline-notification">
     你好似斷左線 有D工能可能會唔work
-    <a >咩意思?</a>
+    <a>咩意思?</a>
     <div class="offline-notification_explanation">
       呢個程式會繼續run 但係你唔會收到其他人嘅 資料/數據 直至你上得返網.
     </div>
@@ -38,45 +39,45 @@
   <!-- top nav -->
   <nav class="z-depth-0">
     <div class="nav-wrapper container">
-      <a href="/">M<span>J</span></a>
+      <a href="../index.html">M<span>J</span></a>
       <span class="right">
         <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
       </span>
     </div>
   </nav>
 
-    <!-- join -->
-    <div class="modal-join">
-      <div class="modal">
-        <h2>加入</h2>
-        <div class="link">
-          <input type="text" class="pen-url" id="modal-join-url">
-        </div>
-        <a class="button" id="modal-join-submit">加入</a>
+  <!-- join -->
+  <div class="modal-join">
+    <div class="modal">
+      <h2>加入</h2>
+      <div class="link">
+        <input type="text" class="pen-url" id="modal-join-url">
       </div>
+      <a class="button" id="modal-join-submit">加入</a>
     </div>
+  </div>
 
   <!-- side nav -->
   <ul id="side-menu" class="sidenav side-menu sidenav-close">
     <li><a class="subheader">MJ</a></li>
-    <li><a href="/" class="waves-effect">主頁</a></li>
-    <li><a  class="waves-effect sidenav-trigger " data-target="side-form">新的賽局</a></li>
+    <li><a href="../index.html" class="waves-effect">主頁</a></li>
+    <li><a class="waves-effect sidenav-trigger " data-target="side-form">新的賽局</a></li>
 
     <li><a id="menu-join" class="waves-effect">加入</a></li>
 
-    <li><a href="/pages/wiki.html" class="waves-effect">教學</a></li>
+    <li><a href="../pages/wiki.html" class="waves-effect">教學</a></li>
 
-    <li><a href="/pages/about.html" class="waves-effect">關於</a></li>
+    <li><a href="../pages/about.html" class="waves-effect">關於</a></li>
 
     <li>
       <div class="divider"></div>
     </li>
-    <li><a href="/pages/contact.html" class="waves-effect">
+    <li><a href="../pages/contact.html" class="waves-effect">
         <i class="material-icons">mail_outline</i>Contact</a>
     </li>
 
-
   </ul>
+  
   <!-- setting + share  -->
   <div class="setting-page">
     <div class="modal">
@@ -416,7 +417,7 @@
     </div>
 
     <div class="eat-button waves-effect">
-      <img src="/img/common/160547136430151.png" class="" alt="">
+      <img src="../img/common/160547136430151.png" class="" alt="">
     </div>
     <!-- <div class="test-button">Test</div> -->
 
@@ -433,38 +434,49 @@
 
   </div>
 
-  <!-- <div class="center">
-    <a class="btn-floating btn-small btn-large add-btn sidenav-trigger" data-target="side-form">
-      <i class="material-icons">add</i>
-    </a>
-  </div> -->
+<!-- add recipe side nav -->
+<div id="side-form" class="sidenav side-form">
+  <form class="add-recipe container section" id="add-recipe-form">
+    <h6>新賽局</h6>
+    <div class="divider"></div>
+    <div class="input-field">
+      <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局" autocomplete="off">
+      <label for="title">標題</label>
+    </div>
+    <div class="input-field">
+      <select id="recipesIcon" class="eat-select validate">
+        <option id="iconselectDefault" value="mjrandom" selected>隨機</option>
+        <option value="mjt">筒</option>
+        <option value="mjs">索</option>
+        <option value="mjw">萬</option>
+        <option value="mjother">其他</option>
+      </select>
+      <label for="recipesIcon" style="-webkit-transform: translateY(-14px) scale(0.8);
+      transform: translateY(-14px) scale(0.8);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;">Icon</label>
+    </div>
 
-  <!-- add recipe side nav -->
-  <div id="side-form" class="sidenav side-form">
-    <form class="add-recipe container section">
-      <h6>New Recipe</h6>
-      <div class="divider"></div>
-      <div class="input-field">
-        <input placeholder="e.g. Ninja soup" id="title" type="text" class="validate">
-        <label for="title">Recipe Title</label>
-      </div>
-      <div class="input-field">
-        <input placeholder="e.g. Tofu, mushroom, garlic" id="ingredients" type="text" class="validate">
-        <label for="ingredients">Ingredients</label>
-      </div>
-      <div class="input-field center">
-        <button class="btn-small">Add</button>
-      </div>
-    </form>
-  </div>
+    <div class="input-field">
+      <input placeholder="" id="ingredients" type="text" class="validate" autocomplete="off">
+      <label for="ingredients">備註</label>
+    </div>
+
+
+    <div class="input-field center">
+      <button class="btn-small">Add</button>
+    </div>
+  </form>
+</div>
+
 
   <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
 
-  <script src="/js/app.js"></script>
-  <script src="/js/db.js"></script>
-  <script src="/js/mj.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/db.js"></script>
+  <script src="../js/mj.js"></script>
 </body>
 
 </html>

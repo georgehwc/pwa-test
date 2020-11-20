@@ -37,7 +37,7 @@ firebase
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
-    navigator.serviceWorker.register("/sw.js").then(
+    navigator.serviceWorker.register("../sw.js").then(
       function (registration) {
         // Registration was successful
         console.log(
@@ -386,7 +386,7 @@ const renderRecipe = (data, id) => {
   let time = timeConverTochinese(data.CreateTime);
   const html = `
     <div class="card-panel recipe row" data-id="${id}">
-      <img src="/img/common/${data.icon}.svg" alt="搵唔到">
+      <img src="img/common/${data.icon}.svg" alt="搵唔到">
       <div class="recipe-details" data-id="${id}">
         <div class="recipe-title" data-id="${id}">${time}</div>
         <div class="recipe-ingredients" data-id="${id}">標題: ${data.name} 備註:${data.ingredients} </br>最大${data.MaxFarn}番</div> 
@@ -403,12 +403,12 @@ function getAll() {
   if (storageAvailable("localStorage")) {
     // Yippee! We can use localStorage awesomeness
     // console.log("We can use localStorage");
-    showNotification("welcome");
+    showNotification("你好");
 
     if (!localStorage.getItem("mjsession")) {
       //dont have
 
-      showNotification("welcome");
+      // showNotification("welcome");
       var a = [];
       a = JSON.parse(localStorage.getItem("mjsession")) || [];
       localStorage.setItem("mjsession", JSON.stringify(a));
@@ -460,27 +460,80 @@ const shareButton = document.querySelector(".share-button");
 const shareDialog = document.querySelector(".share-dialog");
 const closeButton = document.querySelector(".close-button");
 
+const shareId = () => {
+  var url_string = window.location;
+  var url = new URL(url_string);
+  var tvid = url.searchParams.get("id");
+
+  if (tvid == null) {
+    tvid = "";
+  }
+
+  let href = "https://pwa-mj.web.app/";
+
+  if (href.indexOf("/index.html?") > -1) {
+    href = href.replace("index.html?", "");
+  }
+  if (href.indexOf("/index.html") > -1) {
+    href = href.replace("index.html", "");
+  }
+
+  url = href + "pages/mj.html?id=" + tvid;
+
+  console.log(url);
+  return url;
+};
+
 shareButton.addEventListener("click", (event) => {
+  const title = "麻雀實時記錄器 - MJ";
+  const url = shareId();
+
   if (navigator.share) {
     navigator
       .share({
-        title: "WebShare API Demo",
-        url: "https://codepen.io/ayoisaiah/pen/YbNazJ",
+        title: `${title}`,
+        url: `${url}`,
       })
       .then(() => {
-        console.log("Thanks for sharing!");
+        // console.log("Thanks for sharing!");
+        showNotification("Thanks for sharing!");
       })
-      .catch(console.error);
+      .catch((err) => console.log(err));
   } else {
     shareDialog.classList.add("is-open");
   }
 });
 
+document.getElementById("btn-invite").addEventListener("click", (e) => {
+  let share = shareId();
+  console.log(share);
+  copyToClipboard(share);
+  document.getElementById("myTooltip").innerHTML = "Copied ";
+  setTimeout(() => {
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy to clipboard";
+  }, 1500);
+});
+
+// shareButton.addEventListener('click', event => {
+//   if (navigator.share) {
+//     navigator.share({
+//       title: 'WebShare API Demo',
+//       url: 'https://codepen.io/ayoisaiah/pen/YbNazJ'
+//     }).then(() => {
+//       console.log('Thanks for sharing!');
+//     })
+//     .catch(console.error);
+//   } else {
+//     shareDialog.classList.add('is-open');
+//   }
+// });
+
 closeButton.addEventListener("click", (event) => {
   shareDialog.classList.remove("is-open");
 });
 
-document.querySelector(".pen-url").innerHTML = window.location;
+document.querySelector(".pen-url").innerHTML = shareId();
 
 document.getElementById("menu-join").addEventListener("click", () => {
   document.querySelector(".modal-join").classList.add("open");

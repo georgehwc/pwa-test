@@ -384,7 +384,7 @@ async function showRecordBody() {
     }
 
     html += `" >
-    <td class="tg-baqh">       ${index+1} </td>
+    <td class="tg-baqh">       ${index + 1} </td>
     <td class="tg-baqh">${arrayRecordData[index][1]}</td>
     <td class="tg-baqh">${arrayRecordData[index][2]}</td>
     <td class="tg-baqh">${arrayRecordData[index][3]}</td>
@@ -417,8 +417,20 @@ checkTvid() // ------------------------------------- start here ----------------
       .firestore()
       .collection("recipes")
       .doc(tvid)
-      .onSnapshot((doc) => {
-        console.log("Current data: ", doc.data());
+      .onSnapshot((doc) => {  
+        console.log(doc);
+        // doc.docChanges().forEach(function (change) {
+        //   if (change.type === "added") {
+        //     console.log("New city: ", change.doc.data());
+        //   }
+        //   if (change.type === "modified") {
+        //     console.log("Modified city: ", change.doc.data());
+        //   }
+        //   if (change.type === "removed") {
+        //     console.log("Removed city: ", change.doc.data());
+        //   }
+        // });
+
         // getData();
         let roundLength = doc.data().round.length;
         console.log("roundLength" + roundLength);
@@ -1142,19 +1154,16 @@ document.getElementById("setting-chip").addEventListener("change", (event) => {
   // console.log(document.getElementById("setting-jackpot-input").checked);
 });
 
-document.getElementById("btn-invite").addEventListener("click", (e) => {
-  copyToClipboard(window.location.href);
-  document.getElementById("myTooltip").innerHTML = "Copied ";
-  setTimeout(() => {
-    var tooltip = document.getElementById("myTooltip");
-    tooltip.innerHTML = "Copy to clipboard";
-  }, 1500);
-});
-
-// function outFunc() {
-
-//   console.log("1");
-// }
+// document.getElementById("btn-invite").addEventListener("click", (e) => {
+//   let share = shareId();
+//   console.log(share);
+//   copyToClipboard(share);
+//   document.getElementById("myTooltip").innerHTML = "Copied ";
+//   setTimeout(() => {
+//     var tooltip = document.getElementById("myTooltip");
+//     tooltip.innerHTML = "Copy to clipboard";
+//   }, 1500);
+// });
 
 //-------------------------------------------------------- for testing
 
