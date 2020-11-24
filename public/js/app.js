@@ -37,21 +37,17 @@ firebase
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
-    navigator.serviceWorker.register("../sw.js").then(
-      function (registration) {
-        // Registration was successful
-        console.log(
-          "ServiceWorker registration successful with scope: ",
-          registration.scope
-        );
-      },
-      function (err) {
-        // registration failed :(
-        console.log("ServiceWorker registration failed: ", err);
-      }
-    );
+    navigator.serviceWorker
+      .register("./sw.js", { scope: "./" })
+      .then(function (reg) {
+        // registration worked
+        console.log("Registration succeeded. Scope is " + reg.scope);
+      })
+      .catch(function (error) {
+        // registration failed
+        console.log("Registration failed with " + error);
+      });
   });
-
   window.addEventListener("online", handleConnection);
   window.addEventListener("offline", handleConnection);
 }
@@ -471,13 +467,6 @@ const shareId = () => {
 
   let href = "https://pwa-mj.web.app/";
 
-  if (href.indexOf("/index.html?") > -1) {
-    href = href.replace("index.html?", "");
-  }
-  if (href.indexOf("/index.html") > -1) {
-    href = href.replace("index.html", "");
-  }
-
   url = href + "pages/mj.html?id=" + tvid;
 
   console.log(url);
@@ -504,6 +493,37 @@ shareButton.addEventListener("click", (event) => {
   }
 });
 
+const shareButtonTarget = document.querySelectorAll(".targets .button");
+
+shareButtonTarget.forEach((element) => {
+  switch (element.title) {
+    case "Whatsapp":
+      console.log("wts");
+      element.href = "https://wa.me/?text=" + shareId();
+      break;
+
+    case "Telegram":
+      console.log("Telegram");
+      element.href =
+        "https://telegram.me/share/url?url=" + shareId() + "&text=<HI TEXT>";
+
+      break;
+    case "Email":
+      console.log("Email");
+      element.href = "mailto:?subject=黎打牌啦 &body=" + shareId();
+
+      break;
+
+    default:
+      break;
+  }
+
+  element.addEventListener("click", (e) => {
+    showNotification("share by " + element.title);
+    console.log(element.title);
+  });
+});
+
 document.getElementById("btn-invite").addEventListener("click", (e) => {
   let share = shareId();
   console.log(share);
@@ -514,20 +534,6 @@ document.getElementById("btn-invite").addEventListener("click", (e) => {
     tooltip.innerHTML = "Copy to clipboard";
   }, 1500);
 });
-
-// shareButton.addEventListener('click', event => {
-//   if (navigator.share) {
-//     navigator.share({
-//       title: 'WebShare API Demo',
-//       url: 'https://codepen.io/ayoisaiah/pen/YbNazJ'
-//     }).then(() => {
-//       console.log('Thanks for sharing!');
-//     })
-//     .catch(console.error);
-//   } else {
-//     shareDialog.classList.add('is-open');
-//   }
-// });
 
 closeButton.addEventListener("click", (event) => {
   shareDialog.classList.remove("is-open");
@@ -568,3 +574,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const forms = document.querySelectorAll(".side-form");
   M.Sidenav.init(forms, { edge: "left" });
 });
+
+// A2HS on desktop
+
+var promptEvent;
+
+// Capture event and defer
+window.addEventListener("beforeinstallprompt", function (e) {
+  e.preventDefault();
+  promptEvent = e;
+  listenToUserAction();
+});
+
+// listen to install button clic
+function listenToUserAction() {
+  const installBtn = document.querySelector(".add-button");
+  installBtn.addEventListener("click", presentAddToHome);
+}
+
+// present install prompt to user
+function presentAddToHome() {
+  promptEvent.prompt(); // Wait for the user to respond to the prompt
+  promptEvent.userChoice.then((choice) => {
+    if (choice.outcome === "accepted") {
+      console.log("User accepted the A2HS prompt");
+    } else {
+      console.log("User dismissed the A2HS prompt");
+    }
+  });
+}

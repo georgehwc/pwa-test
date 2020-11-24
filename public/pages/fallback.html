@@ -8,17 +8,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>MJ</title>
   <!-- materialize icons, css & js -->
-  <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
+  <link type="text/css" href="../css/materialize.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" href="/css/styles.css" rel="stylesheet">
-  <script type="text/javascript" src="/js/materialize.min.js"></script>
-  <link rel="manifest" href="/manifest.json">
+  <link href="../css/styles.css" rel="stylesheet">
+  <script type="text/javascript" src="../js/materialize.min.js"></script>
+  <link rel="manifest" href="../manifest.json">
+  <link href="../css/nouislider.css" rel="stylesheet">
+  <script src="../js/nouislider.js"></script>
   <!-- ios support -->
-  <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
-  <link rel="icon" href="/img/mahjong-icon.png">
+  <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
+  <link rel="icon" href="../img/mahjong-icon.png">
   <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
   <meta name="theme-color" content="#FFE1C4">
   <meta name="google" content="notranslate" />
+  <base href="">
 </head>
 
 <body class="bgtext">
@@ -35,7 +38,7 @@
   <!-- top nav -->
   <nav class="z-depth-0">
     <div class="nav-wrapper container">
-      <a href="/">M<span>J</span></a>
+      <a href="../index.html">M<span>J</span></a>
       <span class="right">
         <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
       </span>
@@ -170,18 +173,17 @@
     </form>
   </div>
 
-    <!-- content -->
-    <div class="container grey-text center">
-      <h5>OOPS!</h5>
-      <p>發生錯誤</p>
-      <P>試下重開app / check下你個上網有冇問題</P>
-      <a href="/" class="btn-small orange z-depth-0">返去主頁</a>
-    </div>
-
   <div class="recipes container grey-text text-darken-1">
 
   </div>
 
+  <!-- content -->
+  <div class="container grey-text center">
+    <h5>OOPS!</h5>
+    <p>發生錯誤</p>
+    <P>試下重開app / check下你個上網有冇問題</P>
+    <a href="../index.html" class="btn-small orange z-depth-0">返去主頁</a>
+  </div>
 
   <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>

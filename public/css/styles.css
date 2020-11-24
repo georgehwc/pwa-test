@@ -157,6 +157,7 @@ form .input-field {
   grid-row: auto auto;
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
+  max-height: 60vh;
 }
 
 .player-row-confirm {
@@ -207,7 +208,7 @@ form .input-field {
   /* height: 52px; */
 }
 
-.mjmain .record-box {
+.record-box {
   background: url(../img/bg.jpeg);
   /* background-attachment: fixed; */
   /* padding-right: 5px; */
@@ -283,6 +284,20 @@ form .input-field {
   top: 0;
 }
 .confirm-page.open {
+  display: block;
+}
+
+/*confirm*/
+.moreDetail-page {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 15;
+  display: none;
+  top: 0;
+}
+.moreDetail-page.open {
   display: block;
 }
 
@@ -458,8 +473,12 @@ th {
   margin-left: 50px;
 }
 
-.hrDelable {
+/* .hrDelable {
   background-color: rgba(128, 0, 0, 0.5);
+  cursor: pointer;
+} */
+
+.recordRound{
   cursor: pointer;
 }
 

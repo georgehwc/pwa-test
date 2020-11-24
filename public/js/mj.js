@@ -1,5 +1,6 @@
 // open profile modal
 const profileModal = document.querySelector(".Profile-page");
+const moreDetail = document.querySelector(".moreDetail-page");
 
 let defValue = Math.floor(1);
 let arrayRecordData = [];
@@ -11,6 +12,10 @@ let setting = false;
 let jackpot = "";
 let jackpotTotal = 0;
 let chipTotal = 0;
+var player1 = document.getElementById("player1").value;
+var player2 = document.getElementById("player2").value;
+var player3 = document.getElementById("player3").value;
+var player4 = document.getElementById("player4").value;
 
 //check tvid
 const checkTvid = async () => {
@@ -361,29 +366,126 @@ function showRecord() {
   document.getElementById("playerscore4").innerHTML = player4Total;
 
   showRecordBody().then(() => {
-    let round = "recordRound" + (arrayRecordData.length - 1);
+    let recordRound = document.querySelectorAll(".recordRound");
 
-    console.log(round);
-    if (arrayRecordData.length != 0) {
-      document.getElementById(round).addEventListener("click", function () {
-        delNewRecord();
-        showRecord();
+    recordRound.forEach((element) => {
+      element.addEventListener("click", (e) => {
+        moreDetail.classList.add("open");
+        showDetail(element.id);
       });
-    }
+    });
   });
 }
+//  moreDetail modal
+
+moreDetail.addEventListener("click", (e) => {
+  if (e.target.classList.contains("moreDetail-page")) {
+    moreDetail.classList.remove("open");
+  }
+});
+
+function showDetail(id) {
+  let roundid = id.replace("recordRound", "");
+
+  document.getElementById("detailround").innerHTML = parseInt(roundid) + 1;
+  document.getElementById("detailplayer1").innerHTML =
+    arrayRecordData[roundid][1];
+  document.getElementById("detailplayer2").innerHTML =
+    arrayRecordData[roundid][2];
+  document.getElementById("detailplayer3").innerHTML =
+    arrayRecordData[roundid][3];
+  document.getElementById("detailplayer4").innerHTML =
+    arrayRecordData[roundid][4];
+
+  document.getElementById("detailTime").innerHTML =
+    arrayRecordData[roundid]["time"];
+  let detailString = "";
+
+  let winid = 0;
+
+  for (let index = 1; index < 5; index++) {
+    if (arrayRecordData[roundid][index] > 0) {
+      console.log(index);
+      winid = "player" + index;
+      break;
+    }
+  }
+
+  switch (winid) {
+    case "player1":
+      winid = player1;
+      break;
+    case "player2":
+      winid = player2;
+      break;
+    case "player3":
+      winid = player3;
+      break;
+    case "player4":
+      winid = player4;
+      break;
+
+    default:
+      break;
+  }
+
+  switch (arrayRecordData[roundid][5]) {
+    case "0":
+      let loseid = 0;
+
+      for (let index = 1; index < 5; index++) {
+        if (arrayRecordData[roundid][index] < 0) {
+          console.log(index);
+          loseid = "player" + index;
+          break;
+        }
+      }
+
+      switch (loseid) {
+        case "player1":
+          loseid = player1;
+          break;
+        case "player2":
+          loseid = player2;
+          break;
+        case "player3":
+          loseid = player3;
+          break;
+        case "player4":
+          loseid = player4;
+          break;
+
+        default:
+          break;
+      }
+      detailString =
+        winid + " 食左 " + loseid + arrayRecordData[roundid][0] + "番";
+      break;
+    case "1":
+      detailString = winid + " 自摸左 " + arrayRecordData[roundid][0] + "番";
+      break;
+    case 2:
+      detailString = " 流左局";
+      break;
+
+    default:
+      break;
+  }
+
+  document.getElementById("detailDetail").innerHTML = detailString;
+}
+
+document.getElementById("detailDel").addEventListener("click", (e) => {
+  delRecord(document.getElementById("detailround").innerHTML);
+  showRecord();
+  moreDetail.classList.remove("open");
+});
 
 async function showRecordBody() {
   var html = "";
 
   for (let index = 0; index < arrayRecordData.length; index++) {
-    html += `<tr id="recordRound${index}" class="`;
-
-    if (index == arrayRecordData.length - 1) {
-      html += `hrDelable`;
-    }
-
-    html += `" >
+    html += `<tr id="recordRound${index}" class="recordRound" >
     <td class="tg-baqh">       ${index + 1} </td>
     <td class="tg-baqh">${arrayRecordData[index][1]}</td>
     <td class="tg-baqh">${arrayRecordData[index][2]}</td>
@@ -417,7 +519,7 @@ checkTvid() // ------------------------------------- start here ----------------
       .firestore()
       .collection("recipes")
       .doc(tvid)
-      .onSnapshot((doc) => {  
+      .onSnapshot((doc) => {
         console.log(doc);
         // doc.docChanges().forEach(function (change) {
         //   if (change.type === "added") {
@@ -442,9 +544,12 @@ checkTvid() // ------------------------------------- start here ----------------
 
         showRecord();
 
-        console.log(doc.data().PlayerName);
-
         var playerName = document.querySelectorAll(".playername");
+
+        player1 = doc.data().PlayerName.player1;
+        player2 = doc.data().PlayerName.player2;
+        player3 = doc.data().PlayerName.player3;
+        player4 = doc.data().PlayerName.player4;
 
         playerName.forEach((element) => {
           // console.log(element);
@@ -535,22 +640,24 @@ var MapEatDetail = new Map([
   ["type", 0],
 ]);
 
-function delNewRecord() {
-  console.log(arrayRecordData);
-
-  //
+function delRecord(recordNumber) {
+  recordNumber = recordNumber - 1;
   const record = {
-    0: arrayRecordData[arrayRecordData.length - 1][0],
-    1: arrayRecordData[arrayRecordData.length - 1][1],
-    2: arrayRecordData[arrayRecordData.length - 1][2],
-    3: arrayRecordData[arrayRecordData.length - 1][3],
-    4: arrayRecordData[arrayRecordData.length - 1][4],
-    5: arrayRecordData[arrayRecordData.length - 1][5],
-    time: arrayRecordData[arrayRecordData.length - 1]["time"],
+    0: arrayRecordData[recordNumber][0],
+    1: arrayRecordData[recordNumber][1],
+    2: arrayRecordData[recordNumber][2],
+    3: arrayRecordData[recordNumber][3],
+    4: arrayRecordData[recordNumber][4],
+    5: arrayRecordData[recordNumber][5],
+    time: arrayRecordData[recordNumber]["time"],
   };
 
-  console.log(record);
-  arrayRecordData.pop();
+  for (var i = 0; i < arrayRecordData.length; i++) {
+    if (JSON.stringify(arrayRecordData[i]) === JSON.stringify(record)) {
+      arrayRecordData.splice(i, 1);
+      i--;
+    }
+  }
 
   firebase
     .firestore()
@@ -562,8 +669,8 @@ function delNewRecord() {
     })
     .then(function (docRef) {
       console.log("Success update del delNewRecord");
-    });
-  //   .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
 }
 
 function MakeNewRecord() {
@@ -730,6 +837,11 @@ function nameChange(playerNum, value) {
     }
   });
 
+  player1 = document.getElementById("player1").value;
+  player2 = document.getElementById("player2").value;
+  player3 = document.getElementById("player3").value;
+  player4 = document.getElementById("player4").value;
+
   firebase
     .firestore()
     .collection("recipes")
@@ -747,11 +859,6 @@ function nameChange(playerNum, value) {
     })
     .catch((err) => console.log(err));
 }
-
-var player1 = document.getElementById("player1").value;
-var player2 = document.getElementById("player2").value;
-var player3 = document.getElementById("player3").value;
-var player4 = document.getElementById("player4").value;
 
 // open profile modal
 const settingDiv = document.getElementById("setting-div");
@@ -993,7 +1100,9 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
   // console.log(MapEatDetail.get("gotEat"));
   // console.log(MapEatDetail.get("type"));
 
-  if (
+  if (MapEatDetail.get("gotEat") == "default") {
+    showNotification("邊個出衝?");
+  } else if (
     MapEatDetail.get("eat") == MapEatDetail.get("gotEat") &&
     MapEatDetail.get("type") == 0
   ) {

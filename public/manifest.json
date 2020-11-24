@@ -6,6 +6,7 @@
   "background_color": "#f7f7d5",
   "theme_color": "#f7f7d5",
   "orientation": "portrait-primary",
+  "description":"麻雀記錄器",
   "icons": [
     {
       "src": "img/icons/icon-72x72.png",

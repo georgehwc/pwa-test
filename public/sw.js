@@ -1,21 +1,22 @@
-// const staticCacheName = "site-static-v1.23";
-// const dynamicCacheName = "site-dynamic-v1.23";
+// const dynamicCacheName = "site-dynamic-v1.3";
+// const staticCacheName = "site-static-v1.43";
+
 // const assets = [
-//   "/",
-//   "/index.html",
-//   "/js/app.js",
-//   "/js/materialize.min.js",
-//   "/css/styles.css",
-//   "/css/materialize.min.css",
-//   "/img",
+// //   "/",
+//   "./",
+//   "./index.html",
+//   "./js/app.js",
+//   "./js/mj.js",
+//   "./js/db.js",
+//   "./js/nouislider.js",
+//   "./js/materialize.min.js",
+//   "./css/styles.css",
+//   "./css/materialize.min.css",
 //   "https://fonts.googleapis.com/icon?family=Material+Icons",
 //   "https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2",
-//   "/pages/fallback.html",
-//   "/pages/mj.html",
-//   "/js/mj.js",
-//   "/js/db.js",
-//   "/js/nouislider.js",
-//   "/css/nouislider.css",
+//   "./pages/fallback.html",
+//   "./pages/mj.html",
+//   "./css/nouislider.css",
 // ];
 
 // // cache size limit function
@@ -31,7 +32,7 @@
 
 // // install event
 // self.addEventListener("install", (evt) => {
-//   //console.log('service worker installed');
+//   console.log("service worker installed");
 //   evt.waitUntil(
 //     caches.open(staticCacheName).then((cache) => {
 //       console.log("Opened cache");
@@ -82,7 +83,7 @@
 //           console.log(evt.request.url.indexOf(".html"));
 
 //           if (evt.request.url.indexOf(".html") > -1) {
-//             return caches.match("/pages/fallback.html");
+//             return caches.match("./pages/fallback.html");
 //           }
 //         })
 //     );

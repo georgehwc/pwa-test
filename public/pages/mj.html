@@ -77,7 +77,7 @@
     </li>
 
   </ul>
-  
+
   <!-- setting + share  -->
   <div class="setting-page">
     <div class="modal">
@@ -93,7 +93,7 @@
                 </svg></button>
             </header>
             <div class="targets">
-              <a class="button">
+              <a class="button" title="Whatsapp" href="" target="_blank">
                 <!-- <svg>
                   <use href="#whatsapp"></use>
                 </svg> -->
@@ -101,10 +101,10 @@
                   <path
                     d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3 0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7 0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1 0-5.2 4.2-9.4 9.4-9.4 2.5 0 4.9 1 6.7 2.8 1.8 1.8 2.8 4.2 2.8 6.7-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6s.3-.3.4-.5c.2-.1.3-.3.4-.5.1-.2 0-.4 0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z" />
                 </svg>
-                <span>whatsapp</span>
+                <span>Whatsapp</span>
               </a>
 
-              <a class="button">
+              <a class="button" title="Telegram" href="" target="_blank">
                 <!-- <svg>
                   <use href="#Telegram"></use>
                 </svg> -->
@@ -115,7 +115,7 @@
                 <span>Telegram</span>
               </a>
 
-              <a class="button">
+              <a class="button" title="Email" href="" target="_blank">
                 <svg>
                   <use href="#email"></use>
                 </svg>
@@ -306,10 +306,64 @@
 
     </div>
   </div>
+
+  <!-- moreDetail page  -->
+  <div class="moreDetail-page" style=" ">
+
+    <div class="modal">
+
+      <h1>詳細資料</h1>
+
+      <div class="record-box">
+        <table class="tg">
+          <thead>
+            <tr>
+              <th class="tg-c3ow">回合</th>
+              <th class="tg-c3ow playername player1" title="1">Player1</th>
+              <th class="tg-c3ow playername player2" title="2">Player2</th>
+              <th class="tg-c3ow playername player3" title="3">Player3</th>
+              <th class="tg-c3ow playername player4" title="4">Player4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="detailRecord">
+              <td class="tg-baqh" id="detailround">X</td>
+              <td class="tg-baqh" id="detailplayer1">0</td>
+              <td class="tg-baqh" id="detailplayer2">0</td>
+              <td class="tg-baqh" id="detailplayer3">0</td>
+              <td class="tg-baqh" id="detailplayer4">0</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- <div class="right">
+      </div> -->
+
+
+
+      <div class="center">
+        <span class="left" id="detailDetail">邊個食左邊個幾多番</span>
+
+        <!-- <button><span>更改</span></button> -->
+        <span id="detailMid">
+          <button id="detailDel"><span>刪除</span></button>
+
+        </span>
+
+        <span id="detailTime" class="right"></span>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
   <!-- confirm page  -->
   <div class="confirm-page">
-
-
 
 
     <div class="modal">
@@ -329,6 +383,7 @@
       <h2 id="eat-confirm">確定</h2>
 
     </div>
+
   </div>
 
 
@@ -434,40 +489,40 @@
 
   </div>
 
-<!-- add recipe side nav -->
-<div id="side-form" class="sidenav side-form">
-  <form class="add-recipe container section" id="add-recipe-form">
-    <h6>新賽局</h6>
-    <div class="divider"></div>
-    <div class="input-field">
-      <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局" autocomplete="off">
-      <label for="title">標題</label>
-    </div>
-    <div class="input-field">
-      <select id="recipesIcon" class="eat-select validate">
-        <option id="iconselectDefault" value="mjrandom" selected>隨機</option>
-        <option value="mjt">筒</option>
-        <option value="mjs">索</option>
-        <option value="mjw">萬</option>
-        <option value="mjother">其他</option>
-      </select>
-      <label for="recipesIcon" style="-webkit-transform: translateY(-14px) scale(0.8);
+  <!-- add recipe side nav -->
+  <div id="side-form" class="sidenav side-form">
+    <form class="add-recipe container section" id="add-recipe-form">
+      <h6>新賽局</h6>
+      <div class="divider"></div>
+      <div class="input-field">
+        <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局" autocomplete="off">
+        <label for="title">標題</label>
+      </div>
+      <div class="input-field">
+        <select id="recipesIcon" class="eat-select validate">
+          <option id="iconselectDefault" value="mjrandom" selected>隨機</option>
+          <option value="mjt">筒</option>
+          <option value="mjs">索</option>
+          <option value="mjw">萬</option>
+          <option value="mjother">其他</option>
+        </select>
+        <label for="recipesIcon" style="-webkit-transform: translateY(-14px) scale(0.8);
       transform: translateY(-14px) scale(0.8);
       -webkit-transform-origin: 0 0;
       transform-origin: 0 0;">Icon</label>
-    </div>
+      </div>
 
-    <div class="input-field">
-      <input placeholder="" id="ingredients" type="text" class="validate" autocomplete="off">
-      <label for="ingredients">備註</label>
-    </div>
+      <div class="input-field">
+        <input placeholder="" id="ingredients" type="text" class="validate" autocomplete="off">
+        <label for="ingredients">備註</label>
+      </div>
 
 
-    <div class="input-field center">
-      <button class="btn-small">Add</button>
-    </div>
-  </form>
-</div>
+      <div class="input-field center">
+        <button class="btn-small">Add</button>
+      </div>
+    </form>
+  </div>
 
 
   <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
