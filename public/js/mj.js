@@ -34,10 +34,6 @@ const checkTvid = async () => {
 function printPriceTable(arrayPrice, min, max) {
   priceTable = document.getElementById("price-table");
 
-  console.log(arrayPrice);
-  console.log(min);
-  console.log(max);
-
   //table heading
   html = ` <table>
   <tr>
@@ -67,7 +63,7 @@ function printPriceTable(arrayPrice, min, max) {
   </tr>`;
   }
   html += `</table>`;
-  // console.log(html);
+
   priceTable.innerHTML = html;
 
   eatPriceTable = document.getElementById("eat-price-table");
@@ -106,7 +102,7 @@ function printPriceTable(arrayPrice, min, max) {
   </tr>`;
   }
   html += `</table>`;
-  // console.log(html);
+
   eatPriceTable.innerHTML = html;
 
   var btnEatPrice = document.querySelectorAll(".btn-eatPrice");
@@ -169,11 +165,9 @@ function printPriceTable(arrayPrice, min, max) {
 }
 
 function calPrice(defValue, intMaxValue) {
-  console.log("start cal price");
+
   var newvalue = defValue;
   var lart = document.getElementById("price-lart");
-  console.log(defValue, intMaxValue);
-  console.log(arrayPrice);
 
   if (lart.checked == false) {
     for (var i = 0; i < intMaxValue + 1; i++) {
@@ -221,9 +215,6 @@ function calPrice(defValue, intMaxValue) {
     }
   }
 
-  console.log(arrayPrice + "in cal price");
-
-  console.log(tvid + " in calPrice");
   if (tvid != "") {
     firebase
       .firestore()
@@ -233,16 +224,16 @@ function calPrice(defValue, intMaxValue) {
         Price: arrayPrice,
         defValue: defValue,
       })
-      .then(function (docRef) {
-        console.log("price , defvaluse update ");
-      })
+      // .then(function (docRef) {
+      //   console.log("price , defvaluse update ");
+      // })
       .catch((err) => console.log(err));
   }
 
   return arrayPrice;
 }
 
-function getData() {
+async function getData() {
   // ----------- use data from firebase
   firebase
     .firestore()
@@ -263,15 +254,14 @@ function getData() {
         if (setting) {
           settingCover(jackpot);
         }
-        console.log(arrayPrice);
 
         calPrice(defValue, intMaxValue);
 
         slider.noUiSlider.set([intMinValue, intMaxValue]);
-        console.log(slider.noUiSlider.get());
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
+        showNotification("資料有錯")
       }
     })
     .then(() => {
@@ -296,11 +286,9 @@ function getData() {
         .then(function (doc) {
           console.log(doc.data());
           let roundLength = doc.data().round.length;
-          console.log(roundLength);
 
           for (let index = 0; index < roundLength; index++) {
             arrayRecordData[index] = doc.data().round[index];
-            console.log(arrayRecordData[index]);
           }
         })
         .then(() => {
@@ -320,11 +308,10 @@ function getData() {
   // -----------------------}
 }
 
-function showRecord() {
+async function showRecord() {
   console.log("show record function: arrayRecordData = " + arrayRecordData);
   var recordTableBody = document.getElementById("record-table-body");
-  // console.log(typeof player1Total);
-  // console.log(chipTotal);
+
 
   var player1Total = 0;
   var player2Total = 0;
@@ -529,11 +516,7 @@ async function showRecordBody() {
 
 checkTvid() // ------------------------------------- start here -------------------
   .then((data) => {
-    console.log(data);
     tvid = data;
-  })
-  .then(() => {
-    // nameChange(1, 1); // default
   })
   .then(() => {
     getData(); // and also show record() is here
@@ -558,16 +541,16 @@ checkTvid() // ------------------------------------- start here ----------------
         //   }
         // });
 
-        getData();
+        getData().then(()=>{
+          showRecord();
+        });
         let roundLength = doc.data().round.length;
         console.log("roundLength" + roundLength);
 
         for (let index = 0; index < roundLength; index++) {
-          arrayRecordData[index] = doc.data().round[index];
+          arrayRecordData[index] = doc.data().round[index]
           console.log(arrayRecordData[index]);
         }
-
-        showRecord();
 
         var playerName = document.querySelectorAll(".playername");
 
@@ -701,13 +684,9 @@ function delRecord(recordNumber) {
 function MakeNewRecord() {
   //番 player1 player2 player3 player4 0(出)/1(自)/2(流)
 
-  console.log(MapEatDetail.get("eat"));
-  console.log(MapEatDetail.get("gotEat"));
-  console.log(MapEatDetail.get("type"));
 
   arrayRecordData.push(new Array(6));
 
-  console.log(arrayRecordData.length);
 
   for (var j = 0; j < 6; j++) {
     // Initializes:
@@ -825,17 +804,13 @@ const div = (a, b) => {
 
 var playerName = document.querySelectorAll(".playername");
 playerName.forEach((element) => {
-  // console.log(element);
 
   for (let int = 1; int < 4 + 1; int++) {
     var player = "player" + int;
-    //console.log(player);
-    // // element.classList.contains(id);
-    //console.log(element);
+
 
     if (element.classList.contains(player)) {
-      // console.log(element);
-      // element.value = int;
+
       element.value = document.getElementById(player).value;
       // element.innerHTML = document.getElementById(player).value;
       element.innerText = document.getElementById(player).value;
@@ -851,10 +826,10 @@ function nameChange(playerNum, value) {
   console.log(playerNum, value);
 
   var playerName = document.querySelectorAll(".playername");
-  // console.log(id + value);
+
 
   playerName.forEach((element) => {
-    // console.log(element);
+
 
     if (element.classList.contains(playerNum)) {
       element.innerHTML = value;
@@ -898,7 +873,7 @@ profileModal.addEventListener("click", (e) => {
 
 settingDiv.addEventListener("click", () => {
   settingModal.classList.add("open");
-  // console.log("open");
+
 });
 
 document.getElementById("setting-submit").addEventListener("click", (e) => {
@@ -921,17 +896,6 @@ document.getElementById("setting-submit").addEventListener("click", (e) => {
 });
 
 function settingCover(jackpot) {
-  // document.getElementById("setting-page-cover").classList.add("yes");
-  // settingModal.classList.remove("open");
-
-  // document.getElementById("setting-page-cover").title = "Copy to clipboard";
-
-  // document
-  //   .getElementById("setting-page-cover")
-  //   .addEventListener("click", () => {
-  //     showNotification("Copy success, use the link to invite");
-  //     copyToClipboard(console.log(window.location.href));
-  //   });
 
   if (document.getElementById("setting-submit").disabled == true) {
     return 0;
@@ -1027,9 +991,7 @@ lart.addEventListener("change", (event) => {
 
 // / When the slider value changes, update the input and span
 slider.noUiSlider.on("change", function (values, handle) {
-  // console.log(values);
-  // console.log(handle);
-  // console.log(values[handle]);
+
 
   document.getElementById("range-value-1").innerHTML = Math.floor(values[0]);
 
@@ -1121,13 +1083,6 @@ eatSelect.addEventListener("change", (event) => {
 var confirmEat = document.querySelectorAll(".confirm-eat .playerbox");
 
 document.getElementById("eat-confirm").addEventListener("click", (e) => {
-  // for (let [key, value] of MapEatDetail) {
-  //   console.log(key + " = " + value);
-  // }
-
-  // console.log(MapEatDetail.get("eat"));
-  // console.log(MapEatDetail.get("gotEat"));
-  // console.log(MapEatDetail.get("type"));
 
   if (MapEatDetail.get("gotEat") == "default" && eatSelect.value == "") {
     showNotification("邊個出衝?");
@@ -1192,16 +1147,15 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
 });
 
 confirmEat.forEach((element) => {
-  // console.log(element);
+
   element.addEventListener("click", (e) => {
-    // console.log(element);
+
     confirmEat.forEach((element) => {
       element.classList.remove("selected");
     });
     element.classList.add("selected");
     MapEatDetail.set("gotEat", element.title);
-    // console.log(element.value);
-    // console.dir(element);
+
   });
 });
 
@@ -1355,71 +1309,6 @@ document.getElementById("setting-chip").addEventListener("change", (event) => {
 //   }, 1500);
 // });
 
-//-------------------------------------------------------- for testing
-
-// console.log(MapEatDetail.get("eat")); // 食
-// console.log(MapEatDetail.get("farn")); // 番
-// console.log(MapEatDetail.get("gotEat")); // 被食
-
-for (let [key, value] of MapEatDetail) {
-  console.log(key + " = " + value);
-}
-
-// arrayRecordData[0][1] = 16;
-// arrayRecordData[0][2] = 0;
-// arrayRecordData[0][3] = -16;
-// arrayRecordData[0][4] = 0;
-
-// arrayRecordData[1][1] = 128;
-// arrayRecordData[1][2] = 0;
-// arrayRecordData[1][3] = -128;
-// arrayRecordData[1][4] = 0;
-
-console.log("12312312");
-
-// // return ref.doc(docid).onSnapshot((doc) => {
-// //   console.log("Current data: ", doc.data());
-// //   console.log("some data change");
-// // });
-
-// firebase
-// .firestore()
-// .collection("recipes")
-// .doc(tvid)
-// .onSnapshot(()=>{
-//   console.log("Current data: ", doc.data());
-// })
-
-// const testButton = document.querySelector(".test-button");
-// testButton.addEventListener("click", () => {
-//   console.log("test");
-
-//   //  delNewRecord();
-//   const record = {
-//     0: arrayRecordData[arrayRecordData.length - 1][0],
-//     1: arrayRecordData[arrayRecordData.length - 1][1],
-//     2: arrayRecordData[arrayRecordData.length - 1][2],
-//     3: arrayRecordData[arrayRecordData.length - 1][3],
-//     4: arrayRecordData[arrayRecordData.length - 1][4],
-//     5: arrayRecordData[arrayRecordData.length - 1][5],
-//     time: arrayRecordData[arrayRecordData.length - 1]["time"],
-//   };
-
-//   console.log(record);
-
-//   firebase
-//     .firestore()
-//     .collection("recipes")
-//     .doc(tvid)
-//     // .doc(arrayRecordData.length.toString())
-//     .update({
-//       round: firebase.firestore.FieldValue.arrayRemove(record),
-//     })
-//     .then(function (docRef) {
-//       console.log("Success update del delNewRecord");
-//     })
-//     .catch((err) => console.log(err));
-// });
 // var qrcode = new QRCode("qrcode");
 var qrcode = new QRCode("qrcode", {
   // text: "http://jindo.dev.naver.com/collie",
@@ -1435,3 +1324,10 @@ function makeCode() {
 }
 
 makeCode();
+
+//-------------------------------------------------------- for testing
+
+
+// for (let [key, value] of MapEatDetail) {
+//   console.log(key + " = " + value);
+// }

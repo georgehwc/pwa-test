@@ -499,18 +499,15 @@ const shareButtonTarget = document.querySelectorAll(".targets .button");
 shareButtonTarget.forEach((element) => {
   switch (element.title) {
     case "Whatsapp":
-      console.log("wts");
       element.href = "https://wa.me/?text=" + shareId();
       break;
 
     case "Telegram":
-      console.log("Telegram");
       element.href =
         "https://telegram.me/share/url?url=" + shareId() + "&text=<HI TEXT>";
 
       break;
     case "Email":
-      console.log("Email");
       element.href = "mailto:?subject=黎打牌啦 &body=" + shareId();
 
       break;
