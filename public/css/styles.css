@@ -498,8 +498,9 @@ th {
 
 .bgcolor {
   position: relative;
-  height: 100vh;
+  height: 100%;
   background: var(--bg);
+  margin-bottom: 50px;
 }
 
 .bgtext {

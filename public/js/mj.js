@@ -165,7 +165,6 @@ function printPriceTable(arrayPrice, min, max) {
 }
 
 function calPrice(defValue, intMaxValue) {
-
   var newvalue = defValue;
   var lart = document.getElementById("price-lart");
 
@@ -258,10 +257,16 @@ async function getData() {
         calPrice(defValue, intMaxValue);
 
         slider.noUiSlider.set([intMinValue, intMaxValue]);
+
+        let roundLength = doc.data().round.length;
+
+        for (let index = 0; index < roundLength; index++) {
+          arrayRecordData[index] = doc.data().round[index];
+        }
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
-        showNotification("資料有錯")
+        showNotification("資料有錯");
       }
     })
     .then(() => {
@@ -276,29 +281,11 @@ async function getData() {
 
       document.getElementById("max-farn").innerHTML =
         "最大" + intMaxValue + "番" + arrayPrice[intMaxValue] + "蚊";
-
-      // try get round data
-      firebase
-        .firestore()
-        .collection("recipes")
-        .doc(tvid)
-        .get()
-        .then(function (doc) {
-          console.log(doc.data());
-          let roundLength = doc.data().round.length;
-
-          for (let index = 0; index < roundLength; index++) {
-            arrayRecordData[index] = doc.data().round[index];
-          }
-        })
-        .then(() => {
-          showRecord();
-          // calPrice();
-          calPrice(defValue, intMaxValue);
-          printPriceTable(arrayPrice, intMinValue, intMaxValue);
-        });
-
-      return true;
+    })
+    .then(() => {
+      showRecord();
+      calPrice(defValue, intMaxValue);
+      printPriceTable(arrayPrice, intMinValue, intMaxValue);
     })
     .catch(function (error) {
       console.log("Error getting document:", error);
@@ -309,9 +296,7 @@ async function getData() {
 }
 
 async function showRecord() {
-  console.log("show record function: arrayRecordData = " + arrayRecordData);
   var recordTableBody = document.getElementById("record-table-body");
-
 
   var player1Total = 0;
   var player2Total = 0;
@@ -541,14 +526,14 @@ checkTvid() // ------------------------------------- start here ----------------
         //   }
         // });
 
-        getData().then(()=>{
+        getData().then(() => {
           showRecord();
         });
         let roundLength = doc.data().round.length;
         console.log("roundLength" + roundLength);
 
         for (let index = 0; index < roundLength; index++) {
-          arrayRecordData[index] = doc.data().round[index]
+          arrayRecordData[index] = doc.data().round[index];
           console.log(arrayRecordData[index]);
         }
 
@@ -684,9 +669,7 @@ function delRecord(recordNumber) {
 function MakeNewRecord() {
   //番 player1 player2 player3 player4 0(出)/1(自)/2(流)
 
-
   arrayRecordData.push(new Array(6));
-
 
   for (var j = 0; j < 6; j++) {
     // Initializes:
@@ -804,13 +787,10 @@ const div = (a, b) => {
 
 var playerName = document.querySelectorAll(".playername");
 playerName.forEach((element) => {
-
   for (let int = 1; int < 4 + 1; int++) {
     var player = "player" + int;
 
-
     if (element.classList.contains(player)) {
-
       element.value = document.getElementById(player).value;
       // element.innerHTML = document.getElementById(player).value;
       element.innerText = document.getElementById(player).value;
@@ -827,10 +807,7 @@ function nameChange(playerNum, value) {
 
   var playerName = document.querySelectorAll(".playername");
 
-
   playerName.forEach((element) => {
-
-
     if (element.classList.contains(playerNum)) {
       element.innerHTML = value;
       element.value = value;
@@ -873,7 +850,6 @@ profileModal.addEventListener("click", (e) => {
 
 settingDiv.addEventListener("click", () => {
   settingModal.classList.add("open");
-
 });
 
 document.getElementById("setting-submit").addEventListener("click", (e) => {
@@ -896,7 +872,6 @@ document.getElementById("setting-submit").addEventListener("click", (e) => {
 });
 
 function settingCover(jackpot) {
-
   if (document.getElementById("setting-submit").disabled == true) {
     return 0;
   }
@@ -991,8 +966,6 @@ lart.addEventListener("change", (event) => {
 
 // / When the slider value changes, update the input and span
 slider.noUiSlider.on("change", function (values, handle) {
-
-
   document.getElementById("range-value-1").innerHTML = Math.floor(values[0]);
 
   document.getElementById("range-value-2").innerHTML = Math.floor(values[1]);
@@ -1083,7 +1056,6 @@ eatSelect.addEventListener("change", (event) => {
 var confirmEat = document.querySelectorAll(".confirm-eat .playerbox");
 
 document.getElementById("eat-confirm").addEventListener("click", (e) => {
-
   if (MapEatDetail.get("gotEat") == "default" && eatSelect.value == "") {
     showNotification("邊個出衝?");
   } else if (
@@ -1147,15 +1119,12 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
 });
 
 confirmEat.forEach((element) => {
-
   element.addEventListener("click", (e) => {
-
     confirmEat.forEach((element) => {
       element.classList.remove("selected");
     });
     element.classList.add("selected");
     MapEatDetail.set("gotEat", element.title);
-
   });
 });
 
@@ -1326,7 +1295,6 @@ function makeCode() {
 makeCode();
 
 //-------------------------------------------------------- for testing
-
 
 // for (let [key, value] of MapEatDetail) {
 //   console.log(key + " = " + value);
