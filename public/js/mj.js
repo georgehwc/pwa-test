@@ -125,6 +125,28 @@ function printPriceTable(arrayPrice, min, max) {
           "eat",
           document.getElementById("eatSelect").selectedIndex
         );
+
+        switch (MapEatDetail.get("eat")) {
+          case 1:
+            document.getElementById("confirm-1").disabled = true;
+
+            break;
+          case 2:
+            document.getElementById("confirm-2").disabled = true;
+
+            break;
+          case 3:
+            document.getElementById("confirm-3").disabled = true;
+
+            break;
+          case 4:
+            document.getElementById("confirm-4").disabled = true;
+
+            break;
+
+          default:
+            break;
+        }
       });
     }
 
@@ -405,7 +427,6 @@ function showDetail(id) {
 
   for (let index = 1; index < 5; index++) {
     if (arrayRecordData[roundid][index] > 0) {
-      console.log(index);
       winid = "player" + index;
       break;
     }
@@ -473,6 +494,15 @@ function showDetail(id) {
   }
 
   document.getElementById("detailDetail").innerHTML = detailString;
+
+  if (
+    roundid == arrayRecordData.length - 2 ||
+    roundid == arrayRecordData.length - 1
+  ) {
+    document.getElementById("detailMid").style.display = "inline";
+  } else {
+    document.getElementById("detailMid").style.display = "none";
+  }
 }
 
 document.getElementById("detailDel").addEventListener("click", (e) => {
@@ -510,11 +540,6 @@ checkTvid() // ------------------------------------- start here ----------------
     console.log("get data");
   })
   .then(() => {
-    // calPrice();
-    // printPriceTable();
-    // showRecord();
-    // calPrice(arrayPrice, defValue);
-
     firebase
       .firestore()
       .collection("recipes")
@@ -533,7 +558,7 @@ checkTvid() // ------------------------------------- start here ----------------
         //   }
         // });
 
-        // getData();
+        getData();
         let roundLength = doc.data().round.length;
         console.log("roundLength" + roundLength);
 
@@ -908,6 +933,12 @@ function settingCover(jackpot) {
   //     copyToClipboard(console.log(window.location.href));
   //   });
 
+  if (document.getElementById("setting-submit").disabled == true) {
+    return 0;
+  }
+  showNotification("設定完成啦");
+  document.querySelector(".setting-page .modal").scrollTop = 0;
+
   document.getElementById("player1").disabled = true;
   document.getElementById("player2").disabled = true;
   document.getElementById("player3").disabled = true;
@@ -1078,8 +1109,6 @@ document.getElementById("price-reset").addEventListener("click", function () {
 var eatSelect = document.getElementById("eatSelect");
 
 eatSelect.addEventListener("change", (event) => {
-  console.log(eatSelect.value);
-
   if (eatSelect.value != "") {
     var btnEatPrice = document.querySelectorAll(".btn-eatPrice");
 
@@ -1100,7 +1129,7 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
   // console.log(MapEatDetail.get("gotEat"));
   // console.log(MapEatDetail.get("type"));
 
-  if (MapEatDetail.get("gotEat") == "default") {
+  if (MapEatDetail.get("gotEat") == "default" && eatSelect.value == "") {
     showNotification("邊個出衝?");
   } else if (
     MapEatDetail.get("eat") == MapEatDetail.get("gotEat") &&
@@ -1151,6 +1180,7 @@ document.getElementById("eat-confirm").addEventListener("click", (e) => {
 
     confirmEat.forEach((element) => {
       element.classList.remove("selected");
+      element.disabled = false;
     });
 
     //reset map
@@ -1185,6 +1215,7 @@ confirmModal.addEventListener("click", (e) => {
     document.getElementById("modal-confirm-table").style.display = "block";
     confirmEat.forEach((element) => {
       element.classList.remove("selected");
+      element.disabled = false;
     });
   }
 });
@@ -1225,9 +1256,34 @@ document
 
     if (document.getElementById("setting-jackpot-input").disabled == false) {
       document.getElementById("setting-jackpot-input").disabled = true;
+      document.getElementById("setting-jackpot-input").value = "";
+      firebase
+        .firestore()
+        .collection("recipes")
+        .doc(tvid)
+        .update({
+          Jackpot: document.getElementById("setting-jackpot-input").value,
+        })
+        .then(() => {
+          console.log("Jackpot");
+          jackpot = document.getElementById("setting-jackpot-input").value;
+        })
+        .catch((err) => console.log(err));
     } else {
       if (document.getElementById("setting-jackpot-input").disabled == true) {
         document.getElementById("setting-jackpot-input").disabled = false;
+        firebase
+          .firestore()
+          .collection("recipes")
+          .doc(tvid)
+          .update({
+            Jackpot: document.getElementById("setting-jackpot-input").value,
+          })
+          .then(() => {
+            console.log("Jackpot");
+            jackpot = document.getElementById("setting-jackpot-input").value;
+          })
+          .catch((err) => console.log(err));
       }
     }
 
@@ -1254,9 +1310,34 @@ document
 document.getElementById("setting-chip").addEventListener("change", (event) => {
   if (document.getElementById("setting-chip-input").disabled == false) {
     document.getElementById("setting-chip-input").disabled = true;
+    document.getElementById("setting-chip-input").value = "";
+    firebase
+      .firestore()
+      .collection("recipes")
+      .doc(tvid)
+      .update({
+        chip: document.getElementById("setting-chip-input").value,
+      })
+      .then(() => {
+        console.log("chip");
+        jackpot = document.getElementById("setting-chip-input").value;
+      })
+      .catch((err) => console.log(err));
   } else {
     if (document.getElementById("setting-chip-input").disabled == true) {
       document.getElementById("setting-chip-input").disabled = false;
+      firebase
+        .firestore()
+        .collection("recipes")
+        .doc(tvid)
+        .update({
+          chip: document.getElementById("setting-chip-input").value,
+        })
+        .then(() => {
+          console.log("chip");
+          jackpot = document.getElementById("setting-chip-input").value;
+        })
+        .catch((err) => console.log(err));
     }
   }
 
@@ -1339,3 +1420,18 @@ console.log("12312312");
 //     })
 //     .catch((err) => console.log(err));
 // });
+// var qrcode = new QRCode("qrcode");
+var qrcode = new QRCode("qrcode", {
+  // text: "http://jindo.dev.naver.com/collie",
+  width: 256,
+  height: 256,
+  colorDark: "#000000",
+  colorLight: "#ffffff",
+  correctLevel: QRCode.CorrectLevel.H,
+});
+
+function makeCode() {
+  qrcode.makeCode(shareId());
+}
+
+makeCode();

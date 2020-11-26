@@ -129,6 +129,10 @@
                 <!-- Copy Link -->
               </button>
             </div>
+
+            <!-- <input id="text" type="text" value="https://hogangnono.com" style="width:80%" /><br /> -->
+            <div id="qrcode"></div>
+
           </div>
 
           <button class="share-button" type="button" title="">
@@ -137,6 +141,7 @@
             </svg>
             <span>Share</span>
           </button>
+
         </div>
 
 
@@ -193,13 +198,13 @@
       <form>
 
         <input type="text" class="playername player1" id="player1" placeholder="player name..." value="~" maxlength="10"
-          onchange="nameChange(this.id,this.value)">
+          onchange="nameChange(this.id,this.value)" autocomplete="off">
         <input type="text" class="playername player2" id="player2" placeholder="player name..." value="~" maxlength="10"
-          onchange="nameChange(this.id,this.value)">
+          onchange="nameChange(this.id,this.value)" autocomplete="off">
         <input type="text" class="playername player3" id="player3" placeholder="player name..." value="~" maxlength="10"
-          onchange="nameChange(this.id,this.value)">
+          onchange="nameChange(this.id,this.value)" autocomplete="off">
         <input type="text" class="playername player4" id="player4" placeholder="player name..." value="~" maxlength="10"
-          onchange="nameChange(this.id,this.value)">
+          onchange="nameChange(this.id,this.value)" autocomplete="off">
 
         <br>
         <div id="farn-slider"></div>
@@ -308,7 +313,7 @@
   </div>
 
   <!-- moreDetail page  -->
-  <div class="moreDetail-page" style=" ">
+  <div class="moreDetail-page" style="">
 
     <div class="modal">
 
@@ -349,7 +354,6 @@
         <!-- <button><span>更改</span></button> -->
         <span id="detailMid">
           <button id="detailDel"><span>刪除</span></button>
-
         </span>
 
         <span id="detailTime" class="right"></span>
@@ -372,15 +376,15 @@
         <h2> 邊個出衝?</h2>
         <div class="player-row-confirm confirm-eat">
 
-          <input class="playerbox playername player1" type="button" value=""></input>
-          <input class="playerbox playername player2" type="button" value=""></input>
-          <input class="playerbox playername player3" type="button" value=""></input>
-          <input class="playerbox playername player4" type="button" value=""></input>
+          <input class="playerbox playername player1" id="confirm-1" type="button" value=""></input>
+          <input class="playerbox playername player2" id="confirm-2" type="button" value=""></input>
+          <input class="playerbox playername player3" id="confirm-3" type="button" value=""></input>
+          <input class="playerbox playername player4" id="confirm-4" type="button" value=""></input>
 
         </div>
       </div>
 
-      <h2 id="eat-confirm">確定</h2>
+      <span id="eat-confirm">確定</h2>
 
     </div>
 
@@ -531,6 +535,8 @@
 
   <script src="../js/app.js"></script>
   <script src="../js/db.js"></script>
+  <script src="../js/qrcode.js"></script>
+
   <script src="../js/mj.js"></script>
 </body>
 

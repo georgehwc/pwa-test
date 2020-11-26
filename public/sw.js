@@ -1,5 +1,5 @@
-// const dynamicCacheName = "site-dynamic-v1.3";
-// const staticCacheName = "site-static-v1.43";
+// const dynamicCacheName = "site-dynamic-v1.5";
+// const staticCacheName = "site-static-v1.5";
 
 // const assets = [
 // //   "/",
@@ -77,10 +77,10 @@
 //           );
 //         })
 //         .catch((err) => {
-//           console.log(err);
-//           console.log(evt.request);
-//           console.log(evt.request.url);
-//           console.log(evt.request.url.indexOf(".html"));
+//         //   console.log(err);
+//         //   console.log(evt.request);
+//         //   console.log(evt.request.url);
+//         //   console.log(evt.request.url.indexOf(".html"));
 
 //           if (evt.request.url.indexOf(".html") > -1) {
 //             return caches.match("./pages/fallback.html");

@@ -378,7 +378,7 @@ function timeConverTochinese(params) {
 
 // render recipe data
 const renderRecipe = (data, id) => {
-  console.log(data);
+  // console.log(data);
   let time = timeConverTochinese(data.CreateTime);
   const html = `
     <div class="card-panel recipe row" data-id="${id}">
@@ -399,7 +399,10 @@ function getAll() {
   if (storageAvailable("localStorage")) {
     // Yippee! We can use localStorage awesomeness
     // console.log("We can use localStorage");
-    showNotification("你好");
+
+    let random = Math.floor(Math.random() * 3);
+    let hi = ["你好","Yo","Welcome back","nice to see u","^^","Hello","Hey!"]
+    showNotification(hi[random]);
 
     if (!localStorage.getItem("mjsession")) {
       //dont have
@@ -412,13 +415,12 @@ function getAll() {
       //have
 
       var retrievedData = localStorage.getItem("mjsession");
-      console.log(retrievedData);
+      // console.log(retrievedData);
       var retrievedDataArray = JSON.parse(retrievedData);
-      console.log(retrievedDataArray);
+      // console.log(retrievedDataArray);
 
       for (let index = retrievedDataArray.length - 1; index >= 0; index--) {
-        console.log(index);
-        console.log(retrievedDataArray[index]);
+
         firebase
           .firestore()
           .collection("recipes")
@@ -428,7 +430,7 @@ function getAll() {
             if (doc.exists) {
               renderRecipe(doc.data(), doc.id);
             } else {
-              showNotification("something wrong with your data");
+              showNotification("資料出現錯誤");
             }
           });
       }
@@ -469,7 +471,6 @@ const shareId = () => {
 
   url = href + "pages/mj.html?id=" + tvid;
 
-  console.log(url);
   return url;
 };
 
@@ -526,7 +527,6 @@ shareButtonTarget.forEach((element) => {
 
 document.getElementById("btn-invite").addEventListener("click", (e) => {
   let share = shareId();
-  console.log(share);
   copyToClipboard(share);
   document.getElementById("myTooltip").innerHTML = "Copied ";
   setTimeout(() => {
