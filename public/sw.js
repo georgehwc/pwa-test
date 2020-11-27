@@ -34,10 +34,10 @@ const limitCacheSize = (name, size) => {
 
 // install event
 self.addEventListener("install", (evt) => {
-  console.log("service worker installed");
+//   console.log("service worker installed");
   evt.waitUntil(
     caches.open(staticCacheName).then((cache) => {
-      console.log("Opened cache");
+    //   console.log("Opened cache");
       cache.addAll(assets);
     })
     // .then(self.skipWaiting())

@@ -13,13 +13,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-// if ("serviceWorker" in navigator) {
-//   navigator.serviceWorker
-//     .register("/sw.js")
-//     .then((reg) => console.log("service worker registered"))
-//     .catch((err) => console.log("service worker not registered", err));
-// }
-
 // enable offline data
 // const db = firebase.firestore();
 firebase
@@ -35,6 +28,12 @@ firebase
     }
   });
 
+this.onpush = function (event) {
+  console.log(event.data);
+  // From here we can write the data to IndexedDB, send it to any open
+  // windows, display a notification, etc.
+};
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
     navigator.serviceWorker
@@ -42,6 +41,34 @@ if ("serviceWorker" in navigator) {
       .then(function (reg) {
         // registration worked
         console.log("Registration succeeded. Scope is " + reg.scope);
+        // var serviceWorker;
+        // if (reg.installing) {
+        //   serviceWorker = reg.installing;
+        //   // console.log('Service worker installing');
+        // } else if (reg.waiting) {
+        //   serviceWorker = reg.waiting;
+        //   // console.log('Service worker installed & waiting');
+        // } else if (reg.active) {
+        //   serviceWorker = reg.active;
+        //   // console.log('Service worker active');
+        // }
+        // if (serviceWorker) {
+        //   console.log("sw current state", serviceWorker.state);
+        //   if (serviceWorker.state == "activated") {
+        //     //If push subscription wasnt done yet have to do here
+        //     console.log("sw already activated - Do watever needed here");
+        //   }
+        //   serviceWorker.addEventListener("statechange", function (e) {
+        //     console.log("sw statechange : ", e.target.state);
+        //     if (e.target.state == "activated") {
+        //       // use pushManger for subscribing here.
+        //       console.log(
+        //         "Just now activated. now we can subscribe for push notification"
+        //       );
+        //       subscribeForPushNotification(reg);
+        //     }
+        //   });
+        // }
       })
       .catch(function (error) {
         // registration failed
@@ -401,7 +428,15 @@ function getAll() {
     // console.log("We can use localStorage");
 
     let random = Math.floor(Math.random() * 3);
-    let hi = ["你好","Yo","Welcome back","nice to see u","^^","Hello","Hey!"]
+    let hi = [
+      "你好",
+      "Yo",
+      "Welcome back",
+      "nice to see u",
+      "^^",
+      "Hello",
+      "Hey!",
+    ];
     showNotification(hi[random]);
 
     if (!localStorage.getItem("mjsession")) {
@@ -420,7 +455,6 @@ function getAll() {
       // console.log(retrievedDataArray);
 
       for (let index = retrievedDataArray.length - 1; index >= 0; index--) {
-
         firebase
           .firestore()
           .collection("recipes")
