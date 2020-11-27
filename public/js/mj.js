@@ -241,7 +241,7 @@ async function getData() {
     .get()
     .then(function (doc) {
       if (doc.exists) {
-        console.log("Document data:", doc.data());
+        // console.log("Document data:", doc.data());
         defValue = doc.data().defValue;
         arrayPrice = doc.data().Price;
         intMinValue = doc.data().MinFarn;
@@ -505,7 +505,6 @@ checkTvid() // ------------------------------------- start here ----------------
   })
   .then(() => {
     getData(); // and also show record() is here
-    console.log("get data");
   })
   .then(() => {
     firebase
@@ -513,7 +512,7 @@ checkTvid() // ------------------------------------- start here ----------------
       .collection("recipes")
       .doc(tvid)
       .onSnapshot((doc) => {
-        console.log(doc);
+        // console.log(doc.data());
         // doc.docChanges().forEach(function (change) {
         //   if (change.type === "added") {
         //     console.log("New city: ", change.doc.data());
@@ -530,11 +529,10 @@ checkTvid() // ------------------------------------- start here ----------------
           showRecord();
         });
         let roundLength = doc.data().round.length;
-        console.log("roundLength" + roundLength);
 
         for (let index = 0; index < roundLength; index++) {
           arrayRecordData[index] = doc.data().round[index];
-          console.log(arrayRecordData[index]);
+          // console.log(arrayRecordData[index]);
         }
 
         var playerName = document.querySelectorAll(".playername");
@@ -864,9 +862,9 @@ document.getElementById("setting-submit").addEventListener("click", (e) => {
       setting: true,
     })
     .then(() => {
-      console.log("setting true");
       settingCover();
       getData();
+      showNotification("設定完成咗啦");
     })
     .catch((err) => console.log(err));
 });
@@ -875,7 +873,7 @@ function settingCover(jackpot) {
   if (document.getElementById("setting-submit").disabled == true) {
     return 0;
   }
-  showNotification("設定完成啦");
+
   document.querySelector(".setting-page .modal").scrollTop = 0;
 
   document.getElementById("player1").disabled = true;
@@ -905,7 +903,7 @@ function settingCover(jackpot) {
 }
 
 function copyToClipboard(text) {
-  console.log("copy");
+  // console.log("copy");
   if (window.clipboardData && window.clipboardData.setData) {
     // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
     return clipboardData.setData("Text", text);
@@ -956,7 +954,6 @@ noUiSlider.create(slider, {
   },
 });
 
-console.log(intMinValue, intMaxValue);
 var lart = document.getElementById("price-lart");
 lart.addEventListener("change", (event) => {
   calPrice(defValue, intMaxValue);
@@ -992,10 +989,10 @@ slider.noUiSlider.on("change", function (values, handle) {
         MinFarn: intMinValue,
         MaxFarn: intMaxValue,
       })
-      .then(function (docRef) {
-        console.log("min max farn added ");
-        console.log([intMinValue, intMaxValue]);
-      })
+      // .then(function (docRef) {
+      //   console.log("min max farn added ");
+      //   console.log([intMinValue, intMaxValue]);
+      // })
       .catch((err) => console.log(err));
   }
 });

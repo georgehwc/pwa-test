@@ -549,11 +549,9 @@ document.querySelector(".modal-join").addEventListener("click", (e) => {
     document.querySelector(".modal-join").classList.remove("open");
   }
   if (e.target.id == "modal-join-submit") {
-    console.log("1");
     let url = document.getElementById("modal-join-url").value;
-    console.log(url);
-    if (url.indexOf("/pages/mj.html?id=") > -1) {
-      console.log("2");
+    // console.log(url);
+    if (url.indexOf("pwa-mj.web.app/pages/mj.html?id=") > -1) {
       window.location.href = url;
     }
   }
