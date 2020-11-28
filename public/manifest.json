@@ -1,5 +1,5 @@
 {
-  "name": "MJ麻雀記錄器",
+  "name": "麻雀4人同步計分器",
   "short_name": "MJ-recorder",
   "start_url": "/index.html",
   "display": "standalone",
@@ -9,7 +9,7 @@
   "url": "https://pwa-mj.web.app/index.html",
   "lang": "en",
   "description": "麻雀記錄器",
-  "categories": ["香港麻雀記錄", "香港麻雀", "麻雀記錄器", "廣東麻雀", "麻雀"],
+  "categories": ["同步計分器","香港麻雀記錄", "4人同步","香港麻雀", "麻雀記錄器", "廣東麻雀", "麻雀","計分器"],
   "icons": [
     {
       "src": "img/icons/icon-72x72.png",

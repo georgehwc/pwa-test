@@ -115,6 +115,7 @@ form .input-field {
   display: grid;
   place-items: center;
   margin-bottom: 20%;
+  margin-top: 5%;
 }
 
 .playerbox {
