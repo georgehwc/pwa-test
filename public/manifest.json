@@ -1,6 +1,6 @@
 {
-  "name": "MJ",
-  "short_name": "MJ",
+  "name": "MJ麻雀記錄器",
+  "short_name": "MJ-recorder",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#f7f7d5",
