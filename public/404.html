@@ -219,7 +219,9 @@
         <h6>新賽局</h6>
         <div class="divider"></div>
         <div class="input-field">
-          <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局">
+          <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局" autocomplete="off"
+          onfocus="if(this.value  == '我的賽局') { this.value = ''; } "
+          onblur="if(this.value == '') { this.value = '我的賽局'; } ">
           <label for="title">標題</label>
         </div>
         <div class="input-field">

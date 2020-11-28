@@ -25,7 +25,7 @@ const addForm = document.getElementById("add-recipe-form");
 
 function iconRandom(prefer) {
   var icon = [
-    "MJat1",
+    "MJat1-",
     "MJat2-",
     "MJat3-",
     "MJd1-",

@@ -16,7 +16,8 @@
   <script src="../js/nouislider.js"></script>
   <!-- ios support -->
   <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
-  <link rel="icon" sizes="192x192" href="img/icons/icon-192x192.png">
+  <link rel="icon" sizes="192x192" href="../img/icons/icon-192x192.png">
+
   <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
   <meta name="theme-color" content="#FFE1C4">
   <meta name="google" content="notranslate" />
@@ -147,7 +148,9 @@
       <h6>新賽局</h6>
       <div class="divider"></div>
       <div class="input-field">
-        <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局">
+        <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局" autocomplete="off"
+          onfocus="if(this.value  == '我的賽局') { this.value = ''; } "
+          onblur="if(this.value == '') { this.value = '我的賽局'; } ">
         <label for="title">標題</label>
       </div>
       <div class="input-field">

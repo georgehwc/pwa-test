@@ -617,7 +617,7 @@ var recordTableHead = document.getElementById("record-table-head");
 
 recordTableHead.innerHTML = `
 <tr>
-  <th class="tg-c3ow">round</th>
+  <th class="tg-c3ow"></th>
   <th class="tg-c3ow playername player1">~</th>
   <th class="tg-c3ow playername player2">~</th>
   <th class="tg-c3ow playername player3">~</th>
@@ -805,12 +805,12 @@ function nameChange(playerNum, value) {
 
   var playerName = document.querySelectorAll(".playername");
 
-  playerName.forEach((element) => {
-    if (element.classList.contains(playerNum)) {
-      element.innerHTML = value;
-      element.value = value;
-    }
-  });
+  // playerName.forEach((element) => {
+  //   if (element.classList.contains(playerNum)) {
+  //     element.innerHTML = value;
+  //     element.value = value;
+  //   }
+  // });
 
   player1 = document.getElementById("player1").value;
   player2 = document.getElementById("player2").value;

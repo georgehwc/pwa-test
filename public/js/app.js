@@ -436,6 +436,7 @@ function getAll() {
       "^^",
       "Hello",
       "Hey!",
+      "大定一齊黎打麻雀啦!"
     ];
     showNotification(hi[random]);
 

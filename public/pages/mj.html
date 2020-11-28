@@ -16,7 +16,7 @@
   <script src="../js/nouislider.js"></script>
   <!-- ios support -->
   <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
-  <link rel="icon" sizes="192x192" href="img/icons/icon-192x192.png">
+  <link rel="icon" sizes="192x192" href="../img/icons/icon-192x192.png">
   <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
   <meta name="theme-color" content="#FFE1C4">
   <meta name="google" content="notranslate" />
@@ -88,6 +88,10 @@
         <h2>邀請</h2>
 
         <div>
+          <span style="display: inline-flex;">share條link比你雀友<span class="material-icons">
+              navigate_next
+            </span></span>
+
           <div class="share-dialog">
             <header>
               <h3 class="dialog-title">邀請</h3>
@@ -201,13 +205,17 @@
       <form>
 
         <input type="text" class="playername player1" id="player1" placeholder="player name..." value="~" maxlength="10"
-          onchange="nameChange(this.id,this.value)" autocomplete="off">
+          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player1') { this.value = ''; } "
+          onblur="if(this.value == '') { this.value = 'Player1'; } " autocomplete="off">
         <input type="text" class="playername player2" id="player2" placeholder="player name..." value="~" maxlength="10"
-          onchange="nameChange(this.id,this.value)" autocomplete="off">
+          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player2') { this.value = ''; } "
+          onblur="if(this.value == '') { this.value = 'Player2'; } " autocomplete="off">
         <input type="text" class="playername player3" id="player3" placeholder="player name..." value="~" maxlength="10"
-          onchange="nameChange(this.id,this.value)" autocomplete="off">
+          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player3') { this.value = ''; } "
+          onblur="if(this.value == '') { this.value = 'Player3'; } " autocomplete="off">
         <input type="text" class="playername player4" id="player4" placeholder="player name..." value="~" maxlength="10"
-          onchange="nameChange(this.id,this.value)" autocomplete="off">
+          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player4') { this.value = ''; } "
+          onblur="if(this.value == '') { this.value = 'Player4'; } " autocomplete="off">
 
         <br>
         <div id="farn-slider"></div>
@@ -280,12 +288,12 @@
         <div class="range-value">
           <label class="switch">
             <input type="checkbox" id="setting-chip">
-            <span>籌碼</span>
+            <span>幾錢底</span>
             <br>
             <!-- <span class="slider"></span> -->
           </label>
 
-          <input type="number" id="setting-chip-input" placeholder="Chip" value="" step="10" min="0" disabled>
+          <input type="number" id="setting-chip-input" placeholder="幾錢底?" value="" step="10" min="0" disabled>
 
         </div>
 
@@ -307,6 +315,8 @@
         </div> -->
 
         <br>
+        <span>設定後不能更改*</span>
+        <br><br>
         <input type="submit" value="確定" class="button" id="setting-submit">
 
 
@@ -356,7 +366,7 @@
 
         <!-- <button><span>更改</span></button> -->
         <span id="detailMid">
-          <button id="detailDel"><span>刪除</span></button>
+          <button id="detailDel" class="button"><span>刪除</span></button>
         </span>
 
         <span id="detailTime" class="right"></span>
@@ -387,7 +397,7 @@
         </div>
       </div>
 
-      <span id="eat-confirm">確定</h2>
+      <span id="eat-confirm" class="button">確定</h2>
 
     </div>
 
@@ -450,7 +460,7 @@
       打幾大?
 
     </div>
-    <div class="head-div setting" id="setting-div">
+    <div class="head-div setting button" id="setting-div">
       設定
     </div>
 
@@ -502,7 +512,9 @@
       <h6>新賽局</h6>
       <div class="divider"></div>
       <div class="input-field">
-        <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局" autocomplete="off">
+        <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局" autocomplete="off"
+          onfocus="if(this.value  == '我的賽局') { this.value = ''; } "
+          onblur="if(this.value == '') { this.value = '我的賽局'; } ">
         <label for="title">標題</label>
       </div>
       <div class="input-field">
