@@ -1,5 +1,5 @@
 {
-  "name": "麻雀4人同步計分器",
+  "name": "麻雀4人同步記分/計分器",
   "short_name": "MJ-recorder",
   "start_url": "/index.html",
   "display": "standalone",

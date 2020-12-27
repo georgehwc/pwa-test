@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <title>MJ</title>
   <!-- materialize icons, css & js -->
   <link type="text/css" href="../css/materialize.min.css" rel="stylesheet">
@@ -60,19 +61,19 @@
   <!-- side nav -->
   <ul id="side-menu" class="sidenav side-menu sidenav-close">
     <li><a class="subheader">MJ</a></li>
-    <li><a href="../index.html" class="waves-effect">主頁</a></li>
+    <li><a href="index.html" class="waves-effect">主頁</a></li>
     <li><a class="waves-effect sidenav-trigger " data-target="side-form">新的賽局</a></li>
 
     <li><a id="menu-join" class="waves-effect">加入</a></li>
 
-    <li><a href="../pages/wiki.html" class="waves-effect">教學</a></li>
+    <li><a href="pages/wiki.html" class="waves-effect">教學</a></li>
 
-    <li><a href="../pages/about.html" class="waves-effect">關於</a></li>
+    <li><a href="pages/about.html" class="waves-effect">關於</a></li>
 
     <li>
       <div class="divider"></div>
     </li>
-    <li><a href="../pages/contact.html" class="waves-effect">
+    <li><a href="pages/contact.html" class="waves-effect">
         <i class="material-icons">mail_outline</i>Contact</a>
     </li>
     <li><a class="waves-effect add-button">
@@ -204,16 +205,16 @@
       <h2>設定</h2>
       <form>
 
-        <input type="text" class="playername player1" id="player1" placeholder="player name..." value="~" maxlength="10"
+        <input type="text" class="playername player1" id="player1" placeholder="player name..." value="Player1" maxlength="10"
           onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player1') { this.value = ''; } "
           onblur="if(this.value == '') { this.value = 'Player1'; } " autocomplete="off">
-        <input type="text" class="playername player2" id="player2" placeholder="player name..." value="~" maxlength="10"
+        <input type="text" class="playername player2" id="player2" placeholder="player name..." value="Player2" maxlength="10"
           onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player2') { this.value = ''; } "
           onblur="if(this.value == '') { this.value = 'Player2'; } " autocomplete="off">
-        <input type="text" class="playername player3" id="player3" placeholder="player name..." value="~" maxlength="10"
+        <input type="text" class="playername player3" id="player3" placeholder="player name..." value="Player3" maxlength="10"
           onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player3') { this.value = ''; } "
           onblur="if(this.value == '') { this.value = 'Player3'; } " autocomplete="off">
-        <input type="text" class="playername player4" id="player4" placeholder="player name..." value="~" maxlength="10"
+        <input type="text" class="playername player4" id="player4" placeholder="player name..." value="Player4" maxlength="10"
           onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player4') { this.value = ''; } "
           onblur="if(this.value == '') { this.value = 'Player4'; } " autocomplete="off">
 
@@ -470,19 +471,19 @@
   <div class="mjmain container grey-text text-darken-1">
 
     <div class="player-row">
-      <div class="playerbox">
+      <div class="playerbox" title="1">
         <div class="playername player1">~</div>
         <div class="playerscore" id="playerscore1">0</div>
       </div>
-      <div class="playerbox">
+      <div class="playerbox" title="2">
         <div class="playername player2">~</div>
         <div class="playerscore" id="playerscore2">0</div>
       </div>
-      <div class="playerbox">
+      <div class="playerbox" title="3">
         <div class="playername player3">~</div>
         <div class="playerscore" id="playerscore3">0</div>
       </div>
-      <div class="playerbox">
+      <div class="playerbox" title="4">
         <div class="playername player4">~</div>
         <div class="playerscore" id="playerscore4">0</div>
       </div>

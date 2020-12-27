@@ -37,7 +37,7 @@ this.onpush = function (event) {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
     navigator.serviceWorker
-      .register("./sw.js", { scope: "./" })
+      .register('/./sw.js', { scope: '/./' })
       .then(function (reg) {
         // registration worked
         console.log("Registration succeeded. Scope is " + reg.scope);
@@ -409,7 +409,7 @@ const renderRecipe = (data, id) => {
   let time = timeConverTochinese(data.CreateTime);
   const html = `
     <div class="card-panel recipe row" data-id="${id}">
-      <img src="img/common/${data.icon}.svg" alt="搵唔到">
+      <img src="img/common/${data.icon}.svg" alt="搵唔到" data-id="${id}">
       <div class="recipe-details" data-id="${id}">
         <div class="recipe-title" data-id="${id}">${time}</div>
         <div class="recipe-ingredients" data-id="${id}">標題: ${data.name} 備註:${data.ingredients} </br>最大${data.MaxFarn}番</div> 

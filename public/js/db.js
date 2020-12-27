@@ -176,6 +176,7 @@ if (recipeContainer != null) {
       evt.target.classList.contains("card-panel") ||
       evt.target.classList.contains("recipe-title") ||
       evt.target.classList.contains("recipe-details") ||
+      evt.target.tagName === "IMG" ||
       evt.target.classList.contains("recipe-ingredients")
       // evt.target.classList.contains("123")
     ) {
