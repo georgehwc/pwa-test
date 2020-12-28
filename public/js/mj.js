@@ -282,27 +282,6 @@ async function getData() {
         player3 = doc.data().PlayerName.player3
         player4 = doc.data().PlayerName.player4
 
-        // playerName.forEach((element) => {
-        //   // console.log(element);
-
-        //   if (element.classList.contains('player1')) {
-        //     element.innerHTML = doc.data().PlayerName.player1
-        //     element.value = doc.data().PlayerName.player1
-        //   }
-        //   if (element.classList.contains('player2')) {
-        //     element.innerHTML = doc.data().PlayerName.player2
-        //     element.value = doc.data().PlayerName.player2
-        //   }
-        //   if (element.classList.contains('player3')) {
-        //     element.innerHTML = doc.data().PlayerName.player3
-        //     element.value = doc.data().PlayerName.player3
-        //   }
-        //   if (element.classList.contains('player4')) {
-        //     element.innerHTML = doc.data().PlayerName.player4
-
-        //     element.value = doc.data().PlayerName.player4
-        //   }
-        // })
 
 
       } else {
@@ -312,6 +291,7 @@ async function getData() {
       }
     })
     .then(() => {
+      setName();
       document.getElementById('range-value-1').innerHTML = intMinValue
       document.getElementById('range-value-2').innerHTML = intMaxValue
       if (jackpot == '') {
@@ -330,7 +310,7 @@ async function getData() {
     })
     .catch(function (error) {
       console.log('Error getting document:', error)
-      throw new Error('getData error ')
+      throw new Error('gettingData error ')
     })
 
   // -----------------------}
@@ -545,7 +525,7 @@ checkTvid() // ------------------------------------- start here ----------------
     tvid = data
   })
   .then(() => {
-    getData() // and also show record() is here
+    // getData() // and also show record() is here
   })
   .then(() => {
     firebase
@@ -583,11 +563,11 @@ checkTvid() // ------------------------------------- start here ----------------
 
       })
   })
-  .then(() => {
-    // showRecord()
-    // printPriceTable();
-    setName();
-  })
+  // .then(() => {
+  //   // showRecord()
+  //   // printPriceTable();
+  //   setName();
+  // })
   .catch((err) => {
     console.log(err)
     showNotification('Error')
@@ -820,7 +800,10 @@ const div = (a, b) => {
   return fenzi / fenmu / 10 ** (c - d)
 }
 
-function setName() {
+async function setName() {
+
+  // console.log("setname");
+
   var playerName = document.querySelectorAll('.playername')
   playerName.forEach((element) => {
     for (let int = 1; int < 4 + 1; int++) {
@@ -828,13 +811,62 @@ function setName() {
 
       if (element.classList.contains(player)) {
         element.value = document.getElementById(player).value
-        // element.innerHTML = document.getElementById(player).value;
+        element.innerHTML = document.getElementById(player).value;
         element.innerText = document.getElementById(player).value
         element.title = int
         //  console.dir(element);
       }
     }
   })
+  // console.log(player1);
+  // console.log(player2);
+  // console.log(player3);
+  // console.log(player4);
+
+
+  playerName.forEach((element) => {
+    // console.log(element);
+
+    if (element.classList.contains('player1')) {
+      element.innerHTML = player1
+      element.value = player1
+    }
+    if (element.classList.contains('player2')) {
+      element.innerHTML = player2
+      element.value = player2
+    }
+    if (element.classList.contains('player3')) {
+      element.innerHTML = player3
+      element.value = player3
+    }
+    if (element.classList.contains('player4')) {
+      element.innerHTML = player4
+      element.value = player4
+    }
+  })
+
+  
+  // playerName.forEach((element) => {
+  //   // console.log(element);
+
+  //   if (element.classList.contains('player1')) {
+  //     element.innerHTML = doc.data().PlayerName.player1
+  //     element.value = doc.data().PlayerName.player1
+  //   }
+  //   if (element.classList.contains('player2')) {
+  //     element.innerHTML = doc.data().PlayerName.player2
+  //     element.value = doc.data().PlayerName.player2
+  //   }
+  //   if (element.classList.contains('player3')) {
+  //     element.innerHTML = doc.data().PlayerName.player3
+  //     element.value = doc.data().PlayerName.player3
+  //   }
+  //   if (element.classList.contains('player4')) {
+  //     element.innerHTML = doc.data().PlayerName.player4
+
+  //     element.value = doc.data().PlayerName.player4
+  //   }
+  // })
 }
 
 
