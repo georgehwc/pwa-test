@@ -125,28 +125,28 @@ function printPriceTable(arrayPrice, min, max) {
             document.getElementById('confirm-1').disabled = true
             document.getElementById('confirm-1').style.opacity = 0.5
 
-            console.log(MapEatDetail.get('eat'))
+            // console.log(MapEatDetail.get('eat'))
 
             break
           case 2:
             document.getElementById('confirm-2').disabled = true
             document.getElementById('confirm-2').style.opacity = 0.5
 
-            console.log(MapEatDetail.get('eat'))
+            // console.log(MapEatDetail.get('eat'))
 
             break
           case 3:
             document.getElementById('confirm-3').disabled = true
             document.getElementById('confirm-3').style.opacity = 0.5
 
-            console.log(MapEatDetail.get('eat'))
+            // console.log(MapEatDetail.get('eat'))
 
             break
           case 4:
             document.getElementById('confirm-4').disabled = true
             document.getElementById('confirm-4').style.opacity = 0.5
 
-            console.log(MapEatDetail.get('eat'))
+            // console.log(MapEatDetail.get('eat'))
 
             break
 
@@ -469,7 +469,7 @@ function showDetail(id) {
 
       for (let index = 1; index < 5; index++) {
         if (arrayRecordData[roundid][index] < 0) {
-          console.log(index)
+          // console.log(index)
           loseid = 'player' + index
           break
         }
@@ -553,7 +553,8 @@ checkTvid() // ------------------------------------- start here ----------------
       .collection('recipes')
       .doc(tvid)
       .onSnapshot((doc) => {
-        console.log(doc.data());
+        // console.log(doc.data());
+
         // doc.docChanges().forEach(function (change) {
         //   if (change.type === "added") {
         //     console.log("New city: ", change.doc.data());
@@ -577,7 +578,7 @@ checkTvid() // ------------------------------------- start here ----------------
           arrayRecordData[index] = doc.data().round[index]
           // console.log(arrayRecordData[index]);
         }
-        console.log(arrayRecordData.length);
+        // console.log(arrayRecordData.length);
 
 
       })
@@ -615,7 +616,7 @@ eatButton.addEventListener('click', () => {
 
 const eatButtonPlayer = document.querySelectorAll('.mjmain .playerbox')
 
-console.log(eatButtonPlayer)
+// console.log(eatButtonPlayer)
 
 eatButtonPlayer.forEach((element) => {
   element.addEventListener('click', () => {
@@ -625,7 +626,7 @@ eatButtonPlayer.forEach((element) => {
       settingModal.classList.add('open')
     } else {
       profileModal.classList.add('open')
-      console.log('open')
+      // console.log('open')
       document.getElementById('eatSelect').selectedIndex =
         element.children[0].title
       profilePageBtn()
@@ -841,7 +842,7 @@ function setName() {
 function nameChange(playerNum, value) {
   // var y = document.getElementById(x).value;
 
-  console.log(playerNum, value)
+  // console.log(playerNum, value)
 
   var playerName = document.querySelectorAll('.playername')
 
@@ -1099,10 +1100,11 @@ var confirmEat = document.querySelectorAll('.confirm-eat .playerbox')
 document.getElementById('eat-confirm').addEventListener('click', (e) => {
   if (
     MapEatDetail.get('gotEat') == 'default' &&
-    eatSelect.value == '' &&
+    eatSelect.value != '' &&
     MapEatDetail.get('type') == 0
   ) {
-    showNotification('邊個出衝?')
+    showNotification('邊個出衝?');
+    return;
   }
 
   if (
@@ -1111,7 +1113,7 @@ document.getElementById('eat-confirm').addEventListener('click', (e) => {
   ) {
     showNotification('出衝點會同食糊係同一個人呀')
   } else {
-    console.log('confrim eat')
+    // console.log('confrim eat')
     MakeNewRecord()
     showRecord()
 
