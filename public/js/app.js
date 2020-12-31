@@ -37,7 +37,9 @@ this.onpush = function (event) {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
     navigator.serviceWorker
+      // .register('./sw.js', { scope: './' })// for testing loocal
       .register('/./sw.js', { scope: '/./' })
+
       .then(function (reg) {
         // registration worked
         console.log("Registration succeeded. Scope is " + reg.scope);
@@ -616,7 +618,7 @@ window.addEventListener("beforeinstallprompt", function (e) {
   listenToUserAction();
 });
 
-// listen to install button clic
+// listen to install button click
 function listenToUserAction() {
   const installBtn = document.querySelector(".add-button");
   installBtn.addEventListener("click", presentAddToHome);

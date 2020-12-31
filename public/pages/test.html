@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
   <title>MJ</title>
   <!-- materialize icons, css & js -->
   <link type="text/css" href="../css/materialize.min.css" rel="stylesheet">
@@ -17,7 +18,6 @@
   <!-- ios support -->
   <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
   <link rel="icon" sizes="192x192" href="../img/icons/icon-192x192.png">
-
   <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
   <meta name="theme-color" content="#FFE1C4">
   <meta name="google" content="notranslate" />
@@ -25,7 +25,8 @@
   <base href="">
 </head>
 
-<body class="bgtext">
+<body class="bgcolor">
+
   <div class="notification"></div>
 
   <div class="offline-notification">
@@ -46,7 +47,6 @@
     </div>
   </nav>
 
-
   <!-- join -->
   <div class="modal-join">
     <div class="modal">
@@ -61,19 +61,19 @@
   <!-- side nav -->
   <ul id="side-menu" class="sidenav side-menu sidenav-close">
     <li><a class="subheader">MJ</a></li>
-    <li><a href="/" class="waves-effect">主頁</a></li>
+    <li><a href="index.html" class="waves-effect">主頁</a></li>
     <li><a class="waves-effect sidenav-trigger " data-target="side-form">新的賽局</a></li>
 
     <li><a id="menu-join" class="waves-effect">加入</a></li>
 
-    <li><a href="/pages/wiki.html" class="waves-effect">教學</a></li>
+    <li><a href="pages/wiki.html" class="waves-effect">教學</a></li>
 
-    <li><a href="/pages/about.html" class="waves-effect">關於</a></li>
+    <li><a href="pages/about.html" class="waves-effect">關於</a></li>
 
     <li>
       <div class="divider"></div>
     </li>
-    <li><a href="/pages/contact.html" class="waves-effect">
+    <li><a href="pages/contact.html" class="waves-effect">
         <i class="material-icons">mail_outline</i>Contact</a>
     </li>
     <li><a class="waves-effect add-button">
@@ -82,65 +82,430 @@
 
   </ul>
 
+  <!-- setting + share  -->
+  <div class="setting-page">
+    <div class="modal">
+      <div id="setting-invite">
+        <h2>邀請</h2>
+
+        <div>
+          <span style="display: inline-flex;">share條link比你雀友<span class="material-icons">
+              navigate_next
+            </span></span>
+
+          <div class="share-dialog">
+            <header>
+              <h3 class="dialog-title">邀請</h3>
+              <button class="close-button"><svg>
+                  <use href="#close"></use>
+                </svg></button>
+            </header>
+            <div class="targets">
+              <a class="button" title="Whatsapp" href="" target="_blank">
+                <!-- <svg>
+                  <use href="#whatsapp"></use>
+                </svg> -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3 0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7 0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1 0-5.2 4.2-9.4 9.4-9.4 2.5 0 4.9 1 6.7 2.8 1.8 1.8 2.8 4.2 2.8 6.7-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6s.3-.3.4-.5c.2-.1.3-.3.4-.5.1-.2 0-.4 0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z" />
+                </svg>
+                <span>Whatsapp</span>
+              </a>
+
+              <a class="button" title="Telegram" href="" target="_blank">
+                <!-- <svg>
+                  <use href="#Telegram"></use>
+                </svg> -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M.707 8.475C.275 8.64 0 9.508 0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102 0 0 0 1.75.527l2.96-2.41a.405.405 0 0 1 .494-.013l5.34 3.87a1.1 1.1 0 0 0 1.046.135 1.1 1.1 0 0 0 .682-.803l3.91-18.795A1.102 1.102 0 0 0 22.5.075L.706 8.475z" />
+                </svg>
+                <span>Telegram</span>
+              </a>
+
+              <a class="button" title="Email" href="" target="_blank">
+                <svg>
+                  <use href="#email"></use>
+                </svg>
+                <span>Email</span>
+              </a>
+            </div>
+            <div class="link">
+              <div class="pen-url"></div>
+              <button class="copy-link" id="btn-invite">
+                <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+                <!-- Copy Link -->
+              </button>
+            </div>
+
+            <!-- <input id="text" type="text" value="https://hogangnono.com" style="width:80%" /><br /> -->
+            <div id="qrcode"></div>
+
+          </div>
+
+          <button class="share-button" type="button" title="">
+            <svg>
+              <use href="#share-icon"></use>
+            </svg>
+            <span>Share</span>
+          </button>
+
+        </div>
 
 
-  <!-- share -->
-  <div class="hidden">
-    <div class="share-dialog">
-      <header>
-        <h3 class="dialog-title">邀請</h3>
-        <button class="close-button"><svg>
-            <use href="#close"></use>
-          </svg></button>
-      </header>
-      <div class="targets">
-        <a class="button">
-          <!-- <svg>
-              <use href="#whatsapp"></use>
-            </svg> -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path
-              d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3 0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7 0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1 0-5.2 4.2-9.4 9.4-9.4 2.5 0 4.9 1 6.7 2.8 1.8 1.8 2.8 4.2 2.8 6.7-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6s.3-.3.4-.5c.2-.1.3-.3.4-.5.1-.2 0-.4 0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z" />
-          </svg>
-          <span>whatsapp</span>
-        </a>
+        <svg class="hidden">
+          <defs>
+            <symbol id="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-share">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </symbol>
 
-        <a class="button">
-          <!-- <svg>
-              <use href="#Telegram"></use>
-            </svg> -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path
-              d="M.707 8.475C.275 8.64 0 9.508 0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102 0 0 0 1.75.527l2.96-2.41a.405.405 0 0 1 .494-.013l5.34 3.87a1.1 1.1 0 0 0 1.046.135 1.1 1.1 0 0 0 .682-.803l3.91-18.795A1.102 1.102 0 0 0 22.5.075L.706 8.475z" />
-          </svg>
-          <span>Telegram</span>
-        </a>
+            <symbol id="whatsapp" viewBox="0 0 24 24" fill="#3b5998" stroke="#3b5998" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp">
+              <!-- <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path> -->
 
-        <a class="button">
-          <svg>
-            <use href="#email"></use>
-          </svg>
-          <span>Email</span>
-        </a>
+            </symbol>
+
+            <symbol id="twitter" viewBox="0 0 24 24" fill="#1da1f2" stroke="#1da1f2" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter">
+
+            </symbol>
+
+            <symbol id="email" viewBox="0 0 24 24" fill="#777" stroke="#fafafa" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="feather feather-mail">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </symbol>
+
+
+
+            <symbol id="close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+            </symbol>
+          </defs>
+        </svg>
+
+
+        <!-- <input type="button" value=""> -->
+        <!-- <div class="tooltip">
+          <button id="btn-invite" onmouseout="outFunc()">
+            <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+            邀請
+          </button>
+        </div> -->
+
       </div>
-      <div class="link">
-        <div class="pen-url"></div>
-        <button class="copy-link" id="btn-invite">
-          <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-          <!-- Copy Link -->
-        </button>
+
+      <div id="setting-page-cover"></div>
+      <h2>設定</h2>
+      <form>
+
+        <input type="text" class="playername player1" id="player1" placeholder="player name..." value="player1" maxlength="10"
+          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player1') { this.select(); } "
+          onblur="if(this.value == '') { this.value = 'Player1'; } " autocomplete="off">
+        <input type="text" class="playername player2" id="player2" placeholder="player name..." value="Player2" maxlength="10"
+          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player2') { this.select(); } "
+          onblur="if(this.value == '') { this.value = 'Player2'; } " autocomplete="off">
+        <input type="text" class="playername player3" id="player3" placeholder="player name..." value="Player3" maxlength="10"
+          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player3') { this.select(); } "
+          onblur="if(this.value == '') { this.value = 'Player3'; } " autocomplete="off">
+        <input type="text" class="playername player4" id="player4" placeholder="player name..." value="Player4" maxlength="10"
+          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player4') { this.select(); } "
+          onblur="if(this.value == '') { this.value = 'Player4'; } " autocomplete="off">
+
+        <br>
+        <div id="farn-slider"></div>
+
+        <br><br><br>
+
+        <div class="range-value">
+          <div class="range-value-div">
+            <span>最細</span>
+            <span id="range-value-1">0</span>
+            <span>番</span>
+
+          </div>
+          <div class="range-value-div">
+            <span>最大</span>
+            <span id="range-value-2">0</span>
+            <span>番</span>
+
+          </div>
+
+
+        </div>
+        <div class="range-value">
+          <label class="switch">
+            <input type="checkbox" id="price-lart">
+            <span class="price-lart">辣辣上</span>
+            <br>
+            <!-- <span class="slider"></span> -->
+          </label>
+
+        </div>
+
+
+
+        <div class="range-value">
+          <div class="range-value-div">
+            <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
+            <button type="button" class="price-change button" id="price-d10">細十倍</button>
+          </div>
+          <div class="range-value-div">
+            <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
+            <button type="button" class="price-change button" id="price-d2">細一倍</button>
+          </div>
+          <div class="range-value-div">
+            <button type="button" class="price-change button" id="price-reset">重置</button>
+          </div>
+          <div class="range-value-div">
+            <!-- <input type="text" placeholder="最大幾錢" value="64" id="max-price"> -->
+            <button type="button" class="price-change button" id="price-x2">大一倍</button>
+
+          </div>
+          <div class="range-value-div">
+            <!-- <input type="text" placeholder="最細幾錢" value="2" id="min-price"> -->
+            <button type="button" class="price-change button" id="price-x10">大十倍</button>
+          </div>
+
+          <!-- <div class="setting-button">確定</div> -->
+
+        </div>
+
+
+
+        <!-- <input type="text" value="" placeholder="最大幾錢?" id="max-price" style="text-align: center;"> -->
+
+
+        <div id="price-table">
+
+        </div>
+
+        <div class="range-value">
+          <label class="switch">
+            <input type="checkbox" id="setting-chip">
+            <span>幾錢底</span>
+            <br>
+            <!-- <span class="slider"></span> -->
+          </label>
+
+          <input type="number" id="setting-chip-input" placeholder="幾錢底?" value="" step="10" min="0" disabled>
+
+        </div>
+
+        <div class="range-value">
+          <label class="switch">
+            <input type="checkbox" id="setting-jackpot">
+            <span>Jackpot</span>
+            <br>
+            <!-- <span class="slider"></span> -->
+          </label>
+
+          <input type="number" id="setting-jackpot-input" placeholder="Jackpot" min="0" disabled>
+
+        </div>
+
+
+        <!-- <div class="image-upload">
+          <input type="file" name="userIcon" id="iconBtn" accept="image/*">
+        </div> -->
+
+        <br>
+        <span>設定後不能更改*</span>
+        <br><br>
+        <input type="submit" value="確定" class="button" id="setting-submit">
+
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- moreDetail page  -->
+  <div class="moreDetail-page" style="">
+
+    <div class="modal">
+
+      <h1>詳細資料</h1>
+
+      <div class="record-box">
+        <table class="tg">
+          <thead>
+            <tr>
+              <th class="tg-c3ow">回合</th>
+              <th class="tg-c3ow playername player1" title="1">Player1</th>
+              <th class="tg-c3ow playername player2" title="2">Player2</th>
+              <th class="tg-c3ow playername player3" title="3">Player3</th>
+              <th class="tg-c3ow playername player4" title="4">Player4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="detailRecord">
+              <td class="tg-baqh" id="detailround">X</td>
+              <td class="tg-baqh" id="detailplayer1">0</td>
+              <td class="tg-baqh" id="detailplayer2">0</td>
+              <td class="tg-baqh" id="detailplayer3">0</td>
+              <td class="tg-baqh" id="detailplayer4">0</td>
+            </tr>
+
+          </tbody>
+        </table>
       </div>
+
+      <!-- <div class="right">
+      </div> -->
+
+
+
+      <div class="center">
+        <span class="left" id="detailDetail">邊個食左邊個幾多番</span>
+
+        <!-- <button><span>更改</span></button> -->
+        <span id="detailMid">
+          <button id="detailDel" class="button"><span>刪除</span></button>
+        </span>
+
+        <span id="detailTime" class="right"></span>
+
+
+      </div>
+
     </div>
 
-    <button class="share-button" type="button" title="">
-      <svg>
-        <use href="#share-icon"></use>
-      </svg>
-      <span>Share</span>
-    </button>
   </div>
 
 
+  <!-- confirm page  -->
+  <div class="confirm-page">
+
+
+    <div class="modal">
+
+      <div id="modal-confirm-table">
+        <h2> 邊個出衝?</h2>
+        <div class="player-row-confirm confirm-eat">
+
+          <input class="playerbox playername player1" id="confirm-1" type="button" value=""></input>
+          <input class="playerbox playername player2" id="confirm-2" type="button" value=""></input>
+          <input class="playerbox playername player3" id="confirm-3" type="button" value=""></input>
+          <input class="playerbox playername player4" id="confirm-4" type="button" value=""></input>
+
+        </div>
+      </div>
+
+      <span id="eat-confirm" class="button">確定</h2>
+
+    </div>
+
+  </div>
+
+
+  <!-- Profile  -->
+  <div class="Profile-page">
+    <div class="modal">
+      <h2>食糊</h2>
+      <form>
+
+        <select id="eatSelect" name="eatSelect" class="eat-select">
+          <option id="selectDefault" value="" selected disabled hidden>邊個食?</option>
+          <option class="playername player1"></option>
+          <option class="playername player2"></option>
+          <option class="playername player3"></option>
+          <option class="playername player4"></option>
+
+        </select>
+
+        <div id="eat-price-table">
+
+        </div>
+
+        <div>
+
+          <button type="button" class="button" id="eat-lauGuk"> 流局</button>
+        </div>
+
+
+
+        <div class="image-upload">
+          <!-- <label for="iconBtn">
+            <img src="" alt="user-icon" id="userIcon">
+          </label> -->
+
+          <!-- <input type="file" name="userIcon" id="iconBtn" accept="image/*" disabled> -->
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+
+
+  <!-- recipes -->
+  <div class="recipes container grey-text text-darken-1" id="recipes">
+
+  </div>
+
+  <div class="mj-head">
+
+    <div class="head-div">
+      <span id="head-jackpot"></span>
+      <span id="head-jackpot-value"></span>
+    </div>
+    <div class="head-div" id="max-farn">
+      打幾大?
+
+    </div>
+    <div class="head-div setting button" id="setting-div">
+      設定
+    </div>
+
+  </div>
+
+  <!-- main -->
+  <div class="mjmain container grey-text text-darken-1">
+
+    <div class="player-row">
+      <div class="playerbox" title="1">
+        <div class="playername player1">~</div>
+        <div class="playerscore" id="playerscore1">0</div>
+      </div>
+      <div class="playerbox" title="2">
+        <div class="playername player2">~</div>
+        <div class="playerscore" id="playerscore2">0</div>
+      </div>
+      <div class="playerbox" title="3">
+        <div class="playername player3">~</div>
+        <div class="playerscore" id="playerscore3">0</div>
+      </div>
+      <div class="playerbox" title="4">
+        <div class="playername player4">~</div>
+        <div class="playerscore" id="playerscore4">0</div>
+      </div>
+    </div>
+
+    <div class="eat-button waves-effect">
+      <img src="../img/common/160547136430151.png" class="" alt="">
+    </div>
+    <!-- <div class="test-button">Test</div> -->
+
+
+    <div class="record-box">
+      <table class="tg">
+        <thead id="record-table-head">
+        </thead>
+        <tbody id="record-table-body">
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 
   <!-- add recipe side nav -->
   <div id="side-form" class="sidenav side-form">
@@ -162,13 +527,13 @@
           <option value="mjother">其他</option>
         </select>
         <label for="recipesIcon" style="-webkit-transform: translateY(-14px) scale(0.8);
-        transform: translateY(-14px) scale(0.8);
-        -webkit-transform-origin: 0 0;
-        transform-origin: 0 0;">Icon</label>
+      transform: translateY(-14px) scale(0.8);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;">Icon</label>
       </div>
 
       <div class="input-field">
-        <input placeholder="" id="ingredients" type="text" class="validate">
+        <input placeholder="" id="ingredients" type="text" class="validate" autocomplete="off">
         <label for="ingredients">備註</label>
       </div>
 
@@ -179,21 +544,16 @@
     </form>
   </div>
 
-  <div class="recipes container grey-text text-darken-1">
-
-  </div>
-
-  <iframe src="https://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF%E9%BA%BB%E9%9B%80%E8%83%A1%E7%89%8C%E5%88%97%E8%A1%A8"
-    width="100%" height="1000" frameborder="0" scrolling="yes"></iframe>
 
   <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
 
-  <script src="/js/app.js"></script>
-  <script src="/js/db.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/db.js"></script>
+  <script src="../js/qrcode.js"></script>
 
-
+  <script src="../js/mj.js"></script>
 </body>
 
 </html>

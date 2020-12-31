@@ -806,67 +806,71 @@ async function setName() {
 
   var playerName = document.querySelectorAll('.playername')
   playerName.forEach((element) => {
+    // console.log(element);
     for (let int = 1; int < 4 + 1; int++) {
-      var player = 'player' + int
+      var player = 'player' + int;
 
       if (element.classList.contains(player)) {
-        element.value = document.getElementById(player).value
-        element.innerHTML = document.getElementById(player).value;
-        element.innerText = document.getElementById(player).value
-        element.title = int
+
+        switch (player) {
+          case "player1":
+
+
+            element.value = player1;
+            element.innerHTML = player1;
+
+            // if (element.innerHTML != "" && element.value ) {
+            //   if(element.innerHTML != player1){
+
+            //     console.log(element.value);
+            //     console.log(player1);
+
+            //     element.value = player1;
+            //     element.innerHTML = player1;
+            //   }else{
+            //     break;
+            //   }
+            // } else {
+            //   console.log("emety");
+            //   break;
+            // }
+
+            break;
+          case "player2":
+
+
+            element.value = player2;
+            element.innerHTML = player2;
+            break;
+          case "player3":
+
+
+            element.value = player3;
+            element.innerHTML = player3;
+
+            break;
+          case "player4":
+
+
+            element.value = player4;
+            element.innerHTML = player4;
+            break;
+
+          default:
+            console.log(player);
+            break;
+        }
+
+        // console.log(element);
+        // console.log(player);
+        // element.value = player;
+        // element.innerHTML = player;
+        // element.innerText = document.getElementById(player).value
+        element.title = int;
         //  console.dir(element);
       }
     }
   })
-  // console.log(player1);
-  // console.log(player2);
-  // console.log(player3);
-  // console.log(player4);
-
-
-  playerName.forEach((element) => {
-    // console.log(element);
-
-    if (element.classList.contains('player1')) {
-      element.innerHTML = player1
-      element.value = player1
-    }
-    if (element.classList.contains('player2')) {
-      element.innerHTML = player2
-      element.value = player2
-    }
-    if (element.classList.contains('player3')) {
-      element.innerHTML = player3
-      element.value = player3
-    }
-    if (element.classList.contains('player4')) {
-      element.innerHTML = player4
-      element.value = player4
-    }
-  })
-
-  
-  // playerName.forEach((element) => {
-  //   // console.log(element);
-
-  //   if (element.classList.contains('player1')) {
-  //     element.innerHTML = doc.data().PlayerName.player1
-  //     element.value = doc.data().PlayerName.player1
-  //   }
-  //   if (element.classList.contains('player2')) {
-  //     element.innerHTML = doc.data().PlayerName.player2
-  //     element.value = doc.data().PlayerName.player2
-  //   }
-  //   if (element.classList.contains('player3')) {
-  //     element.innerHTML = doc.data().PlayerName.player3
-  //     element.value = doc.data().PlayerName.player3
-  //   }
-  //   if (element.classList.contains('player4')) {
-  //     element.innerHTML = doc.data().PlayerName.player4
-
-  //     element.value = doc.data().PlayerName.player4
-  //   }
-  // })
 }
 
 
@@ -877,13 +881,6 @@ function nameChange(playerNum, value) {
   // console.log(playerNum, value)
 
   var playerName = document.querySelectorAll('.playername')
-
-  // playerName.forEach((element) => {
-  //   if (element.classList.contains(playerNum)) {
-  //     element.innerHTML = value;
-  //     element.value = value;
-  //   }
-  // });
 
   player1 = document.getElementById('player1').value
   player2 = document.getElementById('player2').value

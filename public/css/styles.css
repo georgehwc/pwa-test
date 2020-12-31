@@ -34,6 +34,10 @@ nav .sidenav-trigger {
   margin: 0;
 }
 
+.nav-wrapper{
+  user-select: none;
+}
+
 /* recipe styles */
 .recipes {
   margin-top: 20px;
@@ -48,6 +52,10 @@ nav .sidenav-trigger {
   position: relative;
   background-color: #f7f7f7;
   z-index: 10;
+  user-select: none;
+}
+.card-panel i{
+  user-select: none;
 }
 .recipe img {
   grid-area: image;
@@ -75,6 +83,9 @@ nav .sidenav-trigger {
 .recipe-ingredients {
   font-size: 0.8em;
 }
+.material-icons{
+  user-select: none;
+}
 
 /* form-styles */
 .add-btn {
@@ -84,6 +95,7 @@ nav .sidenav-trigger {
   padding: 0;
   cursor: pointer;
   margin: 2rem 0 0 0;
+  user-select: none;
 }
 input {
   box-shadow: none !important;
