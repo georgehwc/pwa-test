@@ -1,5 +1,5 @@
 [{
       "relation": ["delegate_permission/common.handle_all_urls"],
-      "target" : { "namespace": "android_app", "package_name": "app.web.pwa_mj.twa",
+      "target" : { "namespace": "android_app", "package_name": "app.web.mj_recorder.twa",
                    "sha256_cert_fingerprints": ["94:2A:C4:6C:B8:67:DB:17:8C:CD:5F:95:5A:FA:04:62:55:20:EF:FC:AF:F2:F6:AB:33:2F:F9:6E:3C:A1:DA:55"] }
     }]
