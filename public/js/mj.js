@@ -319,10 +319,10 @@ async function getData() {
 async function showRecord() {
   var recordTableBody = document.getElementById('record-table-body')
 
-  var player1Total = 0
-  var player2Total = 0
-  var player3Total = 0
-  var player4Total = 0
+  var player1Total = 0;
+  var player2Total = 0;
+  var player3Total = 0;
+  var player4Total = 0;
   // var player1Total = chipTotal;
   // var player2Total = chipTotal;
   // var player3Total = chipTotal;
@@ -390,6 +390,8 @@ async function showRecord() {
       })
     })
   })
+
+  setStatus(player1Total,player2Total,player3Total,player4Total);
 }
 //  moreDetail modal
 
@@ -509,7 +511,7 @@ async function showRecordBody() {
 
   for (let index = 0; index < arrayRecordData.length; index++) {
     html += `<tr id="recordRound${index}" class="recordRound" >
-    <td class="tg-baqh">       ${index + 1} </td>
+    <td class="tg-baqh greenWhite">       ${index + 1} </td>
     <td class="tg-baqh">${arrayRecordData[index][1]}</td>
     <td class="tg-baqh">${arrayRecordData[index][2]}</td>
     <td class="tg-baqh">${arrayRecordData[index][3]}</td>
@@ -719,6 +721,15 @@ function MakeNewRecord() {
       arrayRecordData[arrayRecordData.length - 1][index] = jackpot - jackpot * 2
     }
   }
+
+  console.log("testing");
+  if(MapEatDetail.get("gotEat")== 2 || MapEatDetail.get("eat")== 2 ){
+    arrayRecordData[arrayRecordData.length-1][2] = arrayRecordData[arrayRecordData.length-1][2] * 0.8;
+    console.log("123");
+
+  }
+
+
 
   if (MapEatDetail.get('farn') == intMaxValue) {
     arrayRecordData[arrayRecordData.length - 1][
@@ -1361,6 +1372,12 @@ document.getElementById('setting-chip').addEventListener('change', (event) => {
 
   // console.log(document.getElementById("setting-jackpot-input").checked);
 })
+
+function setStatus(p1,p2,p3,p4) {
+  console.log(p1,p2,p3,p4);
+  
+
+}
 
 // document.getElementById("btn-invite").addEventListener("click", (e) => {
 //   let share = shareId();

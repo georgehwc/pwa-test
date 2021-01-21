@@ -1,5 +1,10 @@
 [{
       "relation": ["delegate_permission/common.handle_all_urls"],
-      "target" : { "namespace": "android_app", "package_name": "app.web.mj_recorder.twa",
-                   "sha256_cert_fingerprints": ["94:2A:C4:6C:B8:67:DB:17:8C:CD:5F:95:5A:FA:04:62:55:20:EF:FC:AF:F2:F6:AB:33:2F:F9:6E:3C:A1:DA:55"] }
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.web.mj_recorder.twa",
+        "sha256_cert_fingerprints": [
+          "8D:4F:6B:D6:48:5A:77:EA:F5:F0:CE:95:63:23:7C:92:A7:5E:B8:48:68:5F:F5:84:EC:D0:BE:71:E4:4F:92:C1"
+        ]
+      }
     }]

@@ -34,7 +34,7 @@ nav .sidenav-trigger {
   margin: 0;
 }
 
-.nav-wrapper{
+.nav-wrapper {
   user-select: none;
 }
 
@@ -48,13 +48,13 @@ nav .sidenav-trigger {
   /* box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1); */
   display: grid;
   grid-template-columns: 2fr 6fr 1fr;
-  grid-template-areas: "image details delete";
+  grid-template-areas: 'image details delete';
   position: relative;
   background-color: #f7f7f7;
   z-index: 10;
   user-select: none;
 }
-.card-panel i{
+.card-panel i {
   user-select: none;
 }
 .recipe img {
@@ -83,7 +83,7 @@ nav .sidenav-trigger {
 .recipe-ingredients {
   font-size: 0.8em;
 }
-.material-icons{
+.material-icons {
   user-select: none;
 }
 
@@ -286,6 +286,20 @@ form .input-field {
   display: block;
 }
 
+.ShowAll-page {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 5;
+  display: none;
+  top: 0;
+}
+
+.ShowAll-page.open {
+  display: block;
+}
+
 /*confirm*/
 .confirm-page {
   width: 100%;
@@ -331,7 +345,7 @@ form .input-field {
 .setting-page.open {
   display: block;
 }
-.setting-page input[type="text"] {
+.setting-page input[type='text'] {
   width: 98%;
   padding: 0 0 0 15px;
 }
@@ -389,7 +403,7 @@ form .input-field {
   justify-content: center;
 }
 
-.range-value input[type="number"] {
+.range-value input[type='number'] {
   border-bottom: 1px solid #26a69a;
   width: 70%;
 }
@@ -482,7 +496,7 @@ th {
 }
 
 .tooltip .tooltiptext::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 100%;
   left: 50%;
@@ -513,12 +527,16 @@ th {
 .recordRound {
   cursor: pointer;
 }
-#record-table-body tr:first-child,
-td:first-child {
+#record-table-body tr:first-child {
   font-weight: bold;
   /* background-color: var(--green); */
   background-color: var(--green2);
 
+  color: white;
+}
+
+.greenWhite {
+  background-color: var(--green2);
   color: white;
 }
 
@@ -554,7 +572,7 @@ td:first-child {
   margin-bottom: 100px;
 }
 .bgtext::before {
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   position: absolute;
@@ -565,7 +583,7 @@ td:first-child {
   left: 0;
 }
 .bgtext::after {
-  content: "MJ";
+  content: 'MJ';
   position: absolute;
   top: 0;
   left: 0;
@@ -816,4 +834,61 @@ tr {
 #eat-lauGuk {
   border: 2px solid;
   border-color: #900000;
+}
+
+.status-box {
+  margin-top: 5%;
+  flex: 1;
+  width: 80%;
+  background-color: #f7f7f7;
+  /* height: 2rem; */
+}
+
+#status-table-head {
+  font-weight: bold;
+  background-color: var(--green2);
+  color: white;
+}
+
+#status-table-body {
+  font-weight: bold;
+  /* background-color: var(--green); */
+  /* background-color: var(--green2); */
+  /* background-color: var(-); */
+
+  color: var(--black);
+}
+
+.cal-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 10px;
+  grid-template-areas: '. . . . . . . . . . . .';
+  margin: 5% 0 5% 0;
+}
+
+.cal {
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  border-color: #33683e;
+}
+
+.cal-all-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-row-gap: 10px;
+}
+
+.rotate90 {
+  transform: rotate(90deg);
+}
+
+.btnRow{
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 20%;
+  margin: 0 10% 5%;
 }

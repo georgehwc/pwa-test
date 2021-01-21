@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" class="notranslate" translate="no">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>MJ</title>
+  <!-- materialize icons, css & js -->
+  <link type="text/css" href="../css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../css/styles.css" rel="stylesheet">
+  <script type="text/javascript" src="../js/materialize.min.js"></script>
+  <link rel="manifest" href="../manifest.json">
+  <link href="../css/nouislider.css" rel="stylesheet">
+  <script src="../js/nouislider.js"></script>
+  <!-- ios support -->
+  <link rel="apple-touch-icon" href="../img/icons/icon-96x96.png">
+  <link rel="icon" sizes="192x192" href="../img/icons/icon-192x192.png">
+  <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+  <meta name="theme-color" content="#FFE1C4">
+  <meta name="google" content="notranslate" />
+  <meta name="msapplication-TileImage144x144" content="img/icons/icon-144x144.png">
+  <base href="">
+</head>
+
+<body class="bgcolor">
+
+  <div class="notification"></div>
+
+  <div class="offline-notification">
+    你好似斷左線 有D工能可能會唔work
+    <a>咩意思?</a>
+    <div class="offline-notification_explanation">
+      呢個程式會繼續run 但係你唔會收到其他人嘅 資料/數據 直至你上得返網.
+    </div>
+  </div>
+
+  <!-- top nav -->
+  <nav class="z-depth-0">
+    <div class="nav-wrapper container">
+      <a href="../index.html">M<span>J</span></a>
+      <span class="right">
+        <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
+      </span>
+    </div>
+  </nav>
+
+  <!-- join -->
+  <div class="modal-join">
+    <div class="modal">
+      <h2>加入</h2>
+      <div class="link">
+        <input type="text" class="pen-url" id="modal-join-url">
+      </div>
+      <a class="button" id="modal-join-submit">加入</a>
+    </div>
+  </div>
+
+  <!-- side nav -->
+  <ul id="side-menu" class="sidenav side-menu sidenav-close">
+    <li><a class="subheader">MJ</a></li>
+    <li><a href="index.html" class="waves-effect">主頁</a></li>
+    <li><a class="waves-effect sidenav-trigger " data-target="side-form">新的賽局</a></li>
+
+    <li><a id="menu-join" class="waves-effect">加入</a></li>
+
+    <li><a href="pages/wiki.html" class="waves-effect">教學</a></li>
+
+    <li><a href="pages/about.html" class="waves-effect">關於</a></li>
+
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a href="pages/contact.html" class="waves-effect">
+        <i class="material-icons">mail_outline</i>Contact</a>
+    </li>
+    <li><a class="waves-effect add-button">
+        <i class="material-icons ">add_box</i>download</a>
+    </li>
+
+  </ul>
+
+
+  <div class="mj-head">
+
+    <div class="head-div">
+      <span id="head-jackpot"></span>
+      <span id="head-jackpot-value">-</span>
+    </div>
+    <div class="head-div" id="max-farn">
+      <!-- 打幾大? -->
+      -
+    </div>
+    <div class="head-div setting button" id="setting-div">
+      設定
+    </div>
+
+  </div>
+
+
+  <!-- main -->
+  <div class="container">
+
+
+    <!-- <div class="cal-grid-container cal-selected-open">
+      <div class="cal cal-selected-open">
+        <img src="../img/common/MJd1-.svg" alt=""></div>
+    </div> -->
+    <div class="cal-grid-container cal-selected">
+
+    </div>
+
+    <div class="btnRow">
+
+      <input type="button" value="reset" class="button" id="calReset">
+      <input type="button" value="Show All" class="button" id="calShowAll">
+    </div>
+
+    <pre id="output"></pre>
+
+
+    <div class="cal-all-container">
+      <div class="cal ">
+        <img src="../img/common/MJt1-.svg" alt="t1" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJt2-.svg" alt="t2" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJt3-.svg" alt="t3" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJt4-.svg" alt="t4" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJt5-.svg" alt="t5" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJt6-.svg" alt="t6" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJt7-.svg" alt="t7" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJt8-.svg" alt="t8" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJt9-.svg" alt="t9" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJs1-.svg" alt="s1" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJs2-.svg" alt="s2" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJs3-.svg" alt="s3" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJs4-.svg" alt="s4" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJs5-.svg" alt="s5" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJs6-.svg" alt="s6" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJs7-.svg" alt="s7" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJs8-.svg" alt="s8" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJs9-.svg" alt="s9" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJw1-.svg" alt="w1" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJw2-.svg" alt="w2" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJw3-.svg" alt="w3" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJw4-.svg" alt="w4" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJw5-.svg" alt="w5" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJw6-.svg" alt="w6" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJw7-.svg" alt="w7" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJw8-.svg" alt="w8" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJw9-.svg" alt="w9" class="cal-forSelect">
+      </div>
+
+      <div class="cal ">
+        <img src="../img/common/MJd1-.svg" alt="d1" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJd2-.svg" alt="d2" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJd3-.svg" alt="d3" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJf1-.svg" alt="f1" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJf2-.svg" alt="f2" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJf3-.svg" alt="f3" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJf4-.svg" alt="f4" class="cal-forSelect">
+      </div>
+      <div class="cal ">
+        <img src="" alt="">
+      </div>
+      <div class="cal">
+        <img src="" alt="">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJh1-.svg" alt="h1" class="cal-forSelect hidden">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJh2-.svg" alt="h2" class="cal-forSelect hidden">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJh3-.svg" alt="h3" class="cal-forSelect hidden">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJh4-.svg" alt="h4" class="cal-forSelect hidden">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJh5-.svg" alt="h5" class="cal-forSelect hidden">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJh6-.svg" alt="h6" class="cal-forSelect hidden">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJh7-.svg" alt="h7" class="cal-forSelect hidden">
+      </div>
+      <div class="cal ">
+        <img src="../img/common/MJh8-.svg" alt="h8" class="cal-forSelect hidden">
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Show All  -->
+  <div class="ShowAll-page">
+    <div class="modal">
+
+
+    </div>
+  </div>
+
+
+  <!-- add recipe side nav -->
+  <div id="side-form" class="sidenav side-form">
+    <form class="add-recipe container section" id="add-recipe-form">
+      <h6>新賽局</h6>
+      <div class="divider"></div>
+      <div class="input-field">
+        <input placeholder="xx的賽局" id="title" type="text" class="validate" value="我的賽局" autocomplete="off"
+          onfocus="if(this.value  == '我的賽局') { this.value = ''; } "
+          onblur="if(this.value == '') { this.value = '我的賽局'; } ">
+        <label for="title">標題</label>
+      </div>
+      <div class="input-field">
+        <select id="recipesIcon" class="eat-select validate">
+          <option id="iconselectDefault" value="mjrandom" selected>隨機</option>
+          <option value="mjt">筒</option>
+          <option value="mjs">索</option>
+          <option value="mjw">萬</option>
+          <option value="mjother">其他</option>
+        </select>
+        <label for="recipesIcon" style="-webkit-transform: translateY(-14px) scale(0.8);
+      transform: translateY(-14px) scale(0.8);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;">Icon</label>
+      </div>
+
+      <div class="input-field">
+        <input placeholder="" id="ingredients" type="text" class="validate" autocomplete="off">
+        <label for="ingredients">備註</label>
+      </div>
+
+
+      <div class="input-field center">
+        <button class="btn-small">Add</button>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- setting + share  -->
+  <div class="setting-page">
+    <div class="modal">
+      <div id="setting-invite">
+        <h2>邀請</h2>
+
+        <div>
+          <span style="display: inline-flex;">share條link比你雀友<span class="material-icons">
+              navigate_next
+            </span></span>
+
+          <div class="share-dialog">
+            <header>
+              <h3 class="dialog-title">邀請</h3>
+              <button class="close-button"><svg>
+                  <use href="#close"></use>
+                </svg></button>
+            </header>
+            <div class="targets">
+              <a class="button" title="Whatsapp" href="" target="_blank">
+                <!-- <svg>
+                  <use href="#whatsapp"></use>
+                </svg> -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3 0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7 0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1 0-5.2 4.2-9.4 9.4-9.4 2.5 0 4.9 1 6.7 2.8 1.8 1.8 2.8 4.2 2.8 6.7-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6s.3-.3.4-.5c.2-.1.3-.3.4-.5.1-.2 0-.4 0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z" />
+                </svg>
+                <span>Whatsapp</span>
+              </a>
+
+              <a class="button" title="Telegram" href="" target="_blank">
+                <!-- <svg>
+                  <use href="#Telegram"></use>
+                </svg> -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M.707 8.475C.275 8.64 0 9.508 0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102 0 0 0 1.75.527l2.96-2.41a.405.405 0 0 1 .494-.013l5.34 3.87a1.1 1.1 0 0 0 1.046.135 1.1 1.1 0 0 0 .682-.803l3.91-18.795A1.102 1.102 0 0 0 22.5.075L.706 8.475z" />
+                </svg>
+                <span>Telegram</span>
+              </a>
+
+              <a class="button" title="Email" href="" target="_blank">
+                <svg>
+                  <use href="#email"></use>
+                </svg>
+                <span>Email</span>
+              </a>
+            </div>
+            <div class="link">
+              <div class="pen-url"></div>
+              <button class="copy-link" id="btn-invite">
+                <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+                <!-- Copy Link -->
+              </button>
+            </div>
+
+            <!-- <input id="text" type="text" value="https://hogangnono.com" style="width:80%" /><br /> -->
+            <div id="qrcode"></div>
+
+          </div>
+
+          <button class="share-button" type="button" title="">
+            <svg>
+              <use href="#share-icon"></use>
+            </svg>
+            <span>Share</span>
+          </button>
+
+        </div>
+
+
+        <svg class="hidden">
+          <defs>
+            <symbol id="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-share">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </symbol>
+
+            <symbol id="whatsapp" viewBox="0 0 24 24" fill="#3b5998" stroke="#3b5998" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp">
+              <!-- <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path> -->
+
+            </symbol>
+
+            <symbol id="twitter" viewBox="0 0 24 24" fill="#1da1f2" stroke="#1da1f2" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter">
+
+            </symbol>
+
+            <symbol id="email" viewBox="0 0 24 24" fill="#777" stroke="#fafafa" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" class="feather feather-mail">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </symbol>
+
+
+
+            <symbol id="close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-square">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+            </symbol>
+          </defs>
+        </svg>
+
+
+        <!-- <input type="button" value=""> -->
+        <!-- <div class="tooltip">
+          <button id="btn-invite" onmouseout="outFunc()">
+            <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+            邀請
+          </button>
+        </div> -->
+
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/db.js"></script>
+  <script src="../js/qrcode.js"></script>
+
+  <script src="../js/cal.js"></script>
+</body>
+
+</html>

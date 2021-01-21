@@ -205,17 +205,21 @@
       <h2>設定</h2>
       <form>
 
-        <input type="text" class="playername player1" id="player1" placeholder="player name..." value="player1" maxlength="10"
-          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player1') { this.select(); } "
+        <input type="text" class="playername player1" id="player1" placeholder="player name..." value="player1"
+          maxlength="10" onchange="nameChange(this.id,this.value)"
+          onfocus="if(this.value  == 'Player1') { this.select(); } "
           onblur="if(this.value == '') { this.value = 'Player1'; } " autocomplete="off">
-        <input type="text" class="playername player2" id="player2" placeholder="player name..." value="Player2" maxlength="10"
-          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player2') { this.select(); } "
+        <input type="text" class="playername player2" id="player2" placeholder="player name..." value="Player2"
+          maxlength="10" onchange="nameChange(this.id,this.value)"
+          onfocus="if(this.value  == 'Player2') { this.select(); } "
           onblur="if(this.value == '') { this.value = 'Player2'; } " autocomplete="off">
-        <input type="text" class="playername player3" id="player3" placeholder="player name..." value="Player3" maxlength="10"
-          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player3') { this.select(); } "
+        <input type="text" class="playername player3" id="player3" placeholder="player name..." value="Player3"
+          maxlength="10" onchange="nameChange(this.id,this.value)"
+          onfocus="if(this.value  == 'Player3') { this.select(); } "
           onblur="if(this.value == '') { this.value = 'Player3'; } " autocomplete="off">
-        <input type="text" class="playername player4" id="player4" placeholder="player name..." value="Player4" maxlength="10"
-          onchange="nameChange(this.id,this.value)" onfocus="if(this.value  == 'Player4') { this.select(); } "
+        <input type="text" class="playername player4" id="player4" placeholder="player name..." value="Player4"
+          maxlength="10" onchange="nameChange(this.id,this.value)"
+          onfocus="if(this.value  == 'Player4') { this.select(); } "
           onblur="if(this.value == '') { this.value = 'Player4'; } " autocomplete="off">
 
         <br>
@@ -501,6 +505,25 @@
         </thead>
         <tbody id="record-table-body">
 
+        </tbody>
+      </table>
+    </div>
+
+    <div class="status-box">
+      <table class="tg">
+        <thead id="status-table-head">
+          <tr>
+            <td class="tg-baqh">運吉</td>
+            <td class="tg-baqh">大羸家</td>
+            <td class="tg-baqh">要努力</td>
+          </tr>
+        </thead>
+        <tbody id="status-table-body">
+          <tr>
+            <td class="tg-baqh" id="status-not">-</td>
+            <td class="tg-baqh" id="status-win">-</td>
+            <td class="tg-baqh" id="status-add">-</td>
+          </tr>
         </tbody>
       </table>
     </div>
