@@ -882,11 +882,52 @@ tr {
   grid-row-gap: 10px;
 }
 
+.parent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.parent div {
+  height: 100px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.parent div .div1 { grid-area: 1 / 1 / 2 / 2; }
+.parent div .div2 { grid-area: 1 / 2 / 2 / 3; }
+.parent div .div3 { grid-area: 1 / 3 / 2 / 4; }
+.parent div .div4 { grid-area: 1 / 4 / 2 / 5; }
+
+.div1 {
+  grid-area: 1 / 1 / 2 / 2;
+}
+.div2 {
+  grid-area: 1 / 2 / 2 / 3;
+}
+.div3 {
+  grid-area: 1 / 3 / 2 / 4;
+}
+.div4 {
+  grid-area: 2 / 1 / 3 / 2;
+}
+.div5 {
+  grid-area: 2 / 2 / 3 / 3;
+}
+.div6 {
+  grid-area: 2 / 3 / 3 / 4;
+}
+
 .rotate90 {
   transform: rotate(90deg);
 }
 
-.btnRow{
+.btnRow {
   display: grid;
   grid-auto-flow: column;
   grid-gap: 20%;

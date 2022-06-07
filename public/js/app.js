@@ -624,6 +624,12 @@ function listenToUserAction() {
   installBtn.addEventListener("click", presentAddToHome);
 }
 
+window.addEventListener('appinstalled', (evt) => {
+  console.log('a2hs installed');
+  const installBtn = document.querySelector(".add-button");
+  installBtn.classList.add("hidden");
+});
+
 // present install prompt to user
 function presentAddToHome() {
   promptEvent.prompt(); // Wait for the user to respond to the prompt
@@ -635,3 +641,4 @@ function presentAddToHome() {
     }
   });
 }
+
